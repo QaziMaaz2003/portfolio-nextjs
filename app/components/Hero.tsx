@@ -72,7 +72,7 @@ export default function Hero() {
   };
 
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center pt-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden bg-slate-950">
+    <section id="home" className="min-h-screen flex items-center justify-center pt-20 px-0 sm:px-0 lg:px-0 relative overflow-hidden bg-slate-950 w-screen">
       {/* Laptop Background Image - Full Cover */}
       <div className="absolute inset-0 w-full h-full">
         <Image
@@ -90,7 +90,7 @@ export default function Hero() {
         <div className="text-left max-w-3xl">
           {/* Main Name - Large and Bold with Typing Animation */}
           <h1
-            className="text-3xl sm:text-5xl sm:text-6xl lg:text-7xl font-light mb-2 sm:mb-4 text-white tracking-widest drop-shadow-lg"
+            className="text-3xl sm:text-5xl sm:text-6xl lg:text-7xl font-light mb-4 sm:mb-4 text-white tracking-widest drop-shadow-lg"
           >
             {displayedName}
             <span className={`inline-block ml-1 ${!isNameComplete && showCursor ? 'opacity-100' : 'opacity-0'} transition-opacity duration-100`}>
@@ -100,7 +100,7 @@ export default function Hero() {
 
           {/* Subtitle/Title with Typing Animation */}
           <h2
-            className="text-base sm:text-lg sm:text-xl lg:text-2xl font-light mb-4 sm:mb-8 text-gray-300 tracking-widest"
+            className="text-base sm:text-lg sm:text-xl lg:text-2xl font-light mb-6 sm:mb-8 text-gray-300 tracking-widest"
           >
             {displayedSubtitle}
             <span className={`inline-block ml-1 ${isNameComplete && !isSubtitleComplete && showCursor ? 'opacity-100' : 'opacity-0'} transition-opacity duration-100`}>
@@ -110,7 +110,7 @@ export default function Hero() {
 
           {/* Tagline */}
           <p
-            className={`text-sm sm:text-lg sm:text-xl lg:text-2xl mb-4 sm:mb-8 text-gray-400 leading-relaxed font-light max-w-2xl transition-all duration-1000 ${
+            className={`text-sm sm:text-lg sm:text-xl lg:text-2xl mb-8 sm:mb-8 text-gray-400 leading-relaxed font-light max-w-2xl transition-all duration-1000 ${
               showTagline ? 'opacity-100' : 'opacity-0'
             }`}
           >
@@ -120,7 +120,7 @@ export default function Hero() {
 
           {/* CTA Buttons */}
           <div
-            className={`flex flex-col sm:flex-row gap-2 sm:gap-4 items-stretch sm:items-start w-full sm:w-auto transition-all duration-1000 ${
+            className={`flex flex-col sm:flex-row gap-4 sm:gap-4 items-stretch sm:items-start w-full sm:w-auto transition-all duration-1000 mt-8 sm:mt-0 mb-16 sm:mb-0 ${
               showTagline ? 'opacity-100' : 'opacity-0'
             }`}
           >
