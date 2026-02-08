@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import Image from 'next/image';
 import { HiDownload, HiMail } from 'react-icons/hi';
 
 export default function Hero() {
@@ -12,107 +12,87 @@ export default function Hero() {
   };
 
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center pt-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-white via-blue-50 to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
-      <div className="max-w-7xl mx-auto w-full">
-        <div className="text-center">
-          {/* Greeting */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="mb-4"
-          >
-            <span className="text-2xl sm:text-3xl font-medium text-gray-700 dark:text-gray-300">
-              Hi, I&apos;m
-            </span>
-          </motion.div>
+    <section id="home" className="min-h-screen flex items-center justify-center pt-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden bg-slate-950">
+      {/* Laptop Background Image - Full Cover */}
+      <div className="absolute inset-0 w-full h-full">
+        <Image
+          src="/laptop.avif"
+          alt="Laptop Background"
+          fill
+          className="object-cover w-full h-full"
+          quality={100}
+          priority
+          unoptimized
+        />
+      </div>
 
-          {/* Name */}
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-4 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent"
+      <div className="max-w-7xl mx-auto w-full relative z-10">
+        <div className="text-left max-w-3xl">
+          {/* Main Name - Large and Bold */}
+          <h1
+            className="text-4xl sm:text-5xl lg:text-6xl font-black mb-4 text-white tracking-tighter drop-shadow-lg"
           >
             Qazi Maaz Ahmed
-          </motion.h1>
+          </h1>
 
-          {/* Title */}
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-2xl sm:text-3xl lg:text-4xl font-semibold mb-6 text-gray-800 dark:text-gray-200"
+          {/* Subtitle/Title */}
+          <h2
+            className="text-sm sm:text-base lg:text-lg font-light mb-8 text-gray-300 tracking-widest"
           >
-            Full Stack Developer & Performance Optimizer
-          </motion.h2>
+            FULL STACK DEVELOPER, FRONT END & APP DEVELOPER.
+          </h2>
 
           {/* Tagline */}
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            className="text-lg sm:text-xl lg:text-2xl mb-12 max-w-3xl mx-auto text-gray-600 dark:text-gray-400 leading-relaxed"
+          <p
+            className="text-base sm:text-lg mb-8 text-gray-400 leading-relaxed font-light max-w-2xl"
           >
             I build fast, modern websites and applications that help businesses grow.
             Specializing in React, Next.js, and Backend Development.
-          </motion.p>
+          </p>
 
           {/* CTA Buttons */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+          <div
+            className="flex flex-col sm:flex-row gap-4 items-start"
           >
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+            <button
               onClick={() => scrollToSection('contact')}
-              className="flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-full shadow-lg hover:shadow-xl transition-shadow"
+              className="flex items-center gap-2 px-8 py-3 bg-white text-black font-semibold rounded-lg text-sm hover:bg-gray-200 transition-all duration-300"
             >
-              <HiMail size={20} />
-              Hire Me
-            </motion.button>
+              <HiMail size={18} />
+              Get In Touch
+            </button>
 
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+            <button
               onClick={() => scrollToSection('projects')}
-              className="flex items-center gap-2 px-8 py-4 bg-white dark:bg-gray-800 text-gray-800 dark:text-white font-semibold rounded-full border-2 border-gray-300 dark:border-gray-600 hover:border-blue-600 dark:hover:border-blue-400 transition-colors"
+              className="flex items-center gap-2 px-8 py-3 bg-gray-800 text-white font-semibold rounded-lg text-sm border-2 border-white hover:bg-gray-700 transition-all duration-300"
             >
-              View Projects
-            </motion.button>
+              View Work
+            </button>
 
-            <motion.a
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+            <a
               href="/Qazi_Maaz_CV.pdf"
               download
-              className="flex items-center gap-2 px-8 py-4 bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-white font-semibold rounded-full hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+              className="flex items-center gap-2 px-8 py-3 bg-gray-900 text-white font-semibold rounded-lg text-sm border-2 border-white hover:bg-gray-800 transition-all duration-300"
             >
-              <HiDownload size={20} />
+              <HiDownload size={18} />
               Download CV
-            </motion.a>
-          </motion.div>
+            </a>
+          </div>
 
           {/* Scroll Indicator */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.8 }}
-            className="mt-16"
+          <div
+            className="mt-12"
           >
-            <motion.div
-              animate={{ y: [0, 10, 0] }}
-              transition={{ duration: 1.5, repeat: Infinity }}
-              className="inline-block"
+            <div
+              className="inline-block animate-bounce"
             >
-              <div className="w-6 h-10 border-2 border-gray-400 dark:border-gray-600 rounded-full flex justify-center">
-                <div className="w-1.5 h-2 bg-gray-600 dark:bg-gray-400 rounded-full mt-2" />
+              <div className="w-6 h-10 border-2 border-gray-400 rounded-full flex justify-center">
+                <div
+                  className="w-1.5 h-2 bg-white rounded-full mt-2"
+                />
               </div>
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
