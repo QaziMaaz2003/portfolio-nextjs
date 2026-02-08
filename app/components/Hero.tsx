@@ -1,9 +1,69 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import { HiDownload, HiMail } from 'react-icons/hi';
+import { useState, useEffect } from 'react';
+import Image from 'next/image';
+import { HiDownload, HiMail, HiChevronDown } from 'react-icons/hi';
 
 export default function Hero() {
+  const [displayedName, setDisplayedName] = useState('');
+  const [displayedSubtitle, setDisplayedSubtitle] = useState('');
+  const [showCursor, setShowCursor] = useState(true);
+  const [isNameComplete, setIsNameComplete] = useState(false);
+  const [isSubtitleComplete, setIsSubtitleComplete] = useState(false);
+  const [showTagline, setShowTagline] = useState(false);
+  const fullName = 'Qazi Maaz Ahmed';
+  const fullSubtitle = 'FULL STACK DEVELOPER';
+
+  useEffect(() => {
+    let currentIndex = 0;
+    const typingInterval = setInterval(() => {
+      if (currentIndex <= fullName.length) {
+        setDisplayedName(fullName.substring(0, currentIndex));
+        currentIndex++;
+      } else {
+        clearInterval(typingInterval);
+        setIsNameComplete(true);
+      }
+    }, 100);
+
+    return () => clearInterval(typingInterval);
+  }, []);
+
+  useEffect(() => {
+    if (!isNameComplete) return;
+
+    let currentIndex = 0;
+    const typingInterval = setInterval(() => {
+      if (currentIndex <= fullSubtitle.length) {
+        setDisplayedSubtitle(fullSubtitle.substring(0, currentIndex));
+        currentIndex++;
+      } else {
+        clearInterval(typingInterval);
+        setIsSubtitleComplete(true);
+      }
+    }, 50);
+
+    return () => clearInterval(typingInterval);
+  }, [isNameComplete]);
+
+  useEffect(() => {
+    // Only show cursor while typing is happening
+    if (isSubtitleComplete) return;
+
+    const cursorInterval = setInterval(() => {
+      setShowCursor(prev => !prev);
+    }, 500);
+
+    return () => clearInterval(cursorInterval);
+  }, [isSubtitleComplete]);
+
+  useEffect(() => {
+    // Show tagline after subtitle is complete
+    if (isSubtitleComplete) {
+      setShowTagline(true);
+    }
+  }, [isSubtitleComplete]);
+
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
@@ -12,107 +72,94 @@ export default function Hero() {
   };
 
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center pt-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-white via-blue-50 to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
-      <div className="max-w-7xl mx-auto w-full">
-        <div className="text-center">
-          {/* Greeting */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="mb-4"
+    <section id="home" className="min-h-screen flex items-center justify-center pt-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden bg-slate-950 w-screen">
+      {/* Laptop Background Image - Full Cover */}
+      <div className="absolute inset-0 w-full h-full">
+        <Image
+          src="/laptop.avif"
+          alt="Laptop Background"
+          fill
+          className="object-cover w-full h-full"
+          quality={100}
+          priority
+          unoptimized
+        />
+      </div>
+
+      <div className="max-w-7xl mx-auto w-full relative z-10">
+        <div className="text-left max-w-3xl">
+          {/* Main Name - Large and Bold with Typing Animation */}
+          <h1
+            className="text-3xl sm:text-5xl sm:text-6xl lg:text-7xl font-light mb-4 sm:mb-4 text-white tracking-widest drop-shadow-lg"
           >
-            <span className="text-2xl sm:text-3xl font-medium text-gray-700 dark:text-gray-300">
-              Hi, I&apos;m
+            {displayedName}
+            <span className={`inline-block ml-1 ${!isNameComplete && showCursor ? 'opacity-100' : 'opacity-0'} transition-opacity duration-100`}>
+              .
             </span>
-          </motion.div>
+          </h1>
 
-          {/* Name */}
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-4 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent"
+          {/* Subtitle/Title with Typing Animation */}
+          <h2
+            className="text-base sm:text-lg sm:text-xl lg:text-2xl font-light mb-6 sm:mb-8 text-gray-300 tracking-widest"
           >
-            Qazi Maaz Ahmed
-          </motion.h1>
-
-          {/* Title */}
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-2xl sm:text-3xl lg:text-4xl font-semibold mb-6 text-gray-800 dark:text-gray-200"
-          >
-            Full Stack Developer & Performance Optimizer
-          </motion.h2>
+            {displayedSubtitle}
+            <span className={`inline-block ml-1 ${isNameComplete && !isSubtitleComplete && showCursor ? 'opacity-100' : 'opacity-0'} transition-opacity duration-100`}>
+              .
+            </span>
+          </h2>
 
           {/* Tagline */}
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            className="text-lg sm:text-xl lg:text-2xl mb-12 max-w-3xl mx-auto text-gray-600 dark:text-gray-400 leading-relaxed"
+          <p
+            className={`text-sm sm:text-lg sm:text-xl lg:text-2xl mb-8 sm:mb-8 text-gray-400 leading-relaxed font-light max-w-2xl transition-all duration-1000 ${
+              showTagline ? 'opacity-100' : 'opacity-0'
+            }`}
           >
             I build fast, modern websites and applications that help businesses grow.
             Specializing in React, Next.js, and Backend Development.
-          </motion.p>
+          </p>
 
           {/* CTA Buttons */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+          <div
+            className={`flex flex-col sm:flex-row gap-4 sm:gap-4 items-stretch sm:items-start w-full sm:w-auto transition-all duration-1000 mt-8 sm:mt-0 mb-16 sm:mb-0 ${
+              showTagline ? 'opacity-100' : 'opacity-0'
+            }`}
           >
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+            <button
               onClick={() => scrollToSection('contact')}
-              className="flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-full shadow-lg hover:shadow-xl transition-shadow"
+              className="flex items-center justify-center sm:justify-start gap-2 px-4 sm:px-8 py-2.5 sm:py-3 bg-white text-black font-semibold rounded-lg text-xs sm:text-sm hover:bg-gray-200 transition-all duration-300"
             >
-              <HiMail size={20} />
-              Hire Me
-            </motion.button>
+              <HiMail size={16} />
+              Get In Touch
+            </button>
 
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+            <button
               onClick={() => scrollToSection('projects')}
-              className="flex items-center gap-2 px-8 py-4 bg-white dark:bg-gray-800 text-gray-800 dark:text-white font-semibold rounded-full border-2 border-gray-300 dark:border-gray-600 hover:border-blue-600 dark:hover:border-blue-400 transition-colors"
+              className="flex items-center justify-center sm:justify-start gap-2 px-4 sm:px-8 py-2.5 sm:py-3 bg-gray-800 text-white font-semibold rounded-lg text-xs sm:text-sm border-2 border-white hover:bg-gray-700 transition-all duration-300"
             >
-              View Projects
-            </motion.button>
+              View Work
+            </button>
 
-            <motion.a
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+            <a
               href="/Qazi_Maaz_CV.pdf"
               download
-              className="flex items-center gap-2 px-8 py-4 bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-white font-semibold rounded-full hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+              className="flex items-center justify-center sm:justify-start gap-2 px-4 sm:px-8 py-2.5 sm:py-3 bg-gray-900 text-white font-semibold rounded-lg text-xs sm:text-sm border-2 border-white hover:bg-gray-800 transition-all duration-300"
             >
-              <HiDownload size={20} />
+              <HiDownload size={16} />
               Download CV
-            </motion.a>
-          </motion.div>
+            </a>
+          </div>
 
-          {/* Scroll Indicator */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.8 }}
-            className="mt-16"
-          >
-            <motion.div
-              animate={{ y: [0, 10, 0] }}
-              transition={{ duration: 1.5, repeat: Infinity }}
-              className="inline-block"
-            >
-              <div className="w-6 h-10 border-2 border-gray-400 dark:border-gray-600 rounded-full flex justify-center">
-                <div className="w-1.5 h-2 bg-gray-600 dark:bg-gray-400 rounded-full mt-2" />
-              </div>
-            </motion.div>
-          </motion.div>
+      {/* Scroll Indicator - Centered in Hero Section */}
+      <div
+        className="absolute left-1/2 transform -translate-x-1/2 z-20"
+        style={{ top: 'calc(100% + 40px)' }}
+      >
+        <div
+          className="inline-block animate-bounce"
+        >
+          <HiChevronDown size={32} className="text-white" />
+        </div>
+      </div>
         </div>
       </div>
     </section>
