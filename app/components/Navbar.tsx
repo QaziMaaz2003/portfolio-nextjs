@@ -1,22 +1,15 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { HiMenu, HiX, HiMoon, HiSun } from 'react-icons/hi';
+import { motion, AnimatePresence } from 'framer-motion';
+import { HiMenu, HiX } from 'react-icons/hi';
 
 export default function Navbar() {
-  const [isOpen, setIsOpen] = useState(false);
-  const [isDark, setIsDark] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
+  const [isOpen, setIsOpen] = useState(false);
+  const [isDesktopMenuOpen, setIsDesktopMenuOpen] = useState(false);
 
   useEffect(() => {
-    // Check for dark mode preference
-    const darkMode = localStorage.getItem('darkMode') === 'true';
-    setIsDark(darkMode);
-    if (darkMode) {
-      document.documentElement.classList.add('dark');
-    }
-
     // Handle scroll for active section
     const handleScroll = () => {
       const sections = ['home', 'about', 'skills', 'projects', 'experience', 'contact'];
@@ -38,11 +31,43 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const toggleDarkMode = () => {
-    setIsDark(!isDark);
-    document.documentElement.classList.toggle('dark');
-    localStorage.setItem('darkMode', (!isDark).toString());
-  };
+  useEffect(() => {
+    // Apply blur only to main content, not navbar
+    const nav = document.querySelector('nav');
+    
+    if (isOpen) {
+      // Ensure navbar is never blurred
+      if (nav) {
+        (nav as HTMLElement).style.filter = 'none';
+        (nav as HTMLElement).style.pointerEvents = 'auto';
+      }
+      
+      const sections = document.querySelectorAll('section');
+      sections.forEach(section => {
+        (section as HTMLElement).style.filter = 'blur(4px)';
+        (section as HTMLElement).style.pointerEvents = 'none';
+      });
+    } else {
+      const sections = document.querySelectorAll('section');
+      sections.forEach(section => {
+        (section as HTMLElement).style.filter = 'none';
+        (section as HTMLElement).style.pointerEvents = 'auto';
+      });
+    }
+
+    return () => {
+      const sections = document.querySelectorAll('section');
+      sections.forEach(section => {
+        (section as HTMLElement).style.filter = 'none';
+        (section as HTMLElement).style.pointerEvents = 'auto';
+      });
+      
+      if (nav) {
+        (nav as HTMLElement).style.filter = 'none';
+        (nav as HTMLElement).style.pointerEvents = 'auto';
+      }
+    };
+  }, [isOpen]);
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -65,10 +90,10 @@ export default function Navbar() {
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md shadow-sm"
+      className="fixed top-0 left-0 right-0 z-50 bg-gray-900 backdrop-blur-md shadow-md"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
+        <div className="flex justify-between items-center h-16 relative">
           {/* Logo */}
           <motion.div
             whileHover={{ scale: 1.05 }}
@@ -78,76 +103,88 @@ export default function Navbar() {
             QM
           </motion.div>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
-            {navItems.map((item) => (
-              <button
-                key={item.id}
-                onClick={() => scrollToSection(item.id)}
-                className={`relative text-sm font-medium transition-colors ${
-                  activeSection === item.id
-                    ? 'text-blue-600 dark:text-blue-400'
-                    : 'text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400'
-                }`}
-              >
-                {item.name}
-                {activeSection === item.id && (
-                  <motion.div
-                    layoutId="activeSection"
-                    className="absolute -bottom-1 left-0 right-0 h-0.5 bg-blue-600 dark:bg-blue-400"
-                  />
-                )}
-              </button>
-            ))}
-            
-            {/* Dark Mode Toggle */}
-            <motion.button
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              onClick={toggleDarkMode}
-              className="p-2 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200"
+          <div className="hidden md:flex items-center gap-0">
+            {/* Desktop Menu - Slides in from left */}
+            <AnimatePresence>
+              {isDesktopMenuOpen && (
+                <motion.div
+                  initial={{ opacity: 0, width: 0 }}
+                  animate={{ opacity: 1, width: 'auto' }}
+                  exit={{ opacity: 0, width: 0 }}
+                  transition={{ duration: 0.3, ease: "easeInOut" }}
+                  className="overflow-hidden flex gap-2 border-r border-gray-700 pr-4"
+                >
+                  {navItems.map((item) => (
+                    <motion.button
+                      key={item.id}
+                      onClick={() => {
+                        scrollToSection(item.id);
+                        setIsDesktopMenuOpen(false);
+                      }}
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      className={`px-3 py-2 rounded text-sm font-medium transition-all duration-300 whitespace-nowrap ${
+                        activeSection === item.id
+                          ? 'bg-blue-600 text-white'
+                          : 'text-gray-300 hover:text-white hover:bg-gray-800'
+                      }`}
+                    >
+                      {item.name}
+                    </motion.button>
+                  ))}
+                </motion.div>
+              )}
+            </AnimatePresence>
+
+            {/* Desktop Navigation Menu Button - Stays on right */}
+            <button
+              onClick={() => setIsDesktopMenuOpen(!isDesktopMenuOpen)}
+              className="flex items-center px-4 py-2 text-gray-300 hover:text-white transition-colors"
             >
-              {isDark ? <HiSun size={20} /> : <HiMoon size={20} />}
-            </motion.button>
+              <HiMenu size={24} />
+            </button>
           </div>
 
           {/* Mobile Menu Button */}
-          <div className="md:hidden flex items-center space-x-2">
-            <motion.button
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              onClick={toggleDarkMode}
-              className="p-2 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200"
-            >
-              {isDark ? <HiSun size={20} /> : <HiMoon size={20} />}
-            </motion.button>
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="text-gray-700 dark:text-gray-300"
-            >
-              {isOpen ? <HiX size={28} /> : <HiMenu size={28} />}
-            </button>
-          </div>
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="md:hidden text-gray-300 hover:text-white transition-colors"
+          >
+            {isOpen ? <HiX size={28} /> : <HiMenu size={28} />}
+          </button>
         </div>
       </div>
+
+      {/* Mobile Menu Backdrop */}
+      {isOpen && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          onClick={() => setIsOpen(false)}
+          className="fixed inset-0 top-16 bg-black/50 backdrop-blur-sm z-40 md:hidden"
+        />
+      )}
 
       {/* Mobile Menu */}
       {isOpen && (
         <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -20 }}
-          className="md:hidden bg-white dark:bg-gray-900 border-t dark:border-gray-800"
+          initial={{ opacity: 0, scaleY: 0, rotateX: -90, originY: 0 }}
+          animate={{ opacity: 1, scaleY: 1, rotateX: 0, originY: 0 }}
+          exit={{ opacity: 0, scaleY: 0, rotateX: -90, originY: 0 }}
+          transition={{ duration: 0.4, ease: "easeInOut" }}
+          style={{ perspective: 1200 }}
+          className="md:hidden bg-gray-900 border-t border-gray-700 backdrop-blur-md relative z-50"
         >
-          <div className="px-4 py-4 space-y-3">
+          <div className="px-4 py-4 space-y-2">
             {navItems.map((item) => (
               <button
                 key={item.id}
                 onClick={() => scrollToSection(item.id)}
-                className={`block w-full text-left px-4 py-2 rounded-lg font-medium transition-colors ${
+                className={`block w-full text-left px-4 py-3 rounded-lg font-medium transition-all duration-300 ${
                   activeSection === item.id
-                    ? 'bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-400'
-                    : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
+                    ? 'bg-blue-600 text-white'
+                    : 'text-gray-300 hover:text-white hover:bg-gray-800'
                 }`}
               >
                 {item.name}

@@ -1,9 +1,69 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
-import { HiDownload, HiMail } from 'react-icons/hi';
+import { HiDownload, HiMail, HiChevronDown } from 'react-icons/hi';
 
 export default function Hero() {
+  const [displayedName, setDisplayedName] = useState('');
+  const [displayedSubtitle, setDisplayedSubtitle] = useState('');
+  const [showCursor, setShowCursor] = useState(true);
+  const [isNameComplete, setIsNameComplete] = useState(false);
+  const [isSubtitleComplete, setIsSubtitleComplete] = useState(false);
+  const [showTagline, setShowTagline] = useState(false);
+  const fullName = 'Qazi Maaz Ahmed';
+  const fullSubtitle = 'FULL STACK DEVELOPER';
+
+  useEffect(() => {
+    let currentIndex = 0;
+    const typingInterval = setInterval(() => {
+      if (currentIndex <= fullName.length) {
+        setDisplayedName(fullName.substring(0, currentIndex));
+        currentIndex++;
+      } else {
+        clearInterval(typingInterval);
+        setIsNameComplete(true);
+      }
+    }, 100);
+
+    return () => clearInterval(typingInterval);
+  }, []);
+
+  useEffect(() => {
+    if (!isNameComplete) return;
+
+    let currentIndex = 0;
+    const typingInterval = setInterval(() => {
+      if (currentIndex <= fullSubtitle.length) {
+        setDisplayedSubtitle(fullSubtitle.substring(0, currentIndex));
+        currentIndex++;
+      } else {
+        clearInterval(typingInterval);
+        setIsSubtitleComplete(true);
+      }
+    }, 50);
+
+    return () => clearInterval(typingInterval);
+  }, [isNameComplete]);
+
+  useEffect(() => {
+    // Only show cursor while typing is happening
+    if (isSubtitleComplete) return;
+
+    const cursorInterval = setInterval(() => {
+      setShowCursor(prev => !prev);
+    }, 500);
+
+    return () => clearInterval(cursorInterval);
+  }, [isSubtitleComplete]);
+
+  useEffect(() => {
+    // Show tagline after subtitle is complete
+    if (isSubtitleComplete) {
+      setShowTagline(true);
+    }
+  }, [isSubtitleComplete]);
+
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
@@ -28,23 +88,31 @@ export default function Hero() {
 
       <div className="max-w-7xl mx-auto w-full relative z-10">
         <div className="text-left max-w-3xl">
-          {/* Main Name - Large and Bold */}
+          {/* Main Name - Large and Bold with Typing Animation */}
           <h1
-            className="text-4xl sm:text-5xl lg:text-6xl font-black mb-4 text-white tracking-tighter drop-shadow-lg"
+            className="text-3xl sm:text-5xl sm:text-6xl lg:text-7xl font-light mb-2 sm:mb-4 text-white tracking-widest drop-shadow-lg"
           >
-            Qazi Maaz Ahmed
+            {displayedName}
+            <span className={`inline-block ml-1 ${!isNameComplete && showCursor ? 'opacity-100' : 'opacity-0'} transition-opacity duration-100`}>
+              .
+            </span>
           </h1>
 
-          {/* Subtitle/Title */}
+          {/* Subtitle/Title with Typing Animation */}
           <h2
-            className="text-sm sm:text-base lg:text-lg font-light mb-8 text-gray-300 tracking-widest"
+            className="text-base sm:text-lg sm:text-xl lg:text-2xl font-light mb-4 sm:mb-8 text-gray-300 tracking-widest"
           >
-            FULL STACK DEVELOPER, FRONT END & APP DEVELOPER.
+            {displayedSubtitle}
+            <span className={`inline-block ml-1 ${isNameComplete && !isSubtitleComplete && showCursor ? 'opacity-100' : 'opacity-0'} transition-opacity duration-100`}>
+              .
+            </span>
           </h2>
 
           {/* Tagline */}
           <p
-            className="text-base sm:text-lg mb-8 text-gray-400 leading-relaxed font-light max-w-2xl"
+            className={`text-sm sm:text-lg sm:text-xl lg:text-2xl mb-4 sm:mb-8 text-gray-400 leading-relaxed font-light max-w-2xl transition-all duration-1000 ${
+              showTagline ? 'opacity-100' : 'opacity-0'
+            }`}
           >
             I build fast, modern websites and applications that help businesses grow.
             Specializing in React, Next.js, and Backend Development.
@@ -52,19 +120,21 @@ export default function Hero() {
 
           {/* CTA Buttons */}
           <div
-            className="flex flex-col sm:flex-row gap-4 items-start"
+            className={`flex flex-col sm:flex-row gap-2 sm:gap-4 items-stretch sm:items-start w-full sm:w-auto transition-all duration-1000 ${
+              showTagline ? 'opacity-100' : 'opacity-0'
+            }`}
           >
             <button
               onClick={() => scrollToSection('contact')}
-              className="flex items-center gap-2 px-8 py-3 bg-white text-black font-semibold rounded-lg text-sm hover:bg-gray-200 transition-all duration-300"
+              className="flex items-center justify-center sm:justify-start gap-2 px-4 sm:px-8 py-2.5 sm:py-3 bg-white text-black font-semibold rounded-lg text-xs sm:text-sm hover:bg-gray-200 transition-all duration-300"
             >
-              <HiMail size={18} />
+              <HiMail size={16} />
               Get In Touch
             </button>
 
             <button
               onClick={() => scrollToSection('projects')}
-              className="flex items-center gap-2 px-8 py-3 bg-gray-800 text-white font-semibold rounded-lg text-sm border-2 border-white hover:bg-gray-700 transition-all duration-300"
+              className="flex items-center justify-center sm:justify-start gap-2 px-4 sm:px-8 py-2.5 sm:py-3 bg-gray-800 text-white font-semibold rounded-lg text-xs sm:text-sm border-2 border-white hover:bg-gray-700 transition-all duration-300"
             >
               View Work
             </button>
@@ -72,27 +142,24 @@ export default function Hero() {
             <a
               href="/Qazi_Maaz_CV.pdf"
               download
-              className="flex items-center gap-2 px-8 py-3 bg-gray-900 text-white font-semibold rounded-lg text-sm border-2 border-white hover:bg-gray-800 transition-all duration-300"
+              className="flex items-center justify-center sm:justify-start gap-2 px-4 sm:px-8 py-2.5 sm:py-3 bg-gray-900 text-white font-semibold rounded-lg text-xs sm:text-sm border-2 border-white hover:bg-gray-800 transition-all duration-300"
             >
-              <HiDownload size={18} />
+              <HiDownload size={16} />
               Download CV
             </a>
           </div>
 
-          {/* Scroll Indicator */}
-          <div
-            className="mt-12"
-          >
-            <div
-              className="inline-block animate-bounce"
-            >
-              <div className="w-6 h-10 border-2 border-gray-400 rounded-full flex justify-center">
-                <div
-                  className="w-1.5 h-2 bg-white rounded-full mt-2"
-                />
-              </div>
-            </div>
-          </div>
+      {/* Scroll Indicator - Centered in Hero Section */}
+      <div
+        className="absolute left-1/2 transform -translate-x-1/2 z-20"
+        style={{ top: 'calc(100% + 40px)' }}
+      >
+        <div
+          className="inline-block animate-bounce"
+        >
+          <HiChevronDown size={32} className="text-white" />
+        </div>
+      </div>
         </div>
       </div>
     </section>
