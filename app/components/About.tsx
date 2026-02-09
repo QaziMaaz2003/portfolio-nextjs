@@ -1,13 +1,13 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import { useInView } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
+import Image from 'next/image';
 import { HiAcademicCap, HiLocationMarker, HiTrendingUp } from 'react-icons/hi';
 
 export default function About() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: false, margin: "-100px" });
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -19,108 +19,137 @@ export default function About() {
     },
   };
 
+  const imageVariants = {
+    hidden: { opacity: 0, x: -100 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: { duration: 0.8 },
+    },
+  };
+
+  const textVariants = {
+    hidden: { opacity: 0, x: 100 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: { duration: 0.8 },
+    },
+  };
+
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.5 },
+      transition: { duration: 0.6 },
     },
   };
 
   return (
-    <section id="about" className="py-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-900">
-      <div className="max-w-6xl mx-auto">
+    <section 
+      id="about" 
+      ref={ref}
+      className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-100 flex flex-col justify-center"
+    >
+      <div className="max-w-6xl mx-auto w-full">
         <motion.div
-          ref={ref}
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
+          className="space-y-12"
         >
           {/* Section Title */}
-          <motion.div variants={itemVariants} className="text-center mb-16">
-            <h2 className="text-4xl sm:text-5xl font-bold mb-4 text-gray-900 dark:text-white">
+          <motion.div variants={itemVariants} className="text-center">
+            <h2 className="text-4xl sm:text-5xl font-bold mb-4 text-gray-900">
               About <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Me</span>
             </h2>
             <div className="w-20 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto rounded-full" />
           </motion.div>
 
           <div className="grid md:grid-cols-2 gap-12 items-center">
-            {/* Left Column - Image/Stats */}
-            <motion.div variants={itemVariants} className="space-y-6">
-              <div className="bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl p-8 text-white shadow-xl">
-                <h3 className="text-3xl font-bold mb-4">My Story</h3>
-                <p className="text-blue-100 leading-relaxed">
-                  Passionate about creating elegant solutions to complex problems.
-                </p>
-              </div>
-
-              {/* Stats */}
-              <div className="grid grid-cols-2 gap-4">
-                <motion.div
-                  whileHover={{ scale: 1.05 }}
-                  className="bg-gray-100 dark:bg-gray-800 rounded-xl p-6 text-center"
-                >
-                  <div className="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-2">3.50</div>
-                  <div className="text-sm text-gray-600 dark:text-gray-400">CGPA / 4.00</div>
-                </motion.div>
-                <motion.div
-                  whileHover={{ scale: 1.05 }}
-                  className="bg-gray-100 dark:bg-gray-800 rounded-xl p-6 text-center"
-                >
-                  <div className="text-3xl font-bold text-purple-600 dark:text-purple-400 mb-2">5+</div>
-                  <div className="text-sm text-gray-600 dark:text-gray-400">Projects</div>
-                </motion.div>
+            {/* Image - slides in from left */}
+            <motion.div 
+              variants={imageVariants}
+              className="flex justify-center"
+            >
+              <div className="relative w-[350px] h-[350px] md:w-[400px] md:h-[400px]">
+                <Image
+                  src="/portfol.jpg"
+                  alt="Portfolio"
+                  width={400}
+                  height={400}
+                  className="rounded-full shadow-2xl object-cover w-full h-full"
+                  priority
+                />
               </div>
             </motion.div>
 
-            {/* Right Column - Content */}
-            <motion.div variants={itemVariants} className="space-y-6">
-              <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
-                I&apos;m a <span className="font-semibold text-blue-600 dark:text-blue-400">Computer Science student</span> at 
-                FAST National University with expertise in <span className="font-semibold">Full Stack Development</span>, 
-                Data Science, and Performance Optimization.
-              </p>
+            {/* Content - slides in from right */}
+            <motion.div 
+              variants={textVariants}
+              className="space-y-8"
+            >
+              {/* Introduction */}
+              <div className="space-y-4">
+                <h3 className="text-2xl font-bold text-gray-900 dark:text-white">
+                  Passionate Full Stack Developer
+                </h3>
+                <p className="text-base text-gray-600 dark:text-gray-300 leading-relaxed">
+                  I&apos;m a <span className="font-semibold text-blue-600 dark:text-blue-400">Computer Science student</span> at FAST National University with deep expertise in <span className="font-semibold text-gray-900 dark:text-white">Full Stack Development</span>, Data Science, and Performance Optimization. I transform complex problems into elegant, scalable solutions.
+                </p>
+              </div>
 
-              <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
-                With hands-on experience from <span className="font-semibold text-purple-600 dark:text-purple-400">BytesPak</span> and 
-                <span className="font-semibold text-purple-600 dark:text-purple-400"> Meezan Bank</span>, I specialize in building 
-                fast, scalable web applications using modern technologies like React, Next.js, Node.js, and Express.
-              </p>
+              {/* Experience */}
+              <div className="space-y-4">
+                <h3 className="text-base font-semibold text-gray-900 dark:text-white uppercase tracking-widest">Professional Experience</h3>
+                <p className="text-base text-gray-600 dark:text-gray-300 leading-relaxed">
+                  With hands-on experience from <span className="font-semibold text-blue-600 dark:text-blue-400">BytesPak</span> and <span className="font-semibold text-blue-600 dark:text-blue-400">Meezan Bank</span>, I specialize in architecting and developing fast, scalable web applications using modern technologies like <span className="font-medium">React, Next.js, Node.js, Express, and MySQL</span>.
+                </p>
+              </div>
 
-              {/* Highlights */}
-              <div className="space-y-4 mt-8">
+              {/* Highlights Grid */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-10">
                 <motion.div
-                  whileHover={{ x: 10 }}
-                  className="flex items-start gap-4 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg"
+                  variants={itemVariants}
+                  whileHover={{ y: -5, boxShadow: "0 10px 25px rgba(0,0,0,0.1)" }}
+                  className="p-5 bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/30 dark:to-blue-900/10 rounded-xl border border-blue-200 dark:border-blue-800/30 transition-all"
                 >
-                  <HiAcademicCap className="text-blue-600 dark:text-blue-400 text-2xl flex-shrink-0 mt-1" />
-                  <div>
-                    <h4 className="font-semibold text-gray-900 dark:text-white mb-1">Education</h4>
-                    <p className="text-gray-600 dark:text-gray-400">BS Computer Science at FAST University (8th Semester)</p>
+                  <div className="flex items-center gap-3 mb-2">
+                    <div className="p-2 bg-blue-600 rounded-lg">
+                      <HiAcademicCap className="text-white text-lg" />
+                    </div>
+                    <h4 className="font-bold text-gray-900 dark:text-white text-sm uppercase tracking-wide">Education</h4>
                   </div>
+                  <p className="text-sm text-gray-700 dark:text-gray-300">BS Computer Science<br/><span className="text-xs text-gray-600 dark:text-gray-400">FAST University (8th Semester)</span></p>
                 </motion.div>
 
                 <motion.div
-                  whileHover={{ x: 10 }}
-                  className="flex items-start gap-4 p-4 bg-purple-50 dark:bg-purple-900/20 rounded-lg"
+                  variants={itemVariants}
+                  whileHover={{ y: -5, boxShadow: "0 10px 25px rgba(0,0,0,0.1)" }}
+                  className="p-5 bg-gradient-to-br from-purple-50 to-purple-100 dark:from-purple-900/30 dark:to-purple-900/10 rounded-xl border border-purple-200 dark:border-purple-800/30 transition-all"
                 >
-                  <HiTrendingUp className="text-purple-600 dark:text-purple-400 text-2xl flex-shrink-0 mt-1" />
-                  <div>
-                    <h4 className="font-semibold text-gray-900 dark:text-white mb-1">Passion</h4>
-                    <p className="text-gray-600 dark:text-gray-400">Building efficient, user-friendly applications that solve real-world problems</p>
+                  <div className="flex items-center gap-3 mb-2">
+                    <div className="p-2 bg-purple-600 rounded-lg">
+                      <HiTrendingUp className="text-white text-lg" />
+                    </div>
+                    <h4 className="font-bold text-gray-900 dark:text-white text-sm uppercase tracking-wide">Specialty</h4>
                   </div>
+                  <p className="text-sm text-gray-700 dark:text-gray-300">Full Stack & Backend<br/><span className="text-xs text-gray-600 dark:text-gray-400">Scalable Solutions</span></p>
                 </motion.div>
 
                 <motion.div
-                  whileHover={{ x: 10 }}
-                  className="flex items-start gap-4 p-4 bg-pink-50 dark:bg-pink-900/20 rounded-lg"
+                  variants={itemVariants}
+                  whileHover={{ y: -5, boxShadow: "0 10px 25px rgba(0,0,0,0.1)" }}
+                  className="p-5 bg-gradient-to-br from-pink-50 to-pink-100 dark:from-pink-900/30 dark:to-pink-900/10 rounded-xl border border-pink-200 dark:border-pink-800/30 transition-all"
                 >
-                  <HiLocationMarker className="text-pink-600 dark:text-pink-400 text-2xl flex-shrink-0 mt-1" />
-                  <div>
-                    <h4 className="font-semibold text-gray-900 dark:text-white mb-1">Location</h4>
-                    <p className="text-gray-600 dark:text-gray-400">Karachi, Sindh, Pakistan</p>
+                  <div className="flex items-center gap-3 mb-2">
+                    <div className="p-2 bg-pink-600 rounded-lg">
+                      <HiLocationMarker className="text-white text-lg" />
+                    </div>
+                    <h4 className="font-bold text-gray-900 dark:text-white text-sm uppercase tracking-wide">Location</h4>
                   </div>
+                  <p className="text-sm text-gray-700 dark:text-gray-300">Karachi, Pakistan<br/><span className="text-xs text-gray-600 dark:text-gray-400">Available Worldwide</span></p>
                 </motion.div>
               </div>
             </motion.div>

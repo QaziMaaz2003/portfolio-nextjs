@@ -8,7 +8,7 @@ import { SiReact, SiNodedotjs, SiExpress, SiMysql, SiJavascript, SiHtml5, SiCss3
 
 export default function Projects() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: false, margin: "-100px" });
 
   const projects = [
     {
@@ -60,7 +60,7 @@ export default function Projects() {
   };
 
   return (
-    <section id="projects" className="py-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-900">
+    <section id="projects" className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-100">
       <div className="max-w-6xl mx-auto">
         <motion.div
           ref={ref}
@@ -70,11 +70,11 @@ export default function Projects() {
         >
           {/* Section Title */}
           <motion.div variants={itemVariants} className="text-center mb-16">
-            <h2 className="text-4xl sm:text-5xl font-bold mb-4 text-gray-900 dark:text-white">
+            <h2 className="text-4xl sm:text-5xl font-bold mb-4 text-gray-900">
               Featured <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Projects</span>
             </h2>
             <div className="w-20 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto rounded-full" />
-            <p className="mt-4 text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+            <p className="mt-4 text-gray-600 max-w-2xl mx-auto">
               Here are some of my recent projects that showcase my skills and experience
             </p>
           </motion.div>
@@ -105,11 +105,11 @@ export default function Projects() {
 
                 {/* Project Details */}
                 <motion.div className={`${index % 2 === 1 ? 'md:order-1' : ''} space-y-4`}>
-                  <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white">
+                  <h3 className="text-2xl sm:text-3xl font-bold text-gray-900">
                     {project.title}
                   </h3>
                   
-                  <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
+                  <p className="text-gray-600 leading-relaxed">
                     {project.description}
                   </p>
 
