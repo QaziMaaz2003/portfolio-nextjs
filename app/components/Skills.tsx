@@ -47,10 +47,12 @@ interface SkillCardProps {
 // 3D Tilt Card Component
 function SkillCard({ category, categoryIndex, isInView, itemVariants }: SkillCardProps) {
   const cardRef = useRef<HTMLDivElement>(null);
-  const [transform, setTransform] = useState({ rotateX: 0, rotateY: 0 });
+  const [transform, setTransform] = useState({ rotateX: 0, rotateY: 0, scale: 1 });
+  const [isHovering, setIsHovering] = useState(false);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!cardRef.current) return;
+    setIsHovering(true);
 
     const rect = cardRef.current.getBoundingClientRect();
     const x = e.clientX - rect.left;
@@ -59,14 +61,16 @@ function SkillCard({ category, categoryIndex, isInView, itemVariants }: SkillCar
     const centerX = rect.width / 2;
     const centerY = rect.height / 2;
 
-    const rotateX = ((y - centerY) / centerY) * -20;
-    const rotateY = ((x - centerX) / centerX) * 20;
+    // Calculate rotation with smoother easing
+    const rotateX = ((y - centerY) / centerY) * -25;
+    const rotateY = ((x - centerX) / centerX) * 25;
 
-    setTransform({ rotateX, rotateY });
+    setTransform({ rotateX, rotateY, scale: 1.02 });
   };
 
   const handleMouseLeave = () => {
-    setTransform({ rotateX: 0, rotateY: 0 });
+    setTransform({ rotateX: 0, rotateY: 0, scale: 1 });
+    setIsHovering(false);
   };
 
   return (
@@ -75,13 +79,15 @@ function SkillCard({ category, categoryIndex, isInView, itemVariants }: SkillCar
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       style={{
-        transform: `perspective(1200px) rotateX(${transform.rotateX}deg) rotateY(${transform.rotateY}deg)`,
-        transition: 'transform 0.05s linear',
+        transform: `perspective(1500px) rotateX(${transform.rotateX}deg) rotateY(${transform.rotateY}deg) scale(${transform.scale})`,
+        transition: isHovering ? 'none' : 'transform 0.5s cubic-bezier(0.23, 1, 0.32, 1)',
+        transformStyle: 'preserve-3d',
+        willChange: 'transform',
       }}
-      className={`group relative ${category.bgColor} ${category.borderColor} border-2 rounded-3xl p-8 overflow-hidden`}
+      className={`group relative ${category.bgColor} ${category.borderColor} border-2 rounded-3xl p-8 overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300`}
     >
       {/* Decorative Background */}
-      <div className="absolute top-0 right-0 w-32 h-32 opacity-5 transform translate-x-8 -translate-y-8">
+      <div className="absolute top-0 right-0 w-32 h-32 opacity-5 transform translate-x-8 -translate-y-8 pointer-events-none">
         <div className="w-full h-full rounded-full bg-gradient-to-br from-blue-600 to-purple-600" />
       </div>
 
@@ -188,7 +194,7 @@ export default function Skills() {
   };
 
   return (
-    <section id="skills" className="py-24 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-950">
+    <section id="skills" className="py-24 px-4 sm:px-6 lg:px-8 bg-gray-100">
       <div className="max-w-7xl mx-auto">
         <motion.div
           ref={ref}
