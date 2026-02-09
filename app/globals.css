@@ -60,3 +60,86 @@ button, a, input, textarea, select {
   cursor: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48Y2lyY2xlIGN4PSIxNiIgY3k9IjE2IiByPSIxNCIgc3Ryb2tlPSIjMDAwMDAwIiBzdHJva2Utd2lkdGg9IjIiLz48Y2lyY2xlIGN4PSIxNiIgY3k9IjE2IiByPSI0IiBmaWxsPSIjMDAwMDAwIi8+PC9zdmc+') 16 16, auto;
 }
 
+/* Skills Section Animations */
+@keyframes scroll-mobile {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(calc(-250px * 4 - 16px * 4), 0, 0);
+  }
+}
+
+@keyframes scroll-tablet {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(calc(-270px * 4 - 24px * 4), 0, 0);
+  }
+}
+
+@keyframes scroll-desktop {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(calc(-310px * 4 - 32px * 4), 0, 0);
+  }
+}
+
+.animate-scroll-mobile {
+  animation: scroll-mobile 30s linear infinite;
+  will-change: transform;
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+.animate-scroll-tablet {
+  animation: scroll-tablet 28s linear infinite;
+  will-change: transform;
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+.animate-scroll {
+  animation: scroll-desktop 25s linear infinite;
+  will-change: transform;
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* Skill Card Hover Effect */
+.skill-card {
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+  box-shadow: 
+    0 4px 12px rgba(0,0,0,0.08),
+    inset 0 0 20px rgba(156, 163, 175, 0.3),
+    inset 0 0 40px rgba(156, 163, 175, 0.2);
+}
+
+.skill-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.skill-card:hover {
+  transform: translateY(-4px) !important;
+  box-shadow: 
+    0 8px 20px rgba(0, 0, 0, 0.12),
+    inset 0 0 20px rgba(156, 163, 175, 0.3),
+    inset 0 0 40px rgba(156, 163, 175, 0.2) !important;
+}
+
+/* Ensure smooth animation on all devices */
+@media (prefers-reduced-motion: reduce) {
+  .animate-scroll-mobile,
+  .animate-scroll-tablet,
+  .animate-scroll {
+    animation: none;
+  }
+}
+
+
