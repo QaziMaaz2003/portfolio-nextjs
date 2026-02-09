@@ -84,19 +84,13 @@ function SkillCard({ category, categoryIndex, isInView, itemVariants }: SkillCar
         transformStyle: 'preserve-3d',
         willChange: 'transform',
       }}
-      className={`group relative ${category.bgColor} ${category.borderColor} border-2 rounded-3xl p-8 overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300`}
+      className={`group relative bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded-2xl p-8 overflow-hidden shadow-md hover:shadow-lg transition-all duration-300`}
     >
-      {/* Decorative Background */}
-      <div className="absolute top-0 right-0 w-32 h-32 opacity-5 transform translate-x-8 -translate-y-8 pointer-events-none">
-        <div className="w-full h-full rounded-full bg-gradient-to-br from-blue-600 to-purple-600" />
-      </div>
-
       {/* Category Header */}
-      <div className="relative z-10 mb-8">
-        <h3 className="text-2xl font-bold text-gray-900 dark:text-white leading-tight">
+      <div className="relative z-10 mb-6">
+        <h3 className="text-xl font-semibold text-gray-900 dark:text-white leading-tight">
           {category.title}
         </h3>
-        <div className="h-1 w-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full mt-4" />
       </div>
 
       {/* Skills */}
@@ -205,17 +199,13 @@ export default function Skills() {
         >
           {/* Section Header */}
           <motion.div variants={itemVariants} className="text-center max-w-3xl mx-auto">
-            <h2 className="text-5xl sm:text-6xl font-bold mb-6 text-gray-900 dark:text-white">
-              Technical <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Skills</span>
+            <h2 className="text-4xl sm:text-5xl font-bold mb-4 text-gray-900 dark:text-white">
+              Technical Skills
             </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-400 leading-relaxed">
-              A comprehensive collection of tools and technologies I've mastered through real-world development experience. Each skill represents hands-on expertise in production environments.
+            <p className="text-base text-gray-600 dark:text-gray-400 leading-relaxed mb-2">
+              Proficient in modern technologies and frameworks with hands-on experience in production environments
             </p>
-            <div className="flex gap-2 justify-center mt-6">
-              <div className="h-1 w-8 bg-gradient-to-r from-blue-600 to-blue-600 rounded-full" />
-              <div className="h-1 w-8 bg-gradient-to-r from-purple-600 to-purple-600 rounded-full" />
-              <div className="h-1 w-8 bg-gradient-to-r from-pink-600 to-pink-600 rounded-full" />
-            </div>
+            <div className="w-16 h-1 bg-gradient-to-r from-blue-600 to-blue-600 mx-auto rounded-full" />
           </motion.div>
 
           {/* Skills Categories */}
@@ -234,23 +224,23 @@ export default function Skills() {
 
           {/* Core Competencies */}
           <motion.div variants={itemVariants} className="max-w-4xl mx-auto">
-            <div className="bg-gradient-to-br from-blue-50 to-purple-50 dark:from-blue-900/30 dark:to-purple-900/30 border-2 border-blue-200 dark:border-blue-800 rounded-3xl p-10">
+            <div className="bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded-2xl p-10">
               <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
                 Professional Competencies
               </h3>
               <p className="text-gray-600 dark:text-gray-400 mb-8 text-sm">
-                Core strengths that define my approach to software development
+                Core strengths developed through professional experience
               </p>
               
-              <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
+              <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 {['Problem-Solving', 'Team Collaboration', 'Critical Thinking', 'Adaptability', 'Communication', 'Time Management', 'Leadership', 'Project Management'].map((skill, index) => (
                   <motion.div
                     key={skill}
                     initial={{ opacity: 0, scale: 0.85 }}
                     animate={isInView ? { opacity: 1, scale: 1 } : {}}
                     transition={{ delay: 0.4 + index * 0.06, duration: 0.5 }}
-                    whileHover={{ scale: 1.05, y: -4 }}
-                    className="px-4 py-3 bg-white dark:bg-gray-900 rounded-2xl border-2 border-gray-200 dark:border-gray-800 text-center font-semibold text-gray-800 dark:text-gray-200 text-sm hover:border-blue-500 dark:hover:border-blue-500 hover:shadow-md transition-all duration-300 cursor-pointer"
+                    whileHover={{ y: -2 }}
+                    className="px-4 py-3 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg text-center font-medium text-gray-700 dark:text-gray-300 text-sm hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-300"
                   >
                     {skill}
                   </motion.div>
