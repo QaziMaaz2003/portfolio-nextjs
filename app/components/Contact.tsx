@@ -90,13 +90,14 @@ export default function Contact() {
           </div>
 
           {/* Main Content Grid */}
-          <div className="grid lg:grid-cols-[1fr_auto_1fr] gap-12 items-start">
+          <div className="grid lg:grid-cols-[1.2fr_auto_0.8fr] gap-12 items-start lg:pr-12">
             
             {/* Left Side - Contact Form */}
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
               transition={{ duration: 0.6, delay: 0.2 }}
+              className="py-6"
             >
               <form onSubmit={handleSubmit} className="space-y-6">
                 {/* Full Name and Email - Side by Side */}
@@ -217,11 +218,11 @@ export default function Contact() {
               initial={{ opacity: 0, x: 30 }}
               animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="space-y-8 flex flex-col items-center lg:items-start"
+              className="space-y-8 flex flex-col items-center lg:items-start py-6"
             >
               
               {/* Mobile Divider - Only visible on mobile */}
-              <div className="lg:hidden w-full flex items-center gap-4 my-8">
+              <div className="lg:hidden w-full flex items-center gap-4">
                 <div className="flex-1 h-px bg-gradient-to-r from-transparent via-gray-300 dark:via-gray-600 to-gray-300 dark:to-gray-600"></div>
                 <span className="text-sm font-semibold text-gray-600 dark:text-gray-400 whitespace-nowrap">Or Direct Contact</span>
                 <div className="flex-1 h-px bg-gradient-to-l from-transparent via-gray-300 dark:via-gray-600 to-gray-300 dark:to-gray-600"></div>
