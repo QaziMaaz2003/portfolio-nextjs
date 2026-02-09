@@ -111,12 +111,26 @@ button, a, input, textarea, select {
 
 /* Skill Card Hover Effect */
 .skill-card {
+  position: relative;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+  box-shadow: 
+    0 4px 12px rgba(0,0,0,0.08),
+    inset 0 0 20px rgba(156, 163, 175, 0.3),
+    inset 0 0 40px rgba(156, 163, 175, 0.2);
+}
+
+.skill-card > * {
+  position: relative;
+  z-index: 1;
 }
 
 .skill-card:hover {
   transform: translateY(-4px) !important;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 
+    0 8px 20px rgba(0, 0, 0, 0.12),
+    inset 0 0 20px rgba(156, 163, 175, 0.3),
+    inset 0 0 40px rgba(156, 163, 175, 0.2) !important;
 }
 
 /* Ensure smooth animation on all devices */

@@ -13,7 +13,7 @@ export default function Hero() {
   const [isSubtitleComplete, setIsSubtitleComplete] = useState(false);
   const [showTagline, setShowTagline] = useState(false);
   const [showScrollIndicator, setShowScrollIndicator] = useState(false);
-  const fullName = 'Qazi Maaz Ahmed';
+  const fullName = "Hi, I'm Qazi Maaz Ahmed";
   const fullSubtitle = 'FULL STACK DEVELOPER';
 
   useEffect(() => {
@@ -102,7 +102,7 @@ export default function Hero() {
         >
           {/* Main Name - Large and Bold with Typing Animation */}
           <h1
-            className="text-3xl sm:text-5xl sm:text-6xl lg:text-7xl font-light mb-4 sm:mb-4 text-white tracking-widest drop-shadow-lg"
+            className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-light mb-4 sm:mb-4 text-white tracking-widest drop-shadow-lg"
           >
             {displayedName}
             <span className={`inline-block ml-1 ${!isNameComplete && showCursor ? 'opacity-100' : 'opacity-0'} transition-opacity duration-100`}>
