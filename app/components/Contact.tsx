@@ -234,7 +234,7 @@ export default function Contact() {
                   
                   {/* Email */}
                   <motion.a
-                    href="mailto:qazimaaz404@gmail.com"
+                    href="mailto:qazimaaz404@gmail.com?subject=Business Inquiry - Portfolio Contact&body=Dear Qazi Maaz,%0D%0A%0D%0AI hope this message finds you well. I recently reviewed your portfolio and was impressed by your technical expertise and project work.%0D%0A%0D%0AI am reaching out to discuss a potential opportunity that aligns with your skill set. I would appreciate the opportunity to connect and explore how we might work together.%0D%0A%0D%0AProject/Opportunity Overview:%0D%0A%0D%0A%0D%0APlease let me know your availability for a brief discussion at your earliest convenience.%0D%0A%0D%0AThank you for your time and consideration.%0D%0A%0D%0ABest regards,"
                     whileHover={{ x: 5 }}
                     className="flex items-center gap-4 group"
                   >
