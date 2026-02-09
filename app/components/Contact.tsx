@@ -70,7 +70,7 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-gray-900">
+    <section id="contact" className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-100">
       <div className="max-w-7xl mx-auto">
         <motion.div
           ref={ref}
@@ -79,12 +79,12 @@ export default function Contact() {
           animate={isInView ? "visible" : "hidden"}
         >
           {/* Header Section */}
-          <div className="text-center mb-12">
-            <h2 className="text-4xl sm:text-5xl font-bold mb-3 text-gray-900 dark:text-white">
-              Contact Us
+          <div className="text-center mb-16">
+            <h2 className="text-4xl sm:text-5xl font-bold mb-4 text-gray-900">
+              Let&apos;s <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Connect</span>
             </h2>
-            <div className="w-16 h-1 bg-red-600 mx-auto mb-4"></div>
-            <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+            <div className="w-20 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto rounded-full" />
+            <p className="mt-4 text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
               Ready to start your application? Get in touch with us today for a free consultation.
             </p>
           </div>
