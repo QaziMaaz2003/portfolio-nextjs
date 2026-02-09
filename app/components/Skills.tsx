@@ -24,7 +24,7 @@ import { FaDatabase, FaWindows } from 'react-icons/fa';
 
 export default function Skills() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: false, margin: "-100px" });
 
   const skillCategories = [
     {

@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { HiDownload, HiMail, HiChevronDown } from 'react-icons/hi';
+import { motion } from 'framer-motion';
 
 export default function Hero() {
   const [displayedName, setDisplayedName] = useState('');
@@ -93,7 +94,12 @@ export default function Hero() {
       </div>
 
       <div className="max-w-7xl mx-auto w-full relative z-10">
-        <div className="text-left max-w-3xl">
+        <motion.div 
+          className="text-left max-w-3xl"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+        >
           {/* Main Name - Large and Bold with Typing Animation */}
           <h1
             className="text-3xl sm:text-5xl sm:text-6xl lg:text-7xl font-light mb-4 sm:mb-4 text-white tracking-widest drop-shadow-lg"
@@ -168,7 +174,7 @@ export default function Hero() {
           <HiChevronDown size={32} className="text-white" />
         </div>
       </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

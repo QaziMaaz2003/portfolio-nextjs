@@ -8,7 +8,7 @@ import { SiReact, SiNodedotjs, SiExpress, SiMysql, SiJavascript, SiHtml5, SiCss3
 
 export default function Projects() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: false, margin: "-100px" });
 
   const projects = [
     {
