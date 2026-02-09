@@ -142,16 +142,19 @@ export default function About() {
               variants={textVariants}
               className="flex justify-center order-1 md:order-2"
             >
-              <div className="relative w-[280px] h-[280px] xs:w-[320px] xs:h-[320px] sm:w-[380px] sm:h-[380px] md:w-[450px] md:h-[450px] lg:w-[500px] lg:h-[500px] max-w-full">
-                <div className="absolute inset-0 bg-gray-100 rounded-full"></div>
+              <div className="relative w-[280px] h-[280px] xs:w-[320px] xs:h-[320px] sm:w-[380px] sm:h-[380px] md:w-[450px] md:h-[450px] lg:w-[500px] lg:h-[500px] max-w-full overflow-hidden rounded-2xl">
+                <div className="absolute inset-0 bg-gray-100"></div>
                 <Image
                   src="/portfoliooo.png"
                   alt="Portfolio"
                   width={500}
                   height={500}
-                  className="rounded-full object-cover w-full h-full relative z-10"
+                  className="w-full h-full object-cover relative z-10 shadow-xl"
                   priority
-                  style={{ mixBlendMode: 'multiply' }}
+                  style={{ 
+                    mixBlendMode: 'darken',
+                    filter: 'brightness(0.98)'
+                  }}
                 />
               </div>
             </motion.div>
