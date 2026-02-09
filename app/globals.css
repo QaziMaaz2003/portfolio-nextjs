@@ -142,4 +142,15 @@ button, a, input, textarea, select {
   }
 }
 
+/* Contact Form Button Animation */
+.bg-size-200 {
+  background-size: 200% 100%;
+}
 
+.bg-pos-0 {
+  background-position: 0% 50%;
+}
+
+.bg-pos-100 {
+  background-position: 100% 50%;
+}
