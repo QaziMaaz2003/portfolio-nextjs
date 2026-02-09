@@ -58,7 +58,7 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="py-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-900">
+    <section id="contact" className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-100">
       <div className="max-w-6xl mx-auto">
         <motion.div
           ref={ref}
@@ -68,11 +68,11 @@ export default function Contact() {
         >
           {/* Section Title */}
           <motion.div variants={itemVariants} className="text-center mb-16">
-            <h2 className="text-4xl sm:text-5xl font-bold mb-4 text-gray-900 dark:text-white">
+            <h2 className="text-4xl sm:text-5xl font-bold mb-4 text-gray-900">
               Get In <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Touch</span>
             </h2>
             <div className="w-20 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto rounded-full" />
-            <p className="mt-4 text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+            <p className="mt-4 text-gray-600 max-w-2xl mx-auto">
               Have a project in mind? Let&apos;s work together to build something amazing!
             </p>
           </motion.div>

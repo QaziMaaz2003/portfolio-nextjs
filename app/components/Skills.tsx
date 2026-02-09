@@ -90,7 +90,7 @@ export default function Skills() {
   };
 
   return (
-    <section id="skills" className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-gray-800">
+    <section id="skills" className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-100">
       <div className="max-w-6xl mx-auto">
         <motion.div
           ref={ref}
@@ -100,7 +100,7 @@ export default function Skills() {
         >
           {/* Section Title */}
           <motion.div variants={itemVariants} className="text-center mb-16">
-            <h2 className="text-4xl sm:text-5xl font-bold mb-4 text-gray-900 dark:text-white">
+            <h2 className="text-4xl sm:text-5xl font-bold mb-4 text-gray-900">
               Skills & <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Tech Stack</span>
             </h2>
             <div className="w-20 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto rounded-full" />
@@ -141,7 +141,7 @@ export default function Skills() {
 
           {/* Additional Skills */}
           <motion.div variants={itemVariants} className="mt-12">
-            <h3 className="text-2xl font-bold text-center mb-6 text-gray-900 dark:text-white">
+            <h3 className="text-2xl font-bold text-center mb-6 text-gray-900">
               Soft Skills
             </h3>
             <div className="flex flex-wrap justify-center gap-4">

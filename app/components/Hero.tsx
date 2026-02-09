@@ -11,6 +11,7 @@ export default function Hero() {
   const [isNameComplete, setIsNameComplete] = useState(false);
   const [isSubtitleComplete, setIsSubtitleComplete] = useState(false);
   const [showTagline, setShowTagline] = useState(false);
+  const [showScrollIndicator, setShowScrollIndicator] = useState(false);
   const fullName = 'Qazi Maaz Ahmed';
   const fullSubtitle = 'FULL STACK DEVELOPER';
 
@@ -61,6 +62,11 @@ export default function Hero() {
     // Show tagline after subtitle is complete
     if (isSubtitleComplete) {
       setShowTagline(true);
+      // Show scroll indicator after a delay (buttons fade in duration is 1000ms)
+      const timer = setTimeout(() => {
+        setShowScrollIndicator(true);
+      }, 1000);
+      return () => clearTimeout(timer);
     }
   }, [isSubtitleComplete]);
 
@@ -151,7 +157,9 @@ export default function Hero() {
 
       {/* Scroll Indicator - Centered in Hero Section */}
       <div
-        className="absolute left-1/2 transform -translate-x-1/2 z-20"
+        className={`absolute left-1/2 transform -translate-x-1/2 z-20 transition-all duration-1000 ${
+          showScrollIndicator ? 'opacity-100' : 'opacity-0'
+        }`}
         style={{ top: 'calc(100% + 40px)' }}
       >
         <div
