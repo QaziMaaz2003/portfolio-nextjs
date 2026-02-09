@@ -85,12 +85,12 @@ export default function Contact() {
             </h2>
             <div className="w-20 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto rounded-full" />
             <p className="mt-4 text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-              Ready to start your application? Get in touch with us today for a free consultation.
+              Have a project in mind? Let&apos;s turn your vision into reality. I&apos;m here to help bring your ideas to life!
             </p>
           </div>
 
           {/* Main Content Grid */}
-          <div className="grid lg:grid-cols-2 gap-12 items-start">
+          <div className="grid lg:grid-cols-[1fr_auto_1fr] gap-12 items-start">
             
             {/* Left Side - Contact Form */}
             <motion.div
@@ -99,38 +99,41 @@ export default function Contact() {
               transition={{ duration: 0.6, delay: 0.2 }}
             >
               <form onSubmit={handleSubmit} className="space-y-6">
-                {/* Full Name */}
-                <div>
-                  <label htmlFor="name" className="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2">
-                    Full Name *
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-5 py-4 rounded-xl border-2 border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
-                    placeholder="John Doe"
-                  />
-                </div>
+                {/* Full Name and Email - Side by Side */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {/* Full Name */}
+                  <div>
+                    <label htmlFor="name" className="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2">
+                      Full Name *
+                    </label>
+                    <input
+                      type="text"
+                      id="name"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleChange}
+                      required
+                      className="w-full px-5 py-4 rounded-xl border-2 border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
+                      placeholder="John Doe"
+                    />
+                  </div>
 
-                {/* Email Address */}
-                <div>
-                  <label htmlFor="email" className="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2">
-                    Email Address *
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-5 py-4 rounded-xl border-2 border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
-                    placeholder="john@example.com"
-                  />
+                  {/* Email Address */}
+                  <div>
+                    <label htmlFor="email" className="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2">
+                      Email Address *
+                    </label>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      required
+                      className="w-full px-5 py-4 rounded-xl border-2 border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
+                      placeholder="john@example.com"
+                    />
+                  </div>
                 </div>
 
                 {/* Phone Number */}
@@ -201,17 +204,31 @@ export default function Contact() {
               </form>
             </motion.div>
 
+            {/* Vertical Divider with Text */}
+            <div className="hidden lg:flex flex-col items-center justify-center relative h-full self-stretch">
+              <div className="w-px h-full bg-gradient-to-b from-transparent via-gray-300 dark:via-gray-600 to-transparent absolute"></div>
+              <div className="bg-gray-100 px-4 py-2 rounded-full z-10 relative">
+                <span className="text-sm font-semibold text-gray-600 dark:text-gray-400 whitespace-nowrap text-center" style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}>Or Direct Contact</span>
+              </div>
+            </div>
+
             {/* Right Side - Direct Contact Info */}
             <motion.div
               initial={{ opacity: 0, x: 30 }}
               animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="space-y-8"
+              className="space-y-8 flex flex-col items-center lg:items-start"
             >
               
+              {/* Mobile Divider - Only visible on mobile */}
+              <div className="lg:hidden w-full flex items-center gap-4 my-8">
+                <div className="flex-1 h-px bg-gradient-to-r from-transparent via-gray-300 dark:via-gray-600 to-gray-300 dark:to-gray-600"></div>
+                <span className="text-sm font-semibold text-gray-600 dark:text-gray-400 whitespace-nowrap">Or Direct Contact</span>
+                <div className="flex-1 h-px bg-gradient-to-l from-transparent via-gray-300 dark:via-gray-600 to-gray-300 dark:to-gray-600"></div>
+              </div>
+
               {/* Direct Contact Section */}
               <div>
-                <h3 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-6">Direct Contact</h3>
                 <div className="space-y-5">
                   
                   {/* Email */}
@@ -295,19 +312,6 @@ export default function Contact() {
                     </div>
                   </motion.a>
 
-                </div>
-              </div>
-
-              {/* Availability Note */}
-              <div className="bg-gradient-to-br from-blue-50 to-purple-50 dark:from-blue-900/10 dark:to-purple-900/10 rounded-2xl p-6 border border-blue-100 dark:border-blue-900/30">
-                <div className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-green-500 rounded-full mt-2 animate-pulse"></div>
-                  <div>
-                    <h4 className="font-bold text-gray-900 dark:text-white mb-2">Currently Available</h4>
-                    <p className="text-sm text-gray-600 dark:text-gray-400">
-                      Open for freelance projects, full-time opportunities, and consulting work. I usually respond within 24 hours.
-                    </p>
-                  </div>
                 </div>
               </div>
 
