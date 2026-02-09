@@ -2,253 +2,207 @@
 
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import {
-  SiCplusplus,
-  SiPython,
-  SiJavascript,
   SiReact,
   SiNodedotjs,
   SiExpress,
-  SiMysql,
-  SiMongodb,
-  SiHtml5,
-  SiCss3,
+  SiJavascript,
+  SiTypescript,
+  SiPython,
+  SiCplusplus,
+  SiC,
+  SiNextdotjs,
   SiTailwindcss,
+  SiBootstrap,
+  SiCss3,
   SiGit,
-  SiGithub,
+  SiDocker,
   SiVercel,
-  SiLinux,
 } from 'react-icons/si';
-import { FaDatabase, FaWindows } from 'react-icons/fa';
-import { ReactNode } from 'react';
 
 // Type definitions
 interface Skill {
   name: string;
   icon: React.ComponentType<{ className?: string }>;
-  color: string;
 }
 
 interface Category {
   title: string;
-  bgColor: string;
-  borderColor: string;
+  description: string;
   skills: Skill[];
-}
-
-interface SkillCardProps {
-  category: Category;
-  categoryIndex: number;
-  isInView: boolean;
-  itemVariants: Record<string, unknown>;
-}
-
-// 3D Tilt Card Component
-function SkillCard({ category, categoryIndex, isInView, itemVariants }: SkillCardProps) {
-  const cardRef = useRef<HTMLDivElement>(null);
-  const [transform, setTransform] = useState({ rotateX: 0, rotateY: 0, scale: 1 });
-  const [isHovering, setIsHovering] = useState(false);
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!cardRef.current) return;
-    setIsHovering(true);
-
-    const rect = cardRef.current.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-
-    // Calculate rotation with smoother easing
-    const rotateX = ((y - centerY) / centerY) * -25;
-    const rotateY = ((x - centerX) / centerX) * 25;
-
-    setTransform({ rotateX, rotateY, scale: 1.02 });
-  };
-
-  const handleMouseLeave = () => {
-    setTransform({ rotateX: 0, rotateY: 0, scale: 1 });
-    setIsHovering(false);
-  };
-
-  return (
-    <div
-      ref={cardRef}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      style={{
-        transform: `perspective(1500px) rotateX(${transform.rotateX}deg) rotateY(${transform.rotateY}deg) scale(${transform.scale})`,
-        transition: isHovering ? 'none' : 'transform 0.5s cubic-bezier(0.23, 1, 0.32, 1)',
-        transformStyle: 'preserve-3d',
-        willChange: 'transform',
-      }}
-      className={`group relative bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded-2xl p-8 overflow-hidden shadow-md hover:shadow-lg transition-all duration-300`}
-    >
-      {/* Category Header */}
-      <div className="relative z-10 mb-6">
-        <h3 className="text-xl font-semibold text-gray-900 dark:text-white leading-tight">
-          {category.title}
-        </h3>
-      </div>
-
-      {/* Skills */}
-      <div className="relative z-10 space-y-3">
-        {category.skills.map((skill: Skill, skillIndex: number) => (
-          <motion.div
-            key={skill.name}
-            initial={{ opacity: 0, x: -15 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ delay: categoryIndex * 0.15 + skillIndex * 0.08, duration: 0.5 }}
-            whileHover={{ x: 6 }}
-            className="flex items-center gap-3 p-3 rounded-xl hover:bg-white/50 dark:hover:bg-gray-900/50 backdrop-blur-sm transition-all duration-300 cursor-pointer"
-          >
-            <div className="flex-shrink-0">
-              <skill.icon className={`text-2xl ${skill.color} transition-transform duration-300 group-hover:scale-110`} />
-            </div>
-            <span className="font-semibold text-gray-800 dark:text-gray-200 text-sm leading-snug">
-              {skill.name}
-            </span>
-          </motion.div>
-        ))}
-      </div>
-    </div>
-  );
 }
 
 export default function Skills() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: false, margin: "-100px" });
+  const [isPaused, setIsPaused] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
-  const skillCategories = [
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  const skillCategories: Category[] = [
     {
-      title: 'Frontend Development',
-      bgColor: 'bg-blue-50 dark:bg-blue-900/20',
-      borderColor: 'border-blue-200 dark:border-blue-800',
+      title: 'Languages',
+      description: 'Programming Languages',
       skills: [
-        { name: 'React.js', icon: SiReact, color: 'text-blue-500' },
-        { name: 'HTML5', icon: SiHtml5, color: 'text-orange-500' },
-        { name: 'CSS3', icon: SiCss3, color: 'text-blue-600' },
-        { name: 'JavaScript', icon: SiJavascript, color: 'text-yellow-500' },
-        { name: 'Tailwind CSS', icon: SiTailwindcss, color: 'text-cyan-500' },
+        { name: 'JavaScript', icon: SiJavascript },
+        { name: 'TypeScript', icon: SiTypescript },
+        { name: 'Python', icon: SiPython },
+        { name: 'C++', icon: SiCplusplus },
+        { name: 'C', icon: SiC },
       ],
     },
     {
-      title: 'Backend & Database',
-      bgColor: 'bg-green-50 dark:bg-green-900/20',
-      borderColor: 'border-green-200 dark:border-green-800',
+      title: 'Frameworks',
+      description: 'Web Development Frameworks',
       skills: [
-        { name: 'Node.js', icon: SiNodedotjs, color: 'text-green-600' },
-        { name: 'Express.js', icon: SiExpress, color: 'text-gray-700 dark:text-gray-300' },
-        { name: 'MySQL', icon: SiMysql, color: 'text-blue-700' },
-        { name: 'MongoDB', icon: SiMongodb, color: 'text-green-500' },
+        { name: 'React.js', icon: SiReact },
+        { name: 'Next.js', icon: SiNextdotjs },
+        { name: 'Node.js', icon: SiNodedotjs },
+        { name: 'Express.js', icon: SiExpress },
       ],
     },
     {
-      title: 'Programming Languages',
-      bgColor: 'bg-purple-50 dark:bg-purple-900/20',
-      borderColor: 'border-purple-200 dark:border-purple-800',
+      title: 'Styling',
+      description: 'CSS & UI Frameworks',
       skills: [
-        { name: 'JavaScript', icon: SiJavascript, color: 'text-yellow-500' },
-        { name: 'Python', icon: SiPython, color: 'text-blue-500' },
-        { name: 'C/C++', icon: SiCplusplus, color: 'text-blue-600' },
+        { name: 'CSS', icon: SiCss3 },
+        { name: 'Tailwind CSS', icon: SiTailwindcss },
+        { name: 'Bootstrap', icon: SiBootstrap },
       ],
     },
     {
-      title: 'Tools & Platforms',
-      bgColor: 'bg-orange-50 dark:bg-orange-900/20',
-      borderColor: 'border-orange-200 dark:border-orange-800',
+      title: 'Tools',
+      description: 'Development & Deployment',
       skills: [
-        { name: 'Git & GitHub', icon: SiGithub, color: 'text-gray-800 dark:text-white' },
-        { name: 'Vercel', icon: SiVercel, color: 'text-black dark:text-white' },
-        { name: 'Linux', icon: SiLinux, color: 'text-yellow-600' },
-        { name: 'Windows', icon: FaWindows, color: 'text-blue-500' },
+        { name: 'Git', icon: SiGit },
+        { name: 'Docker', icon: SiDocker },
+        { name: 'Vercel', icon: SiVercel },
       ],
     },
   ];
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.5 },
-    },
-  };
-
   return (
-    <section id="skills" className="py-24 px-4 sm:px-6 lg:px-8 bg-gray-100">
+    <section id="skills" className="py-12 sm:py-16 md:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 bg-gray-100 overflow-hidden">
       <div className="max-w-7xl mx-auto">
-        <motion.div
-          ref={ref}
-          variants={containerVariants}
-          initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
-          className="space-y-20"
-        >
+        <div ref={ref}>
           {/* Section Header */}
-          <motion.div variants={itemVariants} className="text-center max-w-3xl mx-auto">
-            <h2 className="text-4xl sm:text-5xl font-bold mb-4 text-gray-900 dark:text-white">
-              Technical Skills
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-8 sm:mb-12 md:mb-16"
+          >
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4 text-gray-900">
+              Technical <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Skills</span>
             </h2>
-            <p className="text-base text-gray-600 dark:text-gray-400 leading-relaxed mb-2">
-              Proficient in modern technologies and frameworks with hands-on experience in production environments
+            <div className="w-16 sm:w-20 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto rounded-full mb-3 sm:mb-4" />
+            <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400 px-4">
+              Tools I use to build scalable apps
             </p>
-            <div className="w-16 h-1 bg-gradient-to-r from-blue-600 to-blue-600 mx-auto rounded-full" />
           </motion.div>
 
-          {/* Skills Categories */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {skillCategories.map((category, categoryIndex) => (
-              <motion.div key={category.title} variants={itemVariants}>
-                <SkillCard
-                  category={category}
-                  categoryIndex={categoryIndex}
-                  isInView={isInView}
-                  itemVariants={itemVariants}
-                />
-              </motion.div>
-            ))}
-          </div>
+          {/* Infinite Scrolling Cards */}
+          <div 
+            className="relative -mx-4 sm:mx-0 overflow-hidden"
+            onMouseEnter={() => setIsPaused(true)}
+            onMouseLeave={() => setIsPaused(false)}
+            onTouchStart={() => setIsPaused(true)}
+            onTouchEnd={() => setIsPaused(false)}
+          >
+            <div 
+              className="flex gap-4 sm:gap-6 md:gap-8 animate-scroll-mobile sm:animate-scroll-tablet md:animate-scroll" 
+              style={{
+                animationPlayState: isPaused ? 'paused' : 'running',
+                transform: 'translate3d(0, 0, 0)',
+              }}
+            >
+              {/* First set of cards */}
+              {skillCategories.map((category) => (
+                <motion.div
+                  key={category.title}
+                  initial={{ opacity: 0 }}
+                  animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+                  transition={{ duration: 0.6 }}
+                  className="skill-card group bg-white dark:bg-gray-900 rounded-lg sm:rounded-xl p-5 sm:p-6 md:p-8 border border-gray-200 dark:border-gray-800 flex-shrink-0 w-[250px] sm:w-[270px] md:w-[310px]"
+                  style={{
+                    boxShadow: '0 4px 12px rgba(0,0,0,0.08)',
+                  }}
+                >
+                  {/* Category Header */}
+                  <div className="mb-4 sm:mb-5">
+                    <h3 className="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white mb-1">
+                      {category.title}
+                    </h3>
+                    <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">
+                      {category.description}
+                    </p>
+                  </div>
 
-          {/* Core Competencies */}
-          <motion.div variants={itemVariants} className="max-w-4xl mx-auto">
-            <div className="bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded-2xl p-10">
-              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
-                Professional Competencies
-              </h3>
-              <p className="text-gray-600 dark:text-gray-400 mb-8 text-sm">
-                Core strengths developed through professional experience
-              </p>
+                  {/* Skills as Tags */}
+                  <div className="flex flex-wrap gap-1.5 sm:gap-2">
+                    {category.skills.map((skill) => (
+                      <div
+                        key={skill.name}
+                        className="inline-flex items-center gap-1.5 sm:gap-2 bg-gray-100 dark:bg-gray-800 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200"
+                      >
+                        <skill.icon className="text-sm sm:text-base" />
+                        <span>{skill.name}</span>
+                      </div>
+                    ))}
+                  </div>
+                </motion.div>
+              ))}
               
-              <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                {['Problem-Solving', 'Team Collaboration', 'Critical Thinking', 'Adaptability', 'Communication', 'Time Management', 'Leadership', 'Project Management'].map((skill, index) => (
-                  <motion.div
-                    key={skill}
-                    initial={{ opacity: 0, scale: 0.85 }}
-                    animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                    transition={{ delay: 0.4 + index * 0.06, duration: 0.5 }}
-                    whileHover={{ y: -2 }}
-                    className="px-4 py-3 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg text-center font-medium text-gray-700 dark:text-gray-300 text-sm hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-300"
-                  >
-                    {skill}
-                  </motion.div>
-                ))}
-              </div>
+              {/* Duplicate set for seamless loop */}
+              {skillCategories.map((category) => (
+                <motion.div
+                  key={`${category.title}-duplicate`}
+                  initial={{ opacity: 0 }}
+                  animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+                  transition={{ duration: 0.6 }}
+                  className="skill-card group bg-white dark:bg-gray-900 rounded-lg sm:rounded-xl p-5 sm:p-6 md:p-8 border border-gray-200 dark:border-gray-800 flex-shrink-0 w-[250px] sm:w-[270px] md:w-[310px]"
+                  style={{
+                    boxShadow: '0 4px 12px rgba(0,0,0,0.08)',
+                  }}
+                >
+                  {/* Category Header */}
+                  <div className="mb-4 sm:mb-5">
+                    <h3 className="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white mb-1">
+                      {category.title}
+                    </h3>
+                    <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">
+                      {category.description}
+                    </p>
+                  </div>
+
+                  {/* Skills as Tags */}
+                  <div className="flex flex-wrap gap-1.5 sm:gap-2">
+                    {category.skills.map((skill) => (
+                      <div
+                        key={skill.name}
+                        className="inline-flex items-center gap-1.5 sm:gap-2 bg-gray-100 dark:bg-gray-800 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200"
+                      >
+                        <skill.icon className="text-sm sm:text-base" />
+                        <span>{skill.name}</span>
+                      </div>
+                    ))}
+                  </div>
+                </motion.div>
+              ))}
             </div>
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
       </div>
     </section>
   );
