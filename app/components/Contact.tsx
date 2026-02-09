@@ -171,15 +171,17 @@ export default function Contact() {
                 </div>
 
                 {/* Submit Button */}
-                <motion.button
-                  type="submit"
-                  disabled={isSubmitting}
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="w-full px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-bold rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl"
-                >
-                  {isSubmitting ? 'SENDING...' : 'SEND MESSAGE'}
-                </motion.button>
+                <div className="flex justify-center">
+                  <motion.button
+                    type="submit"
+                    disabled={isSubmitting}
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    className="px-10 py-4 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl text-base"
+                  >
+                    {isSubmitting ? 'SENDING...' : 'SEND MESSAGE'}
+                  </motion.button>
+                </div>
 
                 {/* Success Message */}
                 {submitStatus === 'success' && (
