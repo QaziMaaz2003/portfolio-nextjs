@@ -101,7 +101,7 @@ export default function Experience() {
             <h3 className="text-2xl font-bold mb-8 text-gray-900">
               Professional Experience
             </h3>
-            <div className="space-y-4 flex flex-col items-center">
+            <div className="space-y-4 flex flex-col items-center px-2 sm:px-0">
               {experiences.map((exp, index) => (
                 <motion.div
                   key={index}
@@ -111,18 +111,20 @@ export default function Experience() {
                   {/* Collapsed View */}
                   <motion.button
                     onClick={() => setExpandedIndex(expandedIndex === index ? null : index)}
-                    className="w-full bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white p-4 flex items-center justify-between transition-all"
+                    className="w-full bg-blue-50 dark:bg-blue-900/20 border-2 border-blue-600 hover:border-purple-600 hover:bg-gray-200 dark:hover:bg-gray-500 hover:shadow-lg shadow-md rounded-lg p-3 sm:p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-4 transition-all hover:scale-102"
                   >
-                    <div className="text-left">
-                      <h4 className="text-lg font-bold">{exp.title}</h4>
-                      <p className="text-purple-100 text-base">{exp.company}</p>
+                    <div className="flex items-start gap-2 w-full sm:w-auto">
+                      <div className="text-left flex-1">
+                        <h4 className="text-lg sm:text-xl font-bold text-gray-700 dark:text-gray-300 line-clamp-2">{exp.title}</h4>
+                        <p className="text-gray-700 dark:text-gray-300 text-xs sm:text-sm line-clamp-1">{exp.company}</p>
+                      </div>
                     </div>
-                    <div className="flex items-center gap-4">
-                      <p className="text-purple-100 text-base font-medium">{exp.period}</p>
+                    <div className="flex items-center gap-2 sm:gap-4 flex-shrink-0">
+                      <p className="text-gray-700 dark:text-gray-300 text-xs sm:text-sm font-medium whitespace-nowrap">{exp.period}</p>
                       <motion.div
                         animate={{ rotate: expandedIndex === index ? 45 : 0 }}
                         transition={{ duration: 0.2 }}
-                        className="text-xl font-light"
+                        className="text-xl sm:text-2xl font-light bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
                       >
                         +
                       </motion.div>
@@ -136,26 +138,26 @@ export default function Experience() {
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: 'auto' }}
                         exit={{ opacity: 0, height: 0 }}
-                        transition={{ duration: 0.3 }}
-                        className="bg-gray-900 dark:bg-gray-800 text-white p-8 overflow-hidden mt-2"
+                        transition={{ duration: 0.4, ease: 'easeInOut' }}
+                        className="bg-gradient-to-br from-blue-500/10 to-purple-500/10 dark:from-blue-900/30 dark:to-purple-900/30 border-2 border-blue-600 text-gray-900 dark:text-white rounded-b-lg p-4 sm:p-6 lg:p-8 overflow-hidden shadow-md mt-2 backdrop-blur-sm"
                       >
-                        <div className="flex gap-6">
-                          <div className="flex-1">
+                        <div className="flex flex-col-reverse lg:flex-row gap-6 lg:gap-8">
+                          <div className="flex-1 min-w-0">
                             {/* Description */}
-                            <p className="text-gray-300 mb-4 leading-relaxed">
+                            <p className="text-gray-800 dark:text-gray-200 mb-4 leading-relaxed text-sm sm:text-base">
                               {exp.description}
                             </p>
 
                             {/* Tools */}
                             <div>
-                              <p className="text-gray-400 text-base font-semibold mb-3">
-                                Location: {exp.location}
+                              <p className="text-gray-700 dark:text-gray-300 text-xs sm:text-sm font-semibold mb-3">
+                                📍 Location: {exp.location}
                               </p>
                               <div className="flex flex-wrap gap-2">
                                 {exp.tools.map((tool, toolIndex) => (
                                   <span
                                     key={toolIndex}
-                                    className="px-4 py-1.5 bg-blue-600 hover:bg-blue-700 rounded-full text-sm font-medium transition-colors"
+                                    className="px-2 sm:px-3 py-1 sm:py-1.5 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-full text-xs font-medium hover:shadow-lg transition-all hover:scale-105 whitespace-nowrap"
                                   >
                                     {tool}
                                   </span>
@@ -165,7 +167,7 @@ export default function Experience() {
                           </div>
                           {exp.logoImage ? (
                             exp.logoImage.includes('bytespak') ? (
-                              <div className="w-32 h-32 rounded-full overflow-hidden flex items-center justify-center">
+                              <div className="w-24 h-24 sm:w-32 sm:h-32 rounded-full overflow-hidden flex items-center justify-center flex-shrink-0 mx-auto lg:mx-0">
                                 <Image
                                   src={exp.logoImage}
                                   alt={exp.company}
@@ -182,13 +184,13 @@ export default function Experience() {
                                 alt={exp.company}
                                 width={120}
                                 height={120}
-                                className="object-contain mix-blend-mode-lighten"
+                                className="object-contain mix-blend-mode-lighten flex-shrink-0 h-24 sm:h-32 w-auto mx-auto lg:mx-0"
                                 style={{ mixBlendMode: 'lighten' }}
                                 quality={95}
                               />
                             )
                           ) : (
-                            <div className="text-6xl">{exp.logo}</div>
+                            <div className="text-4xl sm:text-6xl flex-shrink-0 mx-auto lg:mx-0">{exp.logo}</div>
                           )}
                         </div>
                       </motion.div>
