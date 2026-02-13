@@ -65,20 +65,32 @@ export default function Hero() {
   // Vanta initialization (runs only after scripts loaded and ref ready)
   useEffect(() => {
     if (vantaScriptsLoaded && typeof window !== 'undefined' && window.VANTA && heroRef.current) {
-      const isMobile = window.innerWidth < 640;
-      vantaRef.current = window.VANTA.HALO({
-        el: heroRef.current,
-        mouseControls: true,
-        touchControls: true,
-        gyroControls: false,
-        minHeight: isMobile ? 100 : 200.00,
-        minWidth: isMobile ? 100 : 200.00,
-        color: 0xffffff,
-        backgroundColor: 0x000000,
-        amplitudeFactor: isMobile ? 1.2 : 2.00,
-        size: isMobile ? 1.0 : 1.50,
-        mouseEase: true
-      });
+      try {
+        // Check if WebGL is supported
+        const canvas = document.createElement('canvas');
+        const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+        if (!gl) {
+          console.warn('WebGL not supported, skipping Vanta effect');
+          return;
+        }
+
+        const isMobile = window.innerWidth < 640;
+        vantaRef.current = window.VANTA.HALO({
+          el: heroRef.current,
+          mouseControls: true,
+          touchControls: true,
+          gyroControls: false,
+          minHeight: isMobile ? 100 : 200.00,
+          minWidth: isMobile ? 100 : 200.00,
+          color: 0xffffff,
+          backgroundColor: 0x000000,
+          amplitudeFactor: isMobile ? 1.2 : 2.00,
+          size: isMobile ? 1.0 : 1.50,
+          mouseEase: true
+        });
+      } catch (error) {
+        console.warn('Failed to initialize Vanta effect:', error);
+      }
     }
     return () => {
       if (vantaRef.current && vantaRef.current.destroy) {

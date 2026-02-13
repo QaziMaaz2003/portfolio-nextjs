@@ -1,18 +1,112 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { HiMenu, HiX } from 'react-icons/hi';
+import { useState, useEffect, useRef } from 'react';
+import { motion } from 'framer-motion';
+import gsap from 'gsap';
 
 export default function Navbar() {
   const [activeSection, setActiveSection] = useState('home');
   const [isOpen, setIsOpen] = useState(false);
-  const [isDesktopMenuOpen, setIsDesktopMenuOpen] = useState(false);
+  const [isHeaderHidden, setIsHeaderHidden] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const lastScrollY = useRef(0);
+  const menuRef = useRef<HTMLDivElement>(null);
+  const menuImgContainerRef = useRef<HTMLDivElement>(null);
+  const imagesRef = useRef<(HTMLImageElement | null)[]>([]);
+
+  // Mouse tracking for tilt effect
+  const mouse = useRef({ x: 0, y: 0 });
+  const center = useRef({
+    x: typeof window !== 'undefined' ? window.innerWidth / 2 : 0,
+    y: typeof window !== 'undefined' ? window.innerHeight / 2 : 0,
+  });
+
+  // Default animation ease
+  const defaultEase = "power4.inOut";
+  const scales = [0.81, 0.84, 0.87, 0.9];
+  const heroImage = '/laptop.avif';
+
+  // 3D tilt effect based on mouse position
+  const updateTilt = () => {
+    if (!menuImgContainerRef.current || !imagesRef.current) return;
+
+    const dx = mouse.current.x - center.current.x;
+    const dy = mouse.current.y - center.current.y;
+
+    const tiltx = (dy / center.current.y) * 20;
+    const tilty = (dx / center.current.x) * 20;
+
+    gsap.to(menuImgContainerRef.current, {
+      duration: 2,
+      transform: `translateY(-50%) rotate3d(${tiltx}, ${tilty}, 0, 15deg)`,
+      ease: "power3.out",
+    });
+
+    imagesRef.current.forEach((img, index) => {
+      if (!img) return;
+      const parallaxX = -(dx * (index + 1)) / 100;
+      const parallaxY = -(dy * (index + 1)) / 100;
+      gsap.to(img, {
+        duration: 2,
+        x: parallaxX,
+        y: parallaxY,
+        scale: scales[index],
+        ease: "power3.out",
+      });
+    });
+  };
+
+  // Helper function to set image refs
+  const setImageRef = (index: number) => (el: HTMLImageElement | null) => {
+    if (imagesRef.current) {
+      imagesRef.current[index] = el;
+    }
+  };
 
   useEffect(() => {
-    // Handle scroll for active section
+    // Check screen size
+    const checkScreenSize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    checkScreenSize();
+
+    // Set initial image positions - use CSS transform-compatible approach
+    const setInitialImagePositions = () => {
+      gsap.set(["#img-1", "#img-2", "#img-3", "#img-4"], { 
+        opacity: 0,
+        scale: 0.8,
+      });
+    };
+    setInitialImagePositions();
+
+    // Mouse move handler for 3D tilt effect
+    const handleMouseMove = (event: MouseEvent) => {
+      mouse.current.x = event.clientX;
+      mouse.current.y = event.clientY;
+      updateTilt();
+    };
+
+    // Window resize handler
+    const handleResize = () => {
+      center.current.x = window.innerWidth / 2;
+      center.current.y = window.innerHeight / 2;
+      checkScreenSize();
+      setInitialImagePositions();
+    };
+
+    document.body.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      document.body.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [isMobile]);
+
+  useEffect(() => {
+    // Handle scroll for active section and hide/show header
     const handleScroll = () => {
-      const sections = ['home', 'about', 'skills', 'projects', 'experience', 'contact'];
+      const sections = ['hero', 'about', 'skills', 'projects', 'experience', 'contact'];
       const scrollPosition = window.scrollY + 100;
 
       for (const section of sections) {
@@ -25,60 +119,136 @@ export default function Navbar() {
           }
         }
       }
+
+      // Hide/show header on scroll
+      const currentY = window.scrollY;
+      const diff = currentY - lastScrollY.current;
+      if (!isOpen) {
+        if (diff > 10 && currentY > 50) {
+          setIsHeaderHidden(true);
+        } else if (diff < -10) {
+          setIsHeaderHidden(false);
+        }
+      }
+      lastScrollY.current = currentY;
     };
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [isOpen]);
 
   useEffect(() => {
-    // Apply blur only to main content, not navbar
-    const nav = document.querySelector('nav');
-    
+    // Initial GSAP setup for menu
+    gsap.set(".menu-link-item", { y: 40, opacity: 0 });
+    gsap.set(".mobile-menu", { 
+      clipPath: "polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)",
+      pointerEvents: "none"
+    });
+  }, []);
+
+  // Disable page scroll when menu is open
+  useEffect(() => {
     if (isOpen) {
-      // Ensure navbar is never blurred
-      if (nav) {
-        (nav as HTMLElement).style.filter = 'none';
-        (nav as HTMLElement).style.pointerEvents = 'auto';
-      }
-      
-      const sections = document.querySelectorAll('section');
-      sections.forEach(section => {
-        (section as HTMLElement).style.filter = 'blur(4px)';
-        (section as HTMLElement).style.pointerEvents = 'none';
-      });
+      document.body.style.overflow = 'hidden';
+      document.documentElement.style.overflow = 'hidden';
     } else {
-      const sections = document.querySelectorAll('section');
-      sections.forEach(section => {
-        (section as HTMLElement).style.filter = 'none';
-        (section as HTMLElement).style.pointerEvents = 'auto';
-      });
+      document.body.style.overflow = '';
+      document.documentElement.style.overflow = '';
     }
 
     return () => {
-      const sections = document.querySelectorAll('section');
-      sections.forEach(section => {
-        (section as HTMLElement).style.filter = 'none';
-        (section as HTMLElement).style.pointerEvents = 'auto';
-      });
-      
-      if (nav) {
-        (nav as HTMLElement).style.filter = 'none';
-        (nav as HTMLElement).style.pointerEvents = 'auto';
-      }
+      document.body.style.overflow = '';
+      document.documentElement.style.overflow = '';
     };
   }, [isOpen]);
+
+  const openMenu = () => {
+    setIsOpen(true);
+    
+    // Menu opens from top to bottom
+    gsap.to(".mobile-menu", {
+      clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
+      pointerEvents: "all",
+      duration: 1.25,
+      ease: defaultEase,
+    });
+
+    gsap.to(".menu-link-item", {
+      y: 0,
+      opacity: 1,
+      duration: 0.8,
+      stagger: 0.06,
+      delay: 0.5,
+      ease: "power3.out",
+    });
+
+    // Animate images in
+    gsap.to(["#img-1", "#img-2", "#img-3", "#img-4"], {
+      opacity: 1,
+      scale: 1,
+      duration: 1.25,
+      ease: defaultEase,
+      stagger: 0.1,
+      delay: 0.25,
+    });
+  };
+
+  const closeMenu = () => {
+    // Animate images out first
+    gsap.to(["#img-1", "#img-2", "#img-3", "#img-4"], {
+      opacity: 0,
+      scale: 0.8,
+      duration: 0.8,
+      ease: defaultEase,
+      stagger: 0.05,
+    });
+
+    // Animate menu items out
+    gsap.to(".menu-link-item", {
+      y: 40,
+      opacity: 0,
+      duration: 0.5,
+      stagger: 0.03,
+      ease: "power3.in",
+    });
+
+    // Menu closes from bottom to top
+    gsap.to(".mobile-menu", {
+      clipPath: "polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)",
+      pointerEvents: "none",
+      duration: 1.25,
+      ease: defaultEase,
+      delay: 0.3,
+      onComplete: () => {
+        setIsOpen(false);
+      }
+    });
+  };
+
+  const handleMenuToggle = () => {
+    if (isOpen) {
+      closeMenu();
+    } else {
+      openMenu();
+    }
+  };
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-      setIsOpen(false);
+      if (isOpen) {
+        closeMenu();
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }, 1300);
+      } else {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
     }
   };
 
   const navItems = [
-    { name: 'Home', id: 'home' },
+    { name: 'Home', id: 'hero' },
     { name: 'About', id: 'about' },
     { name: 'Skills', id: 'skills' },
     { name: 'Projects', id: 'projects' },
@@ -87,112 +257,105 @@ export default function Navbar() {
   ];
 
   return (
-    <motion.nav
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      className="fixed top-0 left-0 right-0 z-50 bg-gray-800 sm:bg-gray-700 backdrop-blur-md shadow-md"
-    >
-      <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16 relative">
+    <>
+      <nav
+        className={`fixed top-0 left-0 right-0 z-[200] h-14 flex items-center px-4 transition-all duration-300 ${
+          isHeaderHidden ? '-translate-y-full' : 'translate-y-0'
+        } ${isOpen ? 'bg-[#101010]' : 'bg-[#101010]/90 backdrop-blur-md'}`}
+      >
+        <div className="max-w-7xl mx-auto w-full flex justify-between items-center">
           {/* Logo */}
           <motion.div
             whileHover={{ scale: 1.05 }}
-            className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent cursor-pointer"
-            onClick={() => scrollToSection('home')}
+            className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent cursor-pointer"
+            onClick={() => scrollToSection('hero')}
           >
             QM
           </motion.div>
 
-          <div className="hidden md:flex items-center gap-0">
-            {/* Desktop Menu - Slides in from left */}
-            <AnimatePresence>
-              {isDesktopMenuOpen && (
-                <motion.div
-                  initial={{ opacity: 0, width: 0 }}
-                  animate={{ opacity: 1, width: 'auto' }}
-                  exit={{ opacity: 0, width: 0 }}
-                  transition={{ duration: 0.3, ease: "easeInOut" }}
-                  className="overflow-hidden flex gap-2 border-r border-gray-700 pr-4"
-                >
-                  {navItems.map((item) => (
-                    <motion.button
-                      key={item.id}
-                      onClick={() => {
-                        scrollToSection(item.id);
-                        setIsDesktopMenuOpen(false);
-                      }}
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                      className={`px-3 py-2 rounded text-sm font-medium transition-all duration-300 whitespace-nowrap ${
-                        activeSection === item.id
-                          ? 'bg-blue-600 text-white'
-                          : 'text-gray-300 hover:text-white hover:bg-gray-800'
-                      }`}
-                    >
-                      {item.name}
-                    </motion.button>
-                  ))}
-                </motion.div>
-              )}
-            </AnimatePresence>
-
-            {/* Desktop Navigation Menu Button - Stays on right */}
-            <button
-              onClick={() => setIsDesktopMenuOpen(!isDesktopMenuOpen)}
-              className="flex items-center px-4 py-2 text-gray-300 hover:text-white transition-colors"
-            >
-              <HiMenu size={24} />
-            </button>
-          </div>
-
-          {/* Mobile Menu Button */}
+          {/* Hamburger Button */}
           <button
-            onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden text-gray-300 hover:text-white transition-colors"
+            aria-label="Toggle menu"
+            className="relative z-[400] w-6 h-4 flex items-center justify-center"
+            onClick={handleMenuToggle}
           >
-            {isOpen ? <HiX size={28} /> : <HiMenu size={28} />}
+            <span
+              className={`absolute left-0 w-full h-0.5 bg-white transition-all duration-500 ease-in-out ${
+                isOpen ? 'top-1/2 -translate-y-1/2 rotate-45' : 'top-0'
+              }`}
+            />
+            <span
+              className={`absolute left-0 w-full h-0.5 bg-white transition-all duration-500 ease-in-out ${
+                isOpen ? 'opacity-0 top-1/2 -translate-y-1/2' : 'top-1/2 -translate-y-1/2'
+              }`}
+            />
+            <span
+              className={`absolute left-0 w-full h-0.5 bg-white transition-all duration-500 ease-in-out ${
+                isOpen ? 'top-1/2 -translate-y-1/2 -rotate-45' : 'bottom-0'
+              }`}
+            />
           </button>
         </div>
+      </nav>
+
+      {/* Full-screen Menu */}
+      <div
+        ref={menuRef}
+        className="mobile-menu fixed inset-0 bg-[#101010] z-[150] flex items-center justify-center"
+        style={{ clipPath: "polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)" }}
+      >
+        {/* Image container with layered images and 3D tilt effect */}
+        <div className="menu-img-container" ref={menuImgContainerRef}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            id="img-1"
+            className="menu-img-layer"
+            src={heroImage}
+            alt=""
+            ref={setImageRef(0)}
+          />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            id="img-2"
+            className="menu-img-layer"
+            src={heroImage}
+            alt=""
+            ref={setImageRef(1)}
+          />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            id="img-3"
+            className="menu-img-layer"
+            src={heroImage}
+            alt=""
+            ref={setImageRef(2)}
+          />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            id="img-4"
+            className="menu-img-layer"
+            src={heroImage}
+            alt=""
+            ref={setImageRef(3)}
+          />
+        </div>
+
+        <div className="flex flex-col items-center absolute top-[55%] left-1/2 -translate-x-1/2 md:top-1/2 md:left-auto md:right-[15%] md:translate-x-0 md:-translate-y-1/2 md:items-start gap-2 sm:gap-3 md:gap-4">
+          {navItems.map((item) => (
+            <button
+              key={item.id}
+              onClick={() => scrollToSection(item.id)}
+              className={`menu-link-item text-lg sm:text-xl md:text-5xl font-bold transition-all duration-300 ${
+                activeSection === item.id
+                  ? 'text-cyan-400'
+                  : 'text-white hover:text-cyan-400'
+              }`}
+            >
+              {item.name}
+            </button>
+          ))}
+        </div>
       </div>
-
-      {/* Mobile Menu Backdrop */}
-      {isOpen && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          onClick={() => setIsOpen(false)}
-          className="fixed inset-0 top-16 bg-black/50 backdrop-blur-sm z-40 md:hidden"
-        />
-      )}
-
-      {/* Mobile Menu */}
-      {isOpen && (
-        <motion.div
-          initial={{ opacity: 0, scaleY: 0, rotateX: -90, originY: 0 }}
-          animate={{ opacity: 1, scaleY: 1, rotateX: 0, originY: 0 }}
-          exit={{ opacity: 0, scaleY: 0, rotateX: -90, originY: 0 }}
-          transition={{ duration: 0.4, ease: "easeInOut" }}
-          style={{ perspective: 1200 }}
-          className="md:hidden bg-gray-900 border-t border-gray-700 backdrop-blur-md relative z-50"
-        >
-          <div className="px-4 py-4 space-y-2">
-            {navItems.map((item) => (
-              <button
-                key={item.id}
-                onClick={() => scrollToSection(item.id)}
-                className={`block w-full text-left px-4 py-3 rounded-lg font-medium transition-all duration-300 ${
-                  activeSection === item.id
-                    ? 'bg-blue-600 text-white'
-                    : 'text-gray-300 hover:text-white hover:bg-gray-800'
-                }`}
-              >
-                {item.name}
-              </button>
-            ))}
-          </div>
-        </motion.div>
-      )}
-    </motion.nav>
+    </>
   );
 }
