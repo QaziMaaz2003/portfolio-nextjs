@@ -50,7 +50,7 @@ export default function About() {
     <section 
       id="about" 
       ref={ref}
-      className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8 bg-gray-100 flex flex-col justify-center"
+      className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8 flex flex-col justify-center"
     >
       <div className="max-w-6xl mx-auto w-full">
         <motion.div
@@ -143,7 +143,6 @@ export default function About() {
               className="flex justify-center order-1 md:order-2"
             >
               <div className="relative w-[280px] h-[280px] xs:w-[320px] xs:h-[320px] sm:w-[380px] sm:h-[380px] md:w-[450px] md:h-[450px] lg:w-[500px] lg:h-[500px] max-w-full overflow-hidden rounded-2xl">
-                <div className="absolute inset-0 bg-gray-100"></div>
                 <Image
                   src="/portfoliooo.png"
                   alt="Portfolio"

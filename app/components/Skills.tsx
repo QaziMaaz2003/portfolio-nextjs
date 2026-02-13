@@ -93,7 +93,7 @@ export default function Skills() {
   ];
 
   return (
-    <section id="skills" className="py-12 sm:py-16 md:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 bg-gray-100 overflow-hidden">
+    <section id="skills" className="py-12 sm:py-16 md:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 overflow-hidden">
       <div className="max-w-7xl mx-auto">
         <div ref={ref}>
           {/* Section Header */}
@@ -103,11 +103,11 @@ export default function Skills() {
             transition={{ duration: 0.6 }}
             className="text-center mb-8 sm:mb-12 md:mb-16"
           >
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4 text-gray-900">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4 text-white">
               Technical <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Skills</span>
             </h2>
             <div className="w-16 sm:w-20 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto rounded-full mb-3 sm:mb-4" />
-            <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400 px-4">
+            <p className="text-sm sm:text-base text-gray-400 px-4">
               Tools I use to build scalable apps
             </p>
           </motion.div>
@@ -134,17 +134,17 @@ export default function Skills() {
                   initial={{ opacity: 0 }}
                   animate={isInView ? { opacity: 1 } : { opacity: 0 }}
                   transition={{ duration: 0.6 }}
-                  className="skill-card group bg-white dark:bg-gray-900 rounded-lg sm:rounded-xl p-5 sm:p-6 md:p-8 border border-gray-200 dark:border-gray-800 flex-shrink-0 w-[250px] sm:w-[270px] md:w-[310px]"
+                  className="skill-card group bg-gray-800 rounded-lg sm:rounded-xl p-5 sm:p-6 md:p-8 border border-gray-700 flex-shrink-0 w-[250px] sm:w-[270px] md:w-[310px]"
                   style={{
                     boxShadow: '0 4px 12px rgba(0,0,0,0.08)',
                   }}
                 >
                   {/* Category Header */}
                   <div className="mb-4 sm:mb-5">
-                    <h3 className="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white mb-1">
+                    <h3 className="text-lg sm:text-xl font-semibold text-white mb-1">
                       {category.title}
                     </h3>
-                    <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">
+                    <p className="text-xs sm:text-sm text-gray-400">
                       {category.description}
                     </p>
                   </div>
@@ -154,7 +154,7 @@ export default function Skills() {
                     {category.skills.map((skill) => (
                       <div
                         key={skill.name}
-                        className="inline-flex items-center gap-1.5 sm:gap-2 bg-gray-100 dark:bg-gray-800 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200"
+                        className="inline-flex items-center gap-1.5 sm:gap-2 bg-gray-700 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full text-xs sm:text-sm font-medium text-gray-200 hover:bg-gray-600 transition-colors duration-200"
                       >
                         <skill.icon className="text-sm sm:text-base" />
                         <span>{skill.name}</span>
@@ -171,17 +171,17 @@ export default function Skills() {
                   initial={{ opacity: 0 }}
                   animate={isInView ? { opacity: 1 } : { opacity: 0 }}
                   transition={{ duration: 0.6 }}
-                  className="skill-card group bg-white dark:bg-gray-900 rounded-lg sm:rounded-xl p-5 sm:p-6 md:p-8 border border-gray-200 dark:border-gray-800 flex-shrink-0 w-[250px] sm:w-[270px] md:w-[310px]"
+                  className="skill-card group bg-gray-800 rounded-lg sm:rounded-xl p-5 sm:p-6 md:p-8 border border-gray-700 flex-shrink-0 w-[250px] sm:w-[270px] md:w-[310px]"
                   style={{
                     boxShadow: '0 4px 12px rgba(0,0,0,0.08)',
                   }}
                 >
                   {/* Category Header */}
                   <div className="mb-4 sm:mb-5">
-                    <h3 className="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white mb-1">
+                    <h3 className="text-lg sm:text-xl font-semibold text-white mb-1">
                       {category.title}
                     </h3>
-                    <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">
+                    <p className="text-xs sm:text-sm text-gray-400">
                       {category.description}
                     </p>
                   </div>
@@ -191,7 +191,7 @@ export default function Skills() {
                     {category.skills.map((skill) => (
                       <div
                         key={skill.name}
-                        className="inline-flex items-center gap-1.5 sm:gap-2 bg-gray-100 dark:bg-gray-800 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200"
+                        className="inline-flex items-center gap-1.5 sm:gap-2 bg-gray-700 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full text-xs sm:text-sm font-medium text-gray-200 hover:bg-gray-600 transition-colors duration-200"
                       >
                         <skill.icon className="text-sm sm:text-base" />
                         <span>{skill.name}</span>

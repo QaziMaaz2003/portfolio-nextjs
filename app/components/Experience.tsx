@@ -60,7 +60,7 @@ export default function Experience() {
   };
 
   return (
-    <section id="experience" className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-100">
+    <section id="experience" className="py-20 px-4 sm:px-6 lg:px-8">
       <div className="max-w-6xl mx-auto">
         <motion.div
           ref={ref}
@@ -70,7 +70,7 @@ export default function Experience() {
         >
           {/* Section Title */}
           <motion.div variants={itemVariants} className="text-center mb-16">
-            <h2 className="text-4xl sm:text-5xl font-bold mb-4 text-gray-900">
+            <h2 className="text-4xl sm:text-5xl font-bold mb-4 text-white">
               Professional <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Experience</span>
             </h2>
             <div className="w-20 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto rounded-full" />
@@ -88,16 +88,16 @@ export default function Experience() {
                   {/* Collapsed View */}
                   <motion.button
                     onClick={() => setExpandedIndex(expandedIndex === index ? null : index)}
-                    className="w-full bg-blue-50 dark:bg-blue-900/20 border-2 border-blue-600 hover:border-purple-600 hover:bg-gray-200 dark:hover:bg-gray-500 hover:shadow-lg shadow-md rounded-lg p-3 sm:p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-4 transition-all hover:scale-102"
+                    className="w-full bg-gray-800 border-2 border-blue-600 hover:border-purple-600 hover:bg-gray-700 hover:shadow-lg shadow-md rounded-lg p-3 sm:p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-4 transition-all hover:scale-102"
                   >
                     <div className="flex items-start gap-2 w-full sm:w-auto">
                       <div className="text-left flex-1">
-                        <h4 className="text-lg sm:text-xl font-bold text-gray-700 dark:text-gray-300 line-clamp-2">{exp.title}</h4>
-                        <p className="text-gray-700 dark:text-gray-300 text-xs sm:text-sm line-clamp-1">{exp.company}</p>
+                        <h4 className="text-lg sm:text-xl font-bold text-gray-200 line-clamp-2">{exp.title}</h4>
+                        <p className="text-gray-300 text-xs sm:text-sm line-clamp-1">{exp.company}</p>
                       </div>
                     </div>
                     <div className="flex items-center gap-2 sm:gap-4 flex-shrink-0">
-                      <p className="text-gray-700 dark:text-gray-300 text-xs sm:text-sm font-medium whitespace-nowrap">{exp.period}</p>
+                      <p className="text-gray-300 text-xs sm:text-sm font-medium whitespace-nowrap">{exp.period}</p>
                       <motion.div
                         animate={{ rotate: expandedIndex === index ? 45 : 0 }}
                         transition={{ duration: 0.2 }}
@@ -116,18 +116,18 @@ export default function Experience() {
                         animate={{ opacity: 1, height: 'auto' }}
                         exit={{ opacity: 0, height: 0 }}
                         transition={{ duration: 0.4, ease: 'easeInOut' }}
-                        className="bg-gradient-to-br from-blue-500/10 to-purple-500/10 dark:from-blue-900/30 dark:to-purple-900/30 border-2 border-blue-600 text-gray-900 dark:text-white rounded-b-lg p-4 sm:p-6 lg:p-8 overflow-hidden shadow-md mt-2 backdrop-blur-sm"
+                        className="bg-gradient-to-br from-blue-500/10 to-purple-500/10 border-2 border-blue-600 text-white rounded-b-lg p-4 sm:p-6 lg:p-8 overflow-hidden shadow-md mt-2 backdrop-blur-sm"
                       >
                         <div className="flex flex-col-reverse lg:flex-row gap-6 lg:gap-8">
                           <div className="flex-1 min-w-0">
                             {/* Description */}
-                            <p className="text-gray-800 dark:text-gray-200 mb-4 leading-relaxed text-sm sm:text-base">
+                            <p className="text-gray-200 mb-4 leading-relaxed text-sm sm:text-base">
                               {exp.description}
                             </p>
 
                             {/* Tools */}
                             <div>
-                              <p className="text-gray-700 dark:text-gray-300 text-xs sm:text-sm font-semibold mb-3">
+                              <p className="text-gray-300 text-xs sm:text-sm font-semibold mb-3">
                                 📍 Location: {exp.location}
                               </p>
                               <div className="flex flex-wrap gap-2">
