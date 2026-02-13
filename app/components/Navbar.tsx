@@ -26,9 +26,11 @@ export default function Navbar() {
   const scales = [0.81, 0.84, 0.87, 0.9];
   const heroImage = '/laptop.avif';
 
-  // 3D tilt effect based on mouse position
+  // 3D tilt effect based on mouse position (desktop only)
   const updateTilt = () => {
     if (!menuImgContainerRef.current || !imagesRef.current) return;
+    // Skip tilt animation on mobile
+    if (window.innerWidth <= 768) return;
 
     const dx = mouse.current.x - center.current.x;
     const dy = mouse.current.y - center.current.y;
@@ -70,12 +72,14 @@ export default function Navbar() {
     };
     checkScreenSize();
 
-    // Set initial image positions - use CSS transform-compatible approach
+    // Set initial image positions - only for desktop (mobile uses CSS for static display)
     const setInitialImagePositions = () => {
-      gsap.set(["#img-1", "#img-2", "#img-3", "#img-4"], { 
-        opacity: 0,
-        scale: 0.8,
-      });
+      if (window.innerWidth > 768) {
+        gsap.set(["#img-1", "#img-2", "#img-3", "#img-4"], { 
+          opacity: 0,
+          scale: 0.8,
+        });
+      }
     };
     setInitialImagePositions();
 
@@ -182,26 +186,30 @@ export default function Navbar() {
       ease: "power3.out",
     });
 
-    // Animate images in
-    gsap.to(["#img-1", "#img-2", "#img-3", "#img-4"], {
-      opacity: 1,
-      scale: 1,
-      duration: 1.25,
-      ease: defaultEase,
-      stagger: 0.1,
-      delay: 0.25,
-    });
+    // Animate images in (desktop only - mobile shows static image via CSS)
+    if (window.innerWidth > 768) {
+      gsap.to(["#img-1", "#img-2", "#img-3", "#img-4"], {
+        opacity: 1,
+        scale: 1,
+        duration: 1.25,
+        ease: defaultEase,
+        stagger: 0.1,
+        delay: 0.25,
+      });
+    }
   };
 
   const closeMenu = () => {
-    // Animate images out first
-    gsap.to(["#img-1", "#img-2", "#img-3", "#img-4"], {
-      opacity: 0,
-      scale: 0.8,
-      duration: 0.8,
-      ease: defaultEase,
-      stagger: 0.05,
-    });
+    // Animate images out first (desktop only)
+    if (window.innerWidth > 768) {
+      gsap.to(["#img-1", "#img-2", "#img-3", "#img-4"], {
+        opacity: 0,
+        scale: 0.8,
+        duration: 0.8,
+        ease: defaultEase,
+        stagger: 0.05,
+      });
+    }
 
     // Animate menu items out
     gsap.to(".menu-link-item", {
@@ -340,12 +348,12 @@ export default function Navbar() {
           />
         </div>
 
-        <div className="flex flex-col items-center absolute top-[55%] left-1/2 -translate-x-1/2 md:top-1/2 md:left-auto md:right-[15%] md:translate-x-0 md:-translate-y-1/2 md:items-start gap-2 sm:gap-3 md:gap-4">
+        <div className="flex flex-col items-center justify-center absolute top-[50%] left-1/2 -translate-x-1/2 w-full px-4 md:top-1/2 md:left-auto md:right-[15%] md:translate-x-0 md:-translate-y-1/2 md:items-start md:w-auto md:px-0 gap-3 sm:gap-4 md:gap-4">
           {navItems.map((item) => (
             <button
               key={item.id}
               onClick={() => scrollToSection(item.id)}
-              className={`menu-link-item text-lg sm:text-xl md:text-5xl font-bold transition-all duration-300 ${
+              className={`menu-link-item text-2xl sm:text-3xl md:text-5xl font-bold transition-all duration-300 ${
                 activeSection === item.id
                   ? 'text-cyan-400'
                   : 'text-white hover:text-cyan-400'

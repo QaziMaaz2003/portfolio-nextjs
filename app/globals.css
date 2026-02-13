@@ -54,26 +54,38 @@
 
 @media (max-width: 768px) {
   .menu-img-container {
-    left: 50%;
-    top: 56px;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    top: 120px;
     bottom: auto;
-    transform: translateX(-50%) translateY(0);
-    width: 80%;
-    height: 30%;
+    transform: none;
+    width: 85%;
+    height: 28%;
+    perspective: none;
   }
   
   .menu-img-layer {
     width: 100%;
     height: 100%;
-    object-fit: contain;
+    object-fit: cover;
+    border-radius: 8px;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  
+  /* Hide extra layered images on mobile - show only first image */
+  #img-2, #img-3, #img-4 {
+    display: none;
   }
 }
 
 @media (max-width: 480px) {
   .menu-img-container {
-    width: 85%;
-    height: 28%;
-    top: 56px;
+    width: 90%;
+    height: 25%;
+    top: 120px;
   }
 }
 
