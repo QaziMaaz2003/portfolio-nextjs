@@ -134,10 +134,7 @@ export default function Skills() {
                   initial={{ opacity: 0 }}
                   animate={isInView ? { opacity: 1 } : { opacity: 0 }}
                   transition={{ duration: 0.6 }}
-                  className="skill-card group bg-gray-800 rounded-lg sm:rounded-xl p-5 sm:p-6 md:p-8 border border-gray-700 flex-shrink-0 w-[250px] sm:w-[270px] md:w-[310px]"
-                  style={{
-                    boxShadow: '0 4px 12px rgba(0,0,0,0.08)',
-                  }}
+                  className="skill-card group bg-gray-900 rounded-lg sm:rounded-xl p-5 sm:p-6 md:p-8 border border-gray-800 shadow-lg hover:shadow-xl hover:border-gray-700 flex-shrink-0 w-[250px] sm:w-[270px] md:w-[310px] transition-all duration-300"
                 >
                   {/* Category Header */}
                   <div className="mb-4 sm:mb-5">
@@ -154,9 +151,9 @@ export default function Skills() {
                     {category.skills.map((skill) => (
                       <div
                         key={skill.name}
-                        className="inline-flex items-center gap-1.5 sm:gap-2 bg-gray-700 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full text-xs sm:text-sm font-medium text-gray-200 hover:bg-gray-600 transition-colors duration-200"
+                        className="inline-flex items-center gap-1.5 sm:gap-2 bg-gray-800 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-md text-xs sm:text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white transition-colors duration-200"
                       >
-                        <skill.icon className="text-sm sm:text-base" />
+                        <skill.icon className="text-sm sm:text-base text-blue-400" />
                         <span>{skill.name}</span>
                       </div>
                     ))}
@@ -171,10 +168,7 @@ export default function Skills() {
                   initial={{ opacity: 0 }}
                   animate={isInView ? { opacity: 1 } : { opacity: 0 }}
                   transition={{ duration: 0.6 }}
-                  className="skill-card group bg-gray-800 rounded-lg sm:rounded-xl p-5 sm:p-6 md:p-8 border border-gray-700 flex-shrink-0 w-[250px] sm:w-[270px] md:w-[310px]"
-                  style={{
-                    boxShadow: '0 4px 12px rgba(0,0,0,0.08)',
-                  }}
+                  className="skill-card group bg-gray-900 rounded-lg sm:rounded-xl p-5 sm:p-6 md:p-8 border border-gray-800 shadow-lg hover:shadow-xl hover:border-gray-700 flex-shrink-0 w-[250px] sm:w-[270px] md:w-[310px] transition-all duration-300"
                 >
                   {/* Category Header */}
                   <div className="mb-4 sm:mb-5">
@@ -191,9 +185,9 @@ export default function Skills() {
                     {category.skills.map((skill) => (
                       <div
                         key={skill.name}
-                        className="inline-flex items-center gap-1.5 sm:gap-2 bg-gray-700 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full text-xs sm:text-sm font-medium text-gray-200 hover:bg-gray-600 transition-colors duration-200"
+                        className="inline-flex items-center gap-1.5 sm:gap-2 bg-gray-800 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-md text-xs sm:text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white transition-colors duration-200"
                       >
-                        <skill.icon className="text-sm sm:text-base" />
+                        <skill.icon className="text-sm sm:text-base text-blue-400" />
                         <span>{skill.name}</span>
                       </div>
                     ))}
