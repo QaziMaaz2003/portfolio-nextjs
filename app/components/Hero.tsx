@@ -1,9 +1,15 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import Image from 'next/image';
+import { useState, useEffect, useRef } from 'react';
 import { HiDownload, HiMail, HiChevronDown } from 'react-icons/hi';
 import { motion } from 'framer-motion';
+
+// Extend Window interface for VANTA
+declare global {
+  interface Window {
+    VANTA: any;
+  }
+}
 
 export default function Hero() {
   const [displayedName, setDisplayedName] = useState('');
@@ -13,8 +19,85 @@ export default function Hero() {
   const [isSubtitleComplete, setIsSubtitleComplete] = useState(false);
   const [showTagline, setShowTagline] = useState(false);
   const [showScrollIndicator, setShowScrollIndicator] = useState(false);
+  const [vantaScriptsLoaded, setVantaScriptsLoaded] = useState(false);
+  
+  const heroRef = useRef<HTMLElement>(null);
+  const vantaRef = useRef<any>(null);
+  
   const fullName = "Hi, I'm Qazi Maaz Ahmed";
   const fullSubtitle = 'FULL STACK DEVELOPER';
+
+  // Defer Vanta scripts loading until after initial render
+  useEffect(() => {
+    let threeLoaded = false;
+    let vantaLoaded = false;
+
+    const checkAndSetLoaded = () => {
+      if (threeLoaded && vantaLoaded) setVantaScriptsLoaded(true);
+    };
+
+    // Defer loading by 1 second to prioritize main content
+    const timeoutId = setTimeout(() => {
+      // Load three.js
+      const threeScript = document.createElement('script');
+      threeScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js';
+      threeScript.async = true;
+      threeScript.onload = () => {
+        threeLoaded = true;
+        // Load Vanta after three.js
+        const vantaScript = document.createElement('script');
+        vantaScript.src = 'https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.halo.min.js';
+        vantaScript.async = true;
+        vantaScript.onload = () => {
+          vantaLoaded = true;
+          checkAndSetLoaded();
+        };
+        document.head.appendChild(vantaScript);
+      };
+      document.head.appendChild(threeScript);
+    }, 1000);
+
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, []);
+
+  // Vanta initialization (runs only after scripts loaded and ref ready)
+  useEffect(() => {
+    if (vantaScriptsLoaded && typeof window !== 'undefined' && window.VANTA && heroRef.current) {
+      try {
+        // Check if WebGL is supported
+        const canvas = document.createElement('canvas');
+        const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+        if (!gl) {
+          console.warn('WebGL not supported, skipping Vanta effect');
+          return;
+        }
+
+        const isMobile = window.innerWidth < 640;
+        vantaRef.current = window.VANTA.HALO({
+          el: heroRef.current,
+          mouseControls: true,
+          touchControls: true,
+          gyroControls: false,
+          minHeight: isMobile ? 100 : 200.00,
+          minWidth: isMobile ? 100 : 200.00,
+          color: 0xffffff,
+          backgroundColor: 0x000000,
+          amplitudeFactor: isMobile ? 1.2 : 2.00,
+          size: isMobile ? 1.0 : 1.50,
+          mouseEase: true
+        });
+      } catch (error) {
+        console.warn('Failed to initialize Vanta effect:', error);
+      }
+    }
+    return () => {
+      if (vantaRef.current && vantaRef.current.destroy) {
+        vantaRef.current.destroy();
+      }
+    };
+  }, [vantaScriptsLoaded]);
 
   useEffect(() => {
     let currentIndex = 0;
@@ -79,40 +162,37 @@ export default function Hero() {
   };
 
   return (
-    <section id="hero" className="min-h-screen flex items-center justify-center pt-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden w-screen">
-      {/* Laptop Background Image - Full Cover */}
-      <div className="absolute inset-0 w-full h-full">
-        <Image
-          src="/laptop.avif"
-          alt="Laptop Background"
-          fill
-          className="object-cover w-full h-full"
-          quality={100}
-          priority
-          unoptimized
-        />
-      </div>
+    <>
+      {/* Preconnect to external resources */}
+      <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
+      <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+      
+      <section ref={heroRef} id="hero" className="min-h-screen flex items-center justify-center pt-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden w-screen bg-black">
+        {/* Overlay for readability */}
+        <div className="absolute inset-0 bg-black/50"></div>
 
-      <div className="max-w-7xl mx-auto w-full relative z-10">
+        <div className="relative z-10 px-6 max-w-4xl">
         <motion.div 
-          className="text-left max-w-3xl"
+          className="text-center"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
           {/* Main Name - Large and Bold with Typing Animation */}
           <h1
-            className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-light mb-4 sm:mb-4 text-white tracking-widest drop-shadow-lg"
+            className="text-4xl md:text-6xl lg:text-7xl font-black mb-6 leading-tight"
           >
-            {displayedName}
-            <span className={`inline-block ml-1 ${!isNameComplete && showCursor ? 'opacity-100' : 'opacity-0'} transition-opacity duration-100`}>
+            <span className="gradient-text">
+              {displayedName}
+            </span>
+            <span className={`inline-block ml-1 gradient-text ${!isNameComplete && showCursor ? 'opacity-100' : 'opacity-0'} transition-opacity duration-100`}>
               .
             </span>
           </h1>
 
           {/* Subtitle/Title with Typing Animation */}
           <h2
-            className="text-base sm:text-lg sm:text-xl lg:text-2xl font-light mb-6 sm:mb-8 text-gray-300 tracking-widest"
+            className="text-xl md:text-3xl font-light mb-4 text-cyan-500/90"
           >
             {displayedSubtitle}
             <span className={`inline-block ml-1 ${isNameComplete && !isSubtitleComplete && showCursor ? 'opacity-100' : 'opacity-0'} transition-opacity duration-100`}>
@@ -122,7 +202,7 @@ export default function Hero() {
 
           {/* Tagline */}
           <p
-            className={`text-sm sm:text-lg sm:text-xl lg:text-2xl mb-8 sm:mb-8 text-gray-400 leading-relaxed font-light max-w-2xl transition-all duration-1000 ${
+            className={`text-base md:text-xl mb-8 text-cyan-300 font-medium max-w-2xl mx-auto transition-all duration-1000 ${
               showTagline ? 'opacity-100' : 'opacity-0'
             }`}
           >
@@ -132,13 +212,13 @@ export default function Hero() {
 
           {/* CTA Buttons */}
           <div
-            className={`flex flex-col sm:flex-row gap-4 sm:gap-4 items-stretch sm:items-start w-full sm:w-auto transition-all duration-1000 mt-8 sm:mt-0 mb-16 sm:mb-0 ${
+            className={`flex flex-col sm:flex-row gap-4 sm:gap-4 items-center justify-center w-full transition-all duration-1000 mt-8 sm:mt-0 mb-16 sm:mb-0 ${
               showTagline ? 'opacity-100' : 'opacity-0'
             }`}
           >
             <button
               onClick={() => scrollToSection('contact')}
-              className="flex items-center justify-center sm:justify-start gap-2 px-4 sm:px-8 py-2.5 sm:py-3 bg-white text-black font-semibold rounded-lg text-xs sm:text-sm hover:bg-gray-200 transition-all duration-300"
+              className="w-full sm:w-auto flex items-center justify-center gap-2 px-4 sm:px-8 py-2.5 sm:py-3 bg-white text-black font-semibold rounded-lg text-xs sm:text-sm hover:bg-gray-200 transition-all duration-300"
             >
               <HiMail size={16} />
               Get In Touch
@@ -146,7 +226,7 @@ export default function Hero() {
 
             <button
               onClick={() => scrollToSection('projects')}
-              className="flex items-center justify-center sm:justify-start gap-2 px-4 sm:px-8 py-2.5 sm:py-3 bg-gray-800 text-white font-semibold rounded-lg text-xs sm:text-sm border-2 border-white hover:bg-gray-700 transition-all duration-300"
+              className="w-full sm:w-auto flex items-center justify-center gap-2 px-4 sm:px-8 py-2.5 sm:py-3 bg-gray-800 text-white font-semibold rounded-lg text-xs sm:text-sm border-2 border-white hover:bg-gray-700 transition-all duration-300"
             >
               View Work
             </button>
@@ -154,28 +234,29 @@ export default function Hero() {
             <a
               href="/Qazi_Maaz_CV.pdf"
               download
-              className="flex items-center justify-center sm:justify-start gap-2 px-4 sm:px-8 py-2.5 sm:py-3 bg-gray-900 text-white font-semibold rounded-lg text-xs sm:text-sm border-2 border-white hover:bg-gray-800 transition-all duration-300"
+              className="w-full sm:w-auto flex items-center justify-center gap-2 px-4 sm:px-8 py-2.5 sm:py-3 bg-gray-900 text-white font-semibold rounded-lg text-xs sm:text-sm border-2 border-white hover:bg-gray-800 transition-all duration-300"
             >
               <HiDownload size={16} />
               Download CV
             </a>
           </div>
 
-      {/* Scroll Indicator - Centered in Hero Section */}
-      <div
-        className={`absolute left-1/2 transform -translate-x-1/2 z-20 transition-all duration-1000 ${
-          showScrollIndicator ? 'opacity-100' : 'opacity-0'
-        }`}
-        style={{ top: 'calc(100% + 40px)' }}
-      >
-        <div
-          className="inline-block animate-bounce"
-        >
-          <HiChevronDown size={32} className="text-white" />
-        </div>
-      </div>
+          {/* Scroll Indicator - Centered in Hero Section */}
+          <div
+            className={`absolute left-1/2 transform -translate-x-1/2 z-20 transition-all duration-1000 ${
+              showScrollIndicator ? 'opacity-100' : 'opacity-0'
+            }`}
+            style={{ top: 'calc(100% + 40px)' }}
+          >
+            <div
+              className="inline-block animate-bounce"
+            >
+              <HiChevronDown size={32} className="text-white" />
+            </div>
+          </div>
         </motion.div>
       </div>
-    </section>
+      </section>
+    </>
   );
 }
