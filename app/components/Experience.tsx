@@ -88,7 +88,7 @@ export default function Experience() {
                   {/* Collapsed View */}
                   <motion.button
                     onClick={() => setExpandedIndex(expandedIndex === index ? null : index)}
-                    className="w-full bg-gray-800 border-2 border-blue-600 hover:border-purple-600 hover:bg-gray-700 hover:shadow-lg shadow-md rounded-lg p-3 sm:p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-4 transition-all hover:scale-102"
+                    className="w-full bg-gradient-to-br from-white/5 to-white/10 backdrop-blur-md border border-white/10 hover:border-blue-500/40 hover:from-blue-500/10 hover:to-purple-500/10 hover:shadow-[0_8px_32px_rgba(59,130,246,0.15)] rounded-xl p-3 sm:p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-4 transition-all duration-500 hover:scale-[1.02]"
                   >
                     <div className="flex items-start gap-2 w-full sm:w-auto">
                       <div className="text-left flex-1">
@@ -116,7 +116,7 @@ export default function Experience() {
                         animate={{ opacity: 1, height: 'auto' }}
                         exit={{ opacity: 0, height: 0 }}
                         transition={{ duration: 0.4, ease: 'easeInOut' }}
-                        className="bg-gradient-to-br from-blue-500/10 to-purple-500/10 border-2 border-blue-600 text-white rounded-b-lg p-4 sm:p-6 lg:p-8 overflow-hidden shadow-md mt-2 backdrop-blur-sm"
+                        className="bg-gradient-to-br from-white/5 via-blue-500/5 to-purple-500/10 border border-white/10 text-white rounded-xl p-4 sm:p-6 lg:p-8 overflow-hidden shadow-[0_8px_32px_rgba(59,130,246,0.1)] mt-2 backdrop-blur-md"
                       >
                         <div className="flex flex-col-reverse lg:flex-row gap-6 lg:gap-8">
                           <div className="flex-1 min-w-0">
