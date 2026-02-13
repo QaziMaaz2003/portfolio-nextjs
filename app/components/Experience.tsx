@@ -1,28 +1,18 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'framer-motion';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { HiBriefcase, HiAcademicCap } from 'react-icons/hi';
 import { HiTrophy } from 'react-icons/hi2';
+import Image from 'next/image';
 
 export default function Experience() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: false, margin: "-100px" });
+  const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
 
   const experiences = [
-    {
-      title: 'Full Stack Developer',
-      company: 'BytesPak - Software Company',
-      period: 'October 2025 - January 2026',
-      type: 'work',
-      icon: HiBriefcase,
-      color: 'from-blue-500 to-cyan-500',
-      description: [
-        'Developed and maintained full-stack web applications using modern technologies (React, Node.js, and Express)',
-        'Collaborated with cross-functional teams for system design, API integration, and deployment',
-      ],
-    },
     {
       title: 'Back-End Developer - Internship',
       company: 'Meezan Bank Limited',
@@ -30,23 +20,24 @@ export default function Experience() {
       type: 'work',
       icon: HiBriefcase,
       color: 'from-green-500 to-emerald-500',
-      description: [
-        'Worked as a Backend Developer Intern in the Enterprise Service Bus (ESB) team',
-        'Gained hands-on experience in API development, integration, and management to support core banking services',
-        'Conducted API testing and validation using Postman to ensure reliability and performance',
-      ],
+      description: 'Worked as a Backend Developer Intern in the Enterprise Service Bus (ESB) team. Gained hands-on experience in API development, integration, and management to support core banking services. Conducted API testing and validation using Postman to ensure reliability and performance.',
+      tools: ['IBM App Connect Enterprise', 'REST API Design', 'API Integration', 'Postman', 'Thunder Client'],
+      logo: '🏦',
+      logoImage: '/meezanLogoo.png',
+      location: 'Karachi, Pakistan',
     },
     {
-      title: 'Student Teaching Assistant',
-      company: 'FAST - National University',
-      period: 'September 2023 - December 2023',
+      title: 'Full Stack Developer',
+      company: 'BytesPak - Software Company',
+      period: 'October 2025 - January 2026',
       type: 'work',
-      icon: HiAcademicCap,
-      color: 'from-purple-500 to-pink-500',
-      description: [
-        'Graded and evaluated 50+ assignments and projects in Applied Physics',
-        'Provided detailed feedback that improved students\' problem-solving skills',
-      ],
+      icon: HiBriefcase,
+      color: 'from-blue-500 to-cyan-500',
+      description: 'Developed and maintained full-stack web applications. I develop modern, responsive user interfaces using Next.js and React, and design scalable backend systems with NestJS and using TypeScript. My work includes database management, REST API development, and third-party API integrations. I have built multiple full-stack applications, including a trading platform featuring an AI-powered agent that analyzes market conditions and identifies trade opportunities. I focus on performance optimization, clean architecture, and delivering reliable, scalable solutions.',
+      tools: ['React', 'Next.js', 'NestJS', 'TypeScript', 'JavaScript', 'Git'],
+      logo: '💻',
+      logoImage: '/bytespakLogo.jpg',
+      location: 'Karachi, Pakistan',
     },
   ];
 
@@ -110,52 +101,103 @@ export default function Experience() {
             <h3 className="text-2xl font-bold mb-8 text-gray-900">
               Professional Experience
             </h3>
-            <div className="relative">
-              {/* Timeline Line */}
-              <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-blue-500 to-purple-500 hidden md:block" />
-
-              <div className="space-y-8">
-                {experiences.map((exp, index) => (
-                  <motion.div
-                    key={index}
-                    variants={itemVariants}
-                    className="relative md:pl-20"
+            <div className="space-y-4 flex flex-col items-center px-2 sm:px-0">
+              {experiences.map((exp, index) => (
+                <motion.div
+                  key={index}
+                  variants={itemVariants}
+                  className="w-full max-w-3xl"
+                >
+                  {/* Collapsed View */}
+                  <motion.button
+                    onClick={() => setExpandedIndex(expandedIndex === index ? null : index)}
+                    className="w-full bg-blue-50 dark:bg-blue-900/20 border-2 border-blue-600 hover:border-purple-600 hover:bg-gray-200 dark:hover:bg-gray-500 hover:shadow-lg shadow-md rounded-lg p-3 sm:p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-4 transition-all hover:scale-102"
                   >
-                    {/* Timeline Dot */}
-                    <div className="absolute left-6 top-6 w-4 h-4 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 hidden md:block" />
-                    
-                    <motion.div
-                      whileHover={{ scale: 1.02 }}
-                      className="bg-white dark:bg-gray-900 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow"
-                    >
-                      <div className="flex items-start gap-4">
-                        <div className={`p-4 rounded-xl bg-gradient-to-r ${exp.color}`}>
-                          <exp.icon className="text-3xl text-white" />
-                        </div>
-                        <div className="flex-1">
-                          <h4 className="text-xl font-bold text-gray-900 dark:text-white mb-1">
-                            {exp.title}
-                          </h4>
-                          <p className="text-blue-600 dark:text-blue-400 font-medium mb-1">
-                            {exp.company}
-                          </p>
-                          <p className="text-gray-500 dark:text-gray-400 text-sm mb-4">
-                            {exp.period}
-                          </p>
-                          <ul className="space-y-2">
-                            {exp.description.map((item, i) => (
-                              <li key={i} className="text-gray-600 dark:text-gray-300 flex items-start gap-2">
-                                <span className="text-blue-600 dark:text-blue-400 mt-1">▹</span>
-                                <span>{item}</span>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
+                    <div className="flex items-start gap-2 w-full sm:w-auto">
+                      <div className="text-left flex-1">
+                        <h4 className="text-lg sm:text-xl font-bold text-gray-700 dark:text-gray-300 line-clamp-2">{exp.title}</h4>
+                        <p className="text-gray-700 dark:text-gray-300 text-xs sm:text-sm line-clamp-1">{exp.company}</p>
                       </div>
-                    </motion.div>
-                  </motion.div>
-                ))}
-              </div>
+                    </div>
+                    <div className="flex items-center gap-2 sm:gap-4 flex-shrink-0">
+                      <p className="text-gray-700 dark:text-gray-300 text-xs sm:text-sm font-medium whitespace-nowrap">{exp.period}</p>
+                      <motion.div
+                        animate={{ rotate: expandedIndex === index ? 45 : 0 }}
+                        transition={{ duration: 0.2 }}
+                        className="text-xl sm:text-2xl font-light bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
+                      >
+                        +
+                      </motion.div>
+                    </div>
+                  </motion.button>
+
+                  {/* Expanded View */}
+                  <AnimatePresence>
+                    {expandedIndex === index && (
+                      <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: 'auto' }}
+                        exit={{ opacity: 0, height: 0 }}
+                        transition={{ duration: 0.4, ease: 'easeInOut' }}
+                        className="bg-gradient-to-br from-blue-500/10 to-purple-500/10 dark:from-blue-900/30 dark:to-purple-900/30 border-2 border-blue-600 text-gray-900 dark:text-white rounded-b-lg p-4 sm:p-6 lg:p-8 overflow-hidden shadow-md mt-2 backdrop-blur-sm"
+                      >
+                        <div className="flex flex-col-reverse lg:flex-row gap-6 lg:gap-8">
+                          <div className="flex-1 min-w-0">
+                            {/* Description */}
+                            <p className="text-gray-800 dark:text-gray-200 mb-4 leading-relaxed text-sm sm:text-base">
+                              {exp.description}
+                            </p>
+
+                            {/* Tools */}
+                            <div>
+                              <p className="text-gray-700 dark:text-gray-300 text-xs sm:text-sm font-semibold mb-3">
+                                📍 Location: {exp.location}
+                              </p>
+                              <div className="flex flex-wrap gap-2">
+                                {exp.tools.map((tool, toolIndex) => (
+                                  <span
+                                    key={toolIndex}
+                                    className="px-2 sm:px-3 py-1 sm:py-1.5 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-full text-xs font-medium hover:shadow-lg transition-all hover:scale-105 whitespace-nowrap"
+                                  >
+                                    {tool}
+                                  </span>
+                                ))}
+                              </div>
+                            </div>
+                          </div>
+                          {exp.logoImage ? (
+                            exp.logoImage.includes('bytespak') ? (
+                              <div className="w-24 h-24 sm:w-32 sm:h-32 rounded-full overflow-hidden flex items-center justify-center flex-shrink-0 mx-auto lg:mx-0">
+                                <Image
+                                  src={exp.logoImage}
+                                  alt={exp.company}
+                                  width={128}
+                                  height={128}
+                                  className="object-cover w-full h-full"
+                                  style={{ mixBlendMode: 'lighten' }}
+                                  quality={95}
+                                />
+                              </div>
+                            ) : (
+                              <Image
+                                src={exp.logoImage}
+                                alt={exp.company}
+                                width={120}
+                                height={120}
+                                className="object-contain mix-blend-mode-lighten flex-shrink-0 h-24 sm:h-32 w-auto mx-auto lg:mx-0"
+                                style={{ mixBlendMode: 'lighten' }}
+                                quality={95}
+                              />
+                            )
+                          ) : (
+                            <div className="text-4xl sm:text-6xl flex-shrink-0 mx-auto lg:mx-0">{exp.logo}</div>
+                          )}
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </motion.div>
+              ))}
             </div>
           </div>
 

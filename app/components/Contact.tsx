@@ -249,24 +249,9 @@ export default function Contact() {
                     </div>
                   </motion.a>
 
-                  {/* Phone */}
-                  <motion.a
-                    href="tel:+923113279075"
-                    whileHover={{ x: 5 }}
-                    className="flex items-center gap-4 group"
-                  >
-                    <div className="p-3 bg-green-50 dark:bg-green-900/20 rounded-lg group-hover:bg-green-100 dark:group-hover:bg-green-900/30 transition-colors">
-                      <HiPhone className="text-2xl text-green-600" />
-                    </div>
-                    <div>
-                      <p className="text-sm text-gray-500 dark:text-gray-400">Phone</p>
-                      <p className="font-semibold text-gray-900 dark:text-white">+92 311 327 9075</p>
-                    </div>
-                  </motion.a>
-
                   {/* WhatsApp */}
                   <motion.a
-                    href="https://wa.me/923113279075"
+                    href="https://wa.me/923113279075?text=Hi%20Qazi%20Maaz,%0D%0A%0D%0AI%20hope%20this%20message%20finds%20you%20well.%20I%20recently%20reviewed%20your%20portfolio%20and%20was%20impressed%20by%20your%20technical%20expertise%20and%20project%20work.%0D%0A%0D%0AI%20am%20reaching%20out%20to%20discuss%20a%20potential%20opportunity%20that%20aligns%20with%20your%20skill%20set.%20I%20would%20appreciate%20the%20opportunity%20to%20connect%20and%20explore%20how%20we%20might%20work%20together.%0D%0A%0D%0AProject%2FOpportunity%20Overview:%0D%0A%0D%0APlease%20let%20me%20know%20your%20availability%20for%20a%20brief%20discussion%20at%20your%20earliest%20convenience.%0D%0A%0D%0AThank%20you%20for%20your%20time%20and%20consideration.%0D%0A%0D%0ABest%20regards,"
                     target="_blank"
                     rel="noopener noreferrer"
                     whileHover={{ x: 5 }}
@@ -283,7 +268,7 @@ export default function Contact() {
 
                   {/* LinkedIn */}
                   <motion.a
-                    href="https://linkedin.com/in/qazi-maaz"
+                    href="https://www.linkedin.com/in/qazi-maaz-5a8abb279?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium"
                     target="_blank"
                     rel="noopener noreferrer"
                     whileHover={{ x: 5 }}
