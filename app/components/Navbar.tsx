@@ -24,7 +24,7 @@ export default function Navbar() {
   // Default animation ease
   const defaultEase = "power4.inOut";
   const scales = [0.81, 0.84, 0.87, 0.9];
-  const heroImage = '/laptop.avif';
+  const heroImage = '/lapp.png';
 
   // 3D tilt effect based on mouse position (desktop only)
   const updateTilt = () => {
@@ -56,6 +56,52 @@ export default function Navbar() {
         ease: "power3.out",
       });
     });
+  };
+
+  // Helper function to play scissor sound using Web Audio API
+  const playScissorSound = (type: 'open' | 'close') => {
+    try {
+      const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
+      
+      if (type === 'open') {
+        // Scissor opening sound - ascending pitch
+        const osc = audioContext.createOscillator();
+        const gain = audioContext.createGain();
+        
+        osc.connect(gain);
+        gain.connect(audioContext.destination);
+        
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(800, audioContext.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(1200, audioContext.currentTime + 0.1);
+        
+        gain.gain.setValueAtTime(0.3, audioContext.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.15);
+        
+        osc.start(audioContext.currentTime);
+        osc.stop(audioContext.currentTime + 0.15);
+      } else {
+        // Scissor closing sound - descending pitch
+        const osc = audioContext.createOscillator();
+        const gain = audioContext.createGain();
+        
+        osc.connect(gain);
+        gain.connect(audioContext.destination);
+        
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(1200, audioContext.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(800, audioContext.currentTime + 0.1);
+        
+        gain.gain.setValueAtTime(0.3, audioContext.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.15);
+        
+        osc.start(audioContext.currentTime);
+        osc.stop(audioContext.currentTime + 0.15);
+      }
+    } catch (error) {
+      // Silently fail if Web Audio API is not available
+      console.log('Audio API not available');
+    }
   };
 
   // Helper function to set image refs
@@ -169,6 +215,9 @@ export default function Navbar() {
   const openMenu = () => {
     setIsOpen(true);
     
+    // Play scissor opening sound
+    playScissorSound('open');
+    
     // Menu opens from top to bottom
     gsap.to(".mobile-menu", {
       clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
@@ -200,6 +249,9 @@ export default function Navbar() {
   };
 
   const closeMenu = () => {
+    // Play scissor closing sound
+    playScissorSound('close');
+
     // Animate images out first (desktop only)
     if (window.innerWidth > 768) {
       gsap.to(["#img-1", "#img-2", "#img-3", "#img-4"], {
@@ -270,6 +322,7 @@ export default function Navbar() {
         className={`fixed top-0 left-0 right-0 z-[200] h-14 flex items-center px-4 transition-all duration-300 ${
           isHeaderHidden ? '-translate-y-full' : 'translate-y-0'
         } ${isOpen ? 'bg-[#101010]' : 'bg-[#101010]/90 backdrop-blur-md'}`}
+        style={{ cursor: 'url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2232%22 height=%2232%22 viewBox=%220 0 32 32%22%3E%3Ccircle cx=%2216%22 cy=%2216%22 r=%223%22 fill=%22white%22 stroke=%22white%22 stroke-width=%222%22/%3E%3Ccircle cx=%2216%22 cy=%2216%22 r=%2212%22 fill=%22none%22 stroke=%22white%22 stroke-width=%222%22 opacity=%221%22/%3E%3C/svg%3E") 16 16, auto' }}
       >
         <div className="max-w-7xl mx-auto w-full flex justify-between items-center">
           {/* Logo */}
@@ -310,7 +363,7 @@ export default function Navbar() {
       <div
         ref={menuRef}
         className="mobile-menu fixed inset-0 bg-[#101010] z-[150] flex items-center justify-center"
-        style={{ clipPath: "polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)" }}
+        style={{ clipPath: "polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)", cursor: 'url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2232%22 height=%2232%22 viewBox=%220 0 32 32%22%3E%3Ccircle cx=%2216%22 cy=%2216%22 r=%223%22 fill=%22white%22 stroke=%22white%22 stroke-width=%222%22/%3E%3Ccircle cx=%2216%22 cy=%2216%22 r=%2212%22 fill=%22none%22 stroke=%22white%22 stroke-width=%222%22 opacity=%221%22/%3E%3C/svg%3E") 16 16, auto' }}
       >
         {/* Image container with layered images and 3D tilt effect */}
         <div className="menu-img-container" ref={menuImgContainerRef}>
