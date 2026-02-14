@@ -24,7 +24,7 @@ export default function Navbar() {
   // Default animation ease
   const defaultEase = "power4.inOut";
   const scales = [0.81, 0.84, 0.87, 0.9];
-  const heroImage = '/laptop.avif';
+  const heroImage = '/lapp.png';
 
   // 3D tilt effect based on mouse position (desktop only)
   const updateTilt = () => {

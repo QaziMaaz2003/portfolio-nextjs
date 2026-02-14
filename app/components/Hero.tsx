@@ -232,7 +232,7 @@ export default function Hero() {
             </button>
 
             <a
-              href="/Qazi_Maaz_CV.pdf"
+              href="/QAZI_MAAZ_CV.pdf"
               download
               className="w-full sm:w-auto flex items-center justify-center gap-2 px-8 sm:px-10 py-3 sm:py-3.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold rounded-lg text-sm hover:from-blue-700 hover:to-indigo-700 transition-all duration-300 shadow-lg hover:shadow-xl"
             >
