@@ -167,7 +167,7 @@ export default function Hero() {
       <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
       <link rel="preconnect" href="https://cdn.jsdelivr.net" />
       
-      <section ref={heroRef} id="hero" className="min-h-screen flex items-center justify-center pt-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden w-screen bg-black">
+      <section ref={heroRef} id="hero" className="min-h-screen flex items-center justify-center pt-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden w-screen bg-black" style={{ cursor: 'url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2232%22 height=%2232%22 viewBox=%220 0 32 32%22%3E%3Ccircle cx=%2216%22 cy=%2216%22 r=%223%22 fill=%22white%22 stroke=%22white%22 stroke-width=%222%22/%3E%3Ccircle cx=%2216%22 cy=%2216%22 r=%2212%22 fill=%22none%22 stroke=%22white%22 stroke-width=%222%22 opacity=%221%22/%3E%3C/svg%3E") 16 16, auto' }}>
         {/* Overlay for readability */}
         <div className="absolute inset-0 bg-black/50"></div>
 
@@ -218,15 +218,15 @@ export default function Hero() {
           >
             <button
               onClick={() => scrollToSection('contact')}
-              className="w-full sm:w-auto flex items-center justify-center gap-2 px-4 sm:px-8 py-2.5 sm:py-3 bg-white text-black font-semibold rounded-lg text-xs sm:text-sm hover:bg-gray-200 transition-all duration-300"
+              className="w-full sm:w-auto flex items-center justify-center gap-2 px-8 sm:px-10 py-3 sm:py-3.5 bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-semibold rounded-lg text-sm hover:from-cyan-600 hover:to-blue-600 transition-all duration-300 shadow-lg hover:shadow-xl"
             >
-              <HiMail size={16} />
+              <HiMail size={18} />
               Get In Touch
             </button>
 
             <button
               onClick={() => scrollToSection('projects')}
-              className="w-full sm:w-auto flex items-center justify-center gap-2 px-4 sm:px-8 py-2.5 sm:py-3 bg-gray-800 text-white font-semibold rounded-lg text-xs sm:text-sm border-2 border-white hover:bg-gray-700 transition-all duration-300"
+              className="w-full sm:w-auto flex items-center justify-center gap-2 px-8 sm:px-10 py-3 sm:py-3.5 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold rounded-lg text-sm hover:from-purple-600 hover:to-pink-600 transition-all duration-300 shadow-lg hover:shadow-xl"
             >
               View Work
             </button>
@@ -234,9 +234,9 @@ export default function Hero() {
             <a
               href="/Qazi_Maaz_CV.pdf"
               download
-              className="w-full sm:w-auto flex items-center justify-center gap-2 px-4 sm:px-8 py-2.5 sm:py-3 bg-gray-900 text-white font-semibold rounded-lg text-xs sm:text-sm border-2 border-white hover:bg-gray-800 transition-all duration-300"
+              className="w-full sm:w-auto flex items-center justify-center gap-2 px-8 sm:px-10 py-3 sm:py-3.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold rounded-lg text-sm hover:from-blue-700 hover:to-indigo-700 transition-all duration-300 shadow-lg hover:shadow-xl"
             >
-              <HiDownload size={16} />
+              <HiDownload size={18} />
               Download CV
             </a>
           </div>

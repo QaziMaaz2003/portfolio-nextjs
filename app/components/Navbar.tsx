@@ -270,6 +270,7 @@ export default function Navbar() {
         className={`fixed top-0 left-0 right-0 z-[200] h-14 flex items-center px-4 transition-all duration-300 ${
           isHeaderHidden ? '-translate-y-full' : 'translate-y-0'
         } ${isOpen ? 'bg-[#101010]' : 'bg-[#101010]/90 backdrop-blur-md'}`}
+        style={{ cursor: 'url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2232%22 height=%2232%22 viewBox=%220 0 32 32%22%3E%3Ccircle cx=%2216%22 cy=%2216%22 r=%223%22 fill=%22white%22 stroke=%22white%22 stroke-width=%222%22/%3E%3Ccircle cx=%2216%22 cy=%2216%22 r=%2212%22 fill=%22none%22 stroke=%22white%22 stroke-width=%222%22 opacity=%221%22/%3E%3C/svg%3E") 16 16, auto' }}
       >
         <div className="max-w-7xl mx-auto w-full flex justify-between items-center">
           {/* Logo */}
@@ -310,7 +311,7 @@ export default function Navbar() {
       <div
         ref={menuRef}
         className="mobile-menu fixed inset-0 bg-[#101010] z-[150] flex items-center justify-center"
-        style={{ clipPath: "polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)" }}
+        style={{ clipPath: "polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)", cursor: 'url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2232%22 height=%2232%22 viewBox=%220 0 32 32%22%3E%3Ccircle cx=%2216%22 cy=%2216%22 r=%223%22 fill=%22white%22 stroke=%22white%22 stroke-width=%222%22/%3E%3Ccircle cx=%2216%22 cy=%2216%22 r=%2212%22 fill=%22none%22 stroke=%22white%22 stroke-width=%222%22 opacity=%221%22/%3E%3C/svg%3E") 16 16, auto' }}
       >
         {/* Image container with layered images and 3D tilt effect */}
         <div className="menu-img-container" ref={menuImgContainerRef}>
