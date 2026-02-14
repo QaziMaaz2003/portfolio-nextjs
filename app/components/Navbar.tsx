@@ -58,6 +58,52 @@ export default function Navbar() {
     });
   };
 
+  // Helper function to play scissor sound using Web Audio API
+  const playScissorSound = (type: 'open' | 'close') => {
+    try {
+      const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
+      
+      if (type === 'open') {
+        // Scissor opening sound - ascending pitch
+        const osc = audioContext.createOscillator();
+        const gain = audioContext.createGain();
+        
+        osc.connect(gain);
+        gain.connect(audioContext.destination);
+        
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(800, audioContext.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(1200, audioContext.currentTime + 0.1);
+        
+        gain.gain.setValueAtTime(0.3, audioContext.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.15);
+        
+        osc.start(audioContext.currentTime);
+        osc.stop(audioContext.currentTime + 0.15);
+      } else {
+        // Scissor closing sound - descending pitch
+        const osc = audioContext.createOscillator();
+        const gain = audioContext.createGain();
+        
+        osc.connect(gain);
+        gain.connect(audioContext.destination);
+        
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(1200, audioContext.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(800, audioContext.currentTime + 0.1);
+        
+        gain.gain.setValueAtTime(0.3, audioContext.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.15);
+        
+        osc.start(audioContext.currentTime);
+        osc.stop(audioContext.currentTime + 0.15);
+      }
+    } catch (error) {
+      // Silently fail if Web Audio API is not available
+      console.log('Audio API not available');
+    }
+  };
+
   // Helper function to set image refs
   const setImageRef = (index: number) => (el: HTMLImageElement | null) => {
     if (imagesRef.current) {
@@ -169,6 +215,9 @@ export default function Navbar() {
   const openMenu = () => {
     setIsOpen(true);
     
+    // Play scissor opening sound
+    playScissorSound('open');
+    
     // Menu opens from top to bottom
     gsap.to(".mobile-menu", {
       clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
@@ -200,6 +249,9 @@ export default function Navbar() {
   };
 
   const closeMenu = () => {
+    // Play scissor closing sound
+    playScissorSound('close');
+
     // Animate images out first (desktop only)
     if (window.innerWidth > 768) {
       gsap.to(["#img-1", "#img-2", "#img-3", "#img-4"], {
