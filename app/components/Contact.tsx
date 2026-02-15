@@ -114,7 +114,7 @@ export default function Contact() {
                       value={formData.name}
                       onChange={handleChange}
                       required
-                      className="w-full px-5 py-4 rounded-xl border-2 border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
+                      className="w-full px-5 py-4 rounded-xl border-2 border-gray-300 dark:border-gray-300 sm:dark:border-gray-600 bg-white dark:bg-white sm:dark:bg-gray-800 text-gray-900 dark:text-gray-900 sm:dark:text-white placeholder-gray-400 dark:placeholder-gray-600 sm:dark:placeholder-gray-500 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
                       placeholder="John Doe"
                     />
                   </div>
@@ -131,7 +131,7 @@ export default function Contact() {
                       value={formData.email}
                       onChange={handleChange}
                       required
-                      className="w-full px-5 py-4 rounded-xl border-2 border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
+                      className="w-full px-5 py-4 rounded-xl border-2 border-gray-300 dark:border-gray-300 sm:dark:border-gray-600 bg-white dark:bg-white sm:dark:bg-gray-800 text-gray-900 dark:text-gray-900 sm:dark:text-white placeholder-gray-400 dark:placeholder-gray-600 sm:dark:placeholder-gray-500 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
                       placeholder="john@example.com"
                     />
                   </div>
@@ -148,7 +148,7 @@ export default function Contact() {
                     name="phone"
                     value={formData.phone}
                     onChange={handleChange}
-                    className="w-full px-5 py-4 rounded-xl border-2 border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
+                    className="w-full px-5 py-4 rounded-xl border-2 border-gray-300 dark:border-gray-300 sm:dark:border-gray-600 bg-white dark:bg-white sm:dark:bg-gray-800 text-gray-900 dark:text-gray-900 sm:dark:text-white placeholder-gray-400 dark:placeholder-gray-600 sm:dark:placeholder-gray-500 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
                     placeholder="(555) 123-4567"
                   />
                 </div>
@@ -165,7 +165,7 @@ export default function Contact() {
                     onChange={handleChange}
                     required
                     rows={6}
-                    className="w-full px-5 py-4 rounded-xl border-2 border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all resize-none"
+                    className="w-full px-5 py-4 rounded-xl border-2 border-gray-300 dark:border-gray-300 sm:dark:border-gray-600 bg-white dark:bg-white sm:dark:bg-gray-800 text-gray-900 dark:text-gray-900 sm:dark:text-white placeholder-gray-400 dark:placeholder-gray-600 sm:dark:placeholder-gray-500 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all resize-none"
                     placeholder="Tell me about your project..."
                   />
                 </div>
@@ -240,7 +240,7 @@ export default function Contact() {
                     whileHover={{ x: 5 }}
                     className="flex items-center gap-4 group"
                   >
-                    <div className="p-3 bg-white dark:bg-white rounded-lg border border-gray-400 dark:border-gray-400 group-hover:bg-white dark:group-hover:bg-white transition-colors">
+                    <div className="p-3 bg-white dark:bg-white sm:dark:bg-gray-800 rounded-lg border border-gray-400 dark:border-gray-300 sm:dark:border-gray-600 group-hover:bg-white dark:group-hover:bg-white sm:dark:group-hover:bg-gray-800 transition-colors">
                       <HiMail className="text-2xl text-blue-600" />
                     </div>
                     <div>
@@ -292,7 +292,7 @@ export default function Contact() {
                     className="flex items-center gap-4 group"
                   >
                     <div className="p-3 bg-white dark:bg-white sm:dark:bg-gray-800 rounded-lg border border-gray-400 dark:border-gray-300 sm:dark:border-gray-600 group-hover:bg-white dark:group-hover:bg-white sm:dark:group-hover:bg-gray-800 transition-colors">
-                      <SiGithub className="text-2xl text-gray-900 dark:text-white" />
+                      <SiGithub className="text-2xl text-gray-900 dark:text-gray-900 sm:dark:text-white" />
                     </div>
                     <div>
                       <p className="text-sm text-gray-500 dark:text-gray-700 sm:dark:text-gray-400">GitHub</p>
