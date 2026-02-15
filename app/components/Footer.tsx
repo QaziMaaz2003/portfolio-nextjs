@@ -26,7 +26,7 @@ export default function Footer() {
       <div className="max-w-6xl mx-auto">
         <div className="grid md:grid-cols-3 gap-8 mb-8">
           {/* Brand */}
-          <div>
+          <div className="text-center md:text-left">
             <motion.div
               whileHover={{ scale: 1.05 }}
               className="text-3xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent mb-4"
@@ -36,7 +36,7 @@ export default function Footer() {
             <p className="text-gray-400 mb-4">
               Full Stack Developer passionate about creating efficient and beautiful web applications.
             </p>
-            <div className="flex gap-4">
+            <div className="flex md:flex-row justify-center md:justify-start gap-4">
               <motion.a
                 href="https://github.com/QaziMaaz2003"
                 target="_blank"
@@ -61,9 +61,9 @@ export default function Footer() {
           </div>
 
           {/* Quick Links */}
-          <div>
+          <div className="text-center md:text-left">
             <h3 className="text-xl font-semibold mb-4">Quick Links</h3>
-            <ul className="space-y-3">
+            <ul className="space-y-3 flex flex-col items-center md:items-start">
               {quickLinks.map((link) => (
                 <li key={link.id}>
                   <button
@@ -78,9 +78,9 @@ export default function Footer() {
           </div>
 
           {/* Contact Info */}
-          <div>
+          <div className="text-center md:text-left">
             <h3 className="text-xl font-semibold mb-4">Get In Touch</h3>
-            <ul className="space-y-3 text-gray-400">
+            <ul className="space-y-3 text-gray-400 flex flex-col items-center md:items-start">
               <li>
                 <a href="mailto:qazimaaz404@gmail.com" className="hover:text-white transition-colors">
                   qazimaaz404@gmail.com
