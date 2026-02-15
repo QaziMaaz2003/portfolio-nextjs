@@ -99,7 +99,7 @@ export default function Footer() {
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-white/20 text-center">
           <p className="text-gray-400 text-sm flex items-center justify-center gap-2">
-            Made with <HiHeart className="text-red-500" /> by Qazi Maaz Ahmed © {new Date().getFullYear()}
+            Developed by Qazi Maaz Ahmed © {new Date().getFullYear()}
           </p>
         </div>
       </div>
