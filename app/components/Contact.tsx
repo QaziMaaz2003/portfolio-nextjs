@@ -104,7 +104,7 @@ export default function Contact() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {/* Full Name */}
                   <div>
-                    <label htmlFor="name" className="block text-sm font-bold text-black sm:text-gray-700 dark:text-gray-300 mb-2">
+                    <label htmlFor="name" className="block text-sm font-bold text-black sm:text-gray-700 dark:text-gray-900 sm:dark:text-gray-300 mb-2">
                       Full Name *
                     </label>
                     <input
@@ -121,7 +121,7 @@ export default function Contact() {
 
                   {/* Email Address */}
                   <div>
-                    <label htmlFor="email" className="block text-sm font-bold text-black sm:text-gray-700 dark:text-gray-300 mb-2">
+                    <label htmlFor="email" className="block text-sm font-bold text-black sm:text-gray-700 dark:text-gray-900 sm:dark:text-gray-300 mb-2">
                       Email Address *
                     </label>
                     <input
@@ -139,7 +139,7 @@ export default function Contact() {
 
                 {/* Phone Number */}
                 <div>
-                  <label htmlFor="phone" className="block text-sm font-bold text-black sm:text-gray-700 dark:text-gray-300 mb-2">
+                  <label htmlFor="phone" className="block text-sm font-bold text-black sm:text-gray-700 dark:text-gray-900 sm:dark:text-gray-300 mb-2">
                     Phone Number (Optional)
                   </label>
                   <input
@@ -155,7 +155,7 @@ export default function Contact() {
 
                 {/* Message */}
                 <div>
-                  <label htmlFor="message" className="block text-sm font-bold text-black sm:text-gray-700 dark:text-gray-300 mb-2">
+                  <label htmlFor="message" className="block text-sm font-bold text-black sm:text-gray-700 dark:text-gray-900 sm:dark:text-gray-300 mb-2">
                     Your Message *
                   </label>
                   <textarea
@@ -244,8 +244,8 @@ export default function Contact() {
                       <HiMail className="text-2xl text-blue-600" />
                     </div>
                     <div>
-                      <p className="text-sm font-bold text-black sm:text-gray-500 dark:text-gray-400">Email</p>
-                      <p className="font-semibold text-black sm:text-gray-900 dark:text-white">qazimaaz404@gmail.com</p>
+                      <p className="text-sm text-gray-500 dark:text-gray-700 sm:dark:text-gray-400">Email</p>
+                      <p className="font-semibold text-black sm:text-gray-900 dark:text-gray-900 sm:dark:text-white">qazimaaz404@gmail.com</p>
                     </div>
                   </motion.a>
 
@@ -257,12 +257,12 @@ export default function Contact() {
                     whileHover={{ x: 5 }}
                     className="flex items-center gap-4 group"
                   >
-                    <div className="p-3 bg-white dark:bg-white rounded-lg border border-gray-400 dark:border-gray-400 group-hover:bg-white dark:group-hover:bg-white transition-colors">
+                    <div className="p-3 bg-white dark:bg-white sm:dark:bg-gray-800 rounded-lg border border-gray-400 dark:border-gray-300 sm:dark:border-gray-600 group-hover:bg-white dark:group-hover:bg-white sm:dark:group-hover:bg-gray-800 transition-colors">
                       <SiWhatsapp className="text-2xl text-green-600" />
                     </div>
                     <div>
-                      <p className="text-sm font-bold text-black sm:text-gray-500 dark:text-gray-400">WhatsApp</p>
-                      <p className="font-semibold text-black sm:text-gray-900 dark:text-white">Message on WhatsApp</p>
+                      <p className="text-sm text-gray-500 dark:text-gray-700 sm:dark:text-gray-400">WhatsApp</p>
+                      <p className="font-semibold text-black sm:text-gray-900 dark:text-gray-900 sm:dark:text-white">Message on WhatsApp</p>
                     </div>
                   </motion.a>
 
@@ -274,12 +274,12 @@ export default function Contact() {
                     whileHover={{ x: 5 }}
                     className="flex items-center gap-4 group"
                   >
-                    <div className="p-3 bg-white dark:bg-white rounded-lg border border-gray-400 dark:border-gray-400 group-hover:bg-white dark:group-hover:bg-white transition-colors">
+                    <div className="p-3 bg-white dark:bg-white sm:dark:bg-gray-800 rounded-lg border border-gray-400 dark:border-gray-300 sm:dark:border-gray-600 group-hover:bg-white dark:group-hover:bg-white sm:dark:group-hover:bg-gray-800 transition-colors">
                       <SiLinkedin className="text-2xl text-blue-600" />
                     </div>
                     <div>
-                      <p className="text-sm font-bold text-black sm:text-gray-500 dark:text-gray-400">LinkedIn</p>
-                      <p className="font-semibold text-black sm:text-gray-900 dark:text-white">Connect on LinkedIn</p>
+                      <p className="text-sm text-gray-500 dark:text-gray-700 sm:dark:text-gray-400">LinkedIn</p>
+                      <p className="font-semibold text-black sm:text-gray-900 dark:text-gray-900 sm:dark:text-white">Connect on LinkedIn</p>
                     </div>
                   </motion.a>
 
@@ -291,12 +291,12 @@ export default function Contact() {
                     whileHover={{ x: 5 }}
                     className="flex items-center gap-4 group"
                   >
-                    <div className="p-3 bg-white dark:bg-white rounded-lg border border-gray-400 dark:border-gray-400 group-hover:bg-white dark:group-hover:bg-white transition-colors">
+                    <div className="p-3 bg-white dark:bg-white sm:dark:bg-gray-800 rounded-lg border border-gray-400 dark:border-gray-300 sm:dark:border-gray-600 group-hover:bg-white dark:group-hover:bg-white sm:dark:group-hover:bg-gray-800 transition-colors">
                       <SiGithub className="text-2xl text-gray-900 dark:text-white" />
                     </div>
                     <div>
-                      <p className="text-sm font-bold text-black sm:text-gray-500 dark:text-gray-400">GitHub</p>
-                      <p className="font-semibold text-black sm:text-gray-900 dark:text-white">View My Projects</p>
+                      <p className="text-sm text-gray-500 dark:text-gray-700 sm:dark:text-gray-400">GitHub</p>
+                      <p className="font-semibold text-black sm:text-gray-900 dark:text-gray-900 sm:dark:text-white">View My Projects</p>
                     </div>
                   </motion.a>
 
