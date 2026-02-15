@@ -78,15 +78,15 @@ export default function About() {
                 <h3 className="text-xl sm:text-2xl font-bold text-black sm:text-gray-900 dark:text-black sm:dark:text-white">
                   Passionate Full Stack Developer
                 </h3>
-                <p className="text-sm sm:text-base text-gray-700 sm:text-gray-600 dark:text-black sm:dark:text-gray-300 leading-relaxed">
-                  I&apos;m a <span className="font-semibold text-blue-600 dark:text-blue-400">Computer Science student</span> at FAST National University with deep expertise in <span className="font-semibold text-gray-900 dark:text-white">Full Stack Development</span>, Data Science, and Performance Optimization. I transform complex problems into elegant, scalable solutions.
+                <p className="text-sm sm:text-base text-gray-600 dark:text-black sm:dark:text-gray-300 leading-relaxed">
+                  I&apos;m a <span className="font-semibold text-blue-600 dark:text-blue-400">Computer Science student</span> at FAST National University with deep expertise in <span className="font-semibold dark:font-bold sm:dark:font-semibold text-gray-900 dark:text-black sm:dark:text-white">Full Stack Development</span>, Data Science, and Performance Optimization. I transform complex problems into elegant, scalable solutions.
                 </p>
               </div>
 
               {/* Experience */}
               <div className="space-y-3 sm:space-y-4">
-                <h3 className="text-sm sm:text-base font-semibold text-black sm:text-gray-900 dark:text-black sm:dark:text-white uppercase tracking-wide sm:tracking-widest">Professional Experience</h3>
-                <p className="text-sm sm:text-base text-gray-700 sm:text-gray-600 dark:text-black sm:dark:text-gray-300 leading-relaxed">
+                <h3 className="text-sm sm:text-base font-semibold dark:font-bold sm:dark:font-semibold text-black sm:text-gray-900 dark:text-black sm:dark:text-white uppercase tracking-wide sm:tracking-widest">Professional Experience</h3>
+                <p className="text-sm sm:text-base text-gray-600 dark:text-black sm:dark:text-gray-300 leading-relaxed">
                   With hands-on experience from <span className="font-semibold text-blue-600 dark:text-blue-400">BytesPak</span> and <span className="font-semibold text-blue-600 dark:text-blue-400">Meezan Bank</span>, I specialize in architecting and developing fast, scalable web applications using modern technologies like <span className="font-medium">React, Next.js, Node.js, Express, and MySQL</span>.
                 </p>
               </div>
