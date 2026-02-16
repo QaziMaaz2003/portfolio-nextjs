@@ -235,7 +235,7 @@ export default function Contact() {
                   
                   {/* Email */}
                   <motion.a
-                    href="mailto:qazimaaz404@gmail.com?subject=Business%20Inquiry%20-%20Portfolio%20Contact"
+                    href="mailto:qazimaaz404@gmail.com?subject=Business Inquiry - Portfolio Contact&body=Dear Qazi Maaz,%0D%0A%0D%0AI hope this message finds you well. I recently reviewed your portfolio and was impressed by your technical expertise and project work.%0D%0A%0D%0AI am reaching out to discuss a potential opportunity that aligns with your skill set. I would appreciate the opportunity to connect and explore how we might work together.%0D%0A%0D%0AProject/Opportunity Overview:%0D%0A%0D%0A%0D%0APlease let me know your availability for a brief discussion at your earliest convenience.%0D%0A%0D%0AThank you for your time and consideration.%0D%0A%0D%0ABest regards,"
                     whileHover={{ x: 5 }}
                     className="flex items-center gap-4 group"
                   >
@@ -250,7 +250,7 @@ export default function Contact() {
 
                   {/* WhatsApp */}
                   <motion.a
-                    href="https://wa.me/923113279075?text=Hi%20Qazi%20Maaz%2C%20I%20came%20across%20your%20portfolio%20and%20would%20like%20to%20discuss%20a%20potential%20opportunity."
+                    href="https://wa.me/923113279075?text=Hi%20Qazi%20Maaz,%0D%0A%0D%0AI%20hope%20this%20message%20finds%20you%20well.%20I%20recently%20reviewed%20your%20portfolio%20and%20was%20impressed%20by%20your%20technical%20expertise%20and%20project%20work.%0D%0A%0D%0AI%20am%20reaching%20out%20to%20discuss%20a%20potential%20opportunity%20that%20aligns%20with%20your%20skill%20set.%20I%20would%20appreciate%20the%20opportunity%20to%20connect%20and%20explore%20how%20we%20might%20work%20together.%0D%0A%0D%0AProject%2FOpportunity%20Overview:%0D%0A%0D%0APlease%20let%20me%20know%20your%20availability%20for%20a%20brief%20discussion%20at%20your%20earliest%20convenience.%0D%0A%0D%0AThank%20you%20for%20your%20time%20and%20consideration.%0D%0A%0D%0ABest%20regards,"
                     target="_blank"
                     rel="noopener noreferrer"
                     whileHover={{ x: 5 }}
