@@ -98,8 +98,10 @@ export default function Projects() {
               <motion.div
                 key={project.title}
                 variants={itemVariants}
-                className={`flex flex-col gap-8 ${
-                  expandedProject === index ? 'md:grid md:grid-cols-2 items-start' : 'items-center'
+                className={`${
+                  expandedProject === index 
+                    ? 'flex flex-col md:grid md:grid-cols-2 gap-8' 
+                    : 'flex flex-col gap-8 md:gap-0 md:flex-row md:justify-center'
                 }`}
               >
                 {/* Project Image */}
