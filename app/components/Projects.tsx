@@ -100,7 +100,7 @@ export default function Projects() {
                 variants={itemVariants}
                 className={`${
                   expandedProject === index 
-                    ? 'flex flex-col md:grid md:grid-cols-2 gap-8' 
+                    ? 'flex flex-col md:grid md:grid-cols-2 gap-8 md:items-center' 
                     : 'flex flex-col gap-8 md:gap-0 md:flex-row md:justify-center'
                 }`}
               >
@@ -148,10 +148,6 @@ export default function Projects() {
                       }}
                       className="space-y-4 w-full"
                     >
-                      <h3 className="text-2xl sm:text-3xl font-bold text-gray-900">
-                        {project.title}
-                      </h3>
-                      
                       <p className="text-gray-600 leading-relaxed">
                         {project.description}
                       </p>
