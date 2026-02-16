@@ -48,7 +48,7 @@ export default function Footer() {
                 <SiGithub className="text-xl" />
               </motion.a>
               <motion.a
-                href="https://linkedin.com/in/qazi-maaz"
+                href="https://www.linkedin.com/in/qazi-maaz-5a8abb279?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium"
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.1 }}

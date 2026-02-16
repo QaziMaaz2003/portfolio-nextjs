@@ -154,7 +154,7 @@ export default function Projects() {
 
                       {/* Tech Stack */}
                       <div>
-                        <h4 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">
+                        <h4 className="text-sm font-semibold text-gray-700 dark:text-black sm:dark:text-gray-300 mb-3">
                           Technologies Used:
                         </h4>
                         <div className="flex flex-wrap gap-3">
