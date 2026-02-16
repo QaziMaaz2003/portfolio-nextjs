@@ -23,6 +23,15 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // Check if API key exists
+    if (!process.env.RESEND_API_KEY) {
+      console.error('RESEND_API_KEY is not configured');
+      return NextResponse.json(
+        { message: 'Email service is not configured. Please contact the administrator.' },
+        { status: 500 }
+      );
+    }
+
     // Send email using Resend with API key from env
     const resend = new Resend(process.env.RESEND_API_KEY);
     const { data, error } = await resend.emails.send({
@@ -129,9 +138,9 @@ export async function POST(request: NextRequest) {
     });
 
     if (error) {
-      console.error('Resend Error:', error);
+      console.error('Resend Error:', JSON.stringify(error, null, 2));
       return NextResponse.json(
-        { message: 'Failed to send email. Please try again later.' },
+        { message: 'Failed to send email. Please try again later.', error: process.env.NODE_ENV === 'development' ? error : undefined },
         { status: 500 }
       );
     }
@@ -143,7 +152,7 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     console.error('Server Error:', error);
     return NextResponse.json(
-      { message: 'An unexpected error occurred. Please try again.' },
+      { message: 'An unexpected error occurred. Please try again.', error: process.env.NODE_ENV === 'development' ? String(error) : undefined },
       { status: 500 }
     );
   }
