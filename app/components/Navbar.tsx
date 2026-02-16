@@ -329,14 +329,14 @@ export default function Navbar() {
           {/* Logo */}
           <motion.div
             whileHover={{ scale: 1.05 }}
-            className="cursor-pointer relative w-12 h-12 flex items-center justify-center"
+            className="cursor-pointer relative w-16 h-16 flex items-center justify-center"
             onClick={() => scrollToSection('hero')}
           >
             <Image
               src="/LOGOO.png"
               alt="MA Logo"
-              width={48}
-              height={48}
+              width={64}
+              height={64}
               className="object-contain"
               style={{ filter: 'invert(70%) sepia(50%) saturate(500%) hue-rotate(170deg) brightness(1.1)' }}
             />
