@@ -102,7 +102,7 @@ export default function Projects() {
                     expandedProject === index ? 'md:w-full cursor-pointer' : 'w-full max-w-xl cursor-pointer'
                   } relative group`}
                 >
-                  <div className="min-h-[300px] rounded-2xl shadow-xl overflow-hidden relative">
+                  <div className="min-h-[300px] rounded-2xl shadow-xl overflow-hidden relative border-2 border-gray-700">
                     <Image 
                       src={project.image} 
                       alt={project.title}
@@ -150,32 +150,6 @@ export default function Projects() {
                             </motion.div>
                           ))}
                         </div>
-                      </div>
-
-                      {/* Action Buttons */}
-                      <div className="flex gap-4 pt-4">
-                        <motion.a
-                          whileHover={{ scale: 1.05 }}
-                          whileTap={{ scale: 0.95 }}
-                          href={project.liveLink}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className={`flex items-center gap-2 px-6 py-3 bg-gradient-to-r ${project.gradient} text-white rounded-lg font-medium shadow-md hover:shadow-lg transition-shadow`}
-                        >
-                          <HiExternalLink size={20} />
-                          Live Demo
-                        </motion.a>
-                        <motion.a
-                          whileHover={{ scale: 1.05 }}
-                          whileTap={{ scale: 0.95 }}
-                          href={project.githubLink}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex items-center gap-2 px-6 py-3 bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-lg font-medium hover:bg-gray-300 dark:hover:bg-gray-700 transition-colors"
-                        >
-                          <HiCode size={20} />
-                          View Code
-                        </motion.a>
                       </div>
                     </motion.div>
                   )}
