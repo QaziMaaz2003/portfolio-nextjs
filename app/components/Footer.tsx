@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { SiGithub, SiLinkedin } from 'react-icons/si';
 import { HiHeart } from 'react-icons/hi';
+import Image from 'next/image';
 
 export default function Footer() {
   const scrollToSection = (sectionId: string) => {
@@ -29,9 +30,16 @@ export default function Footer() {
           <div className="text-center md:text-left">
             <motion.div
               whileHover={{ scale: 1.05 }}
-              className="text-3xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent mb-4"
+              className="mb-4 flex justify-center md:justify-start"
             >
-              QM
+              <Image
+                src="/LOGOO.png"
+                alt="MA Logo"
+                width={64}
+                height={64}
+                className="object-contain"
+                style={{ filter: 'invert(70%) sepia(50%) saturate(500%) hue-rotate(170deg) brightness(1.1)' }}
+              />
             </motion.div>
             <p className="text-gray-400 mb-4">
               Full Stack Developer passionate about creating efficient and beautiful web applications.
