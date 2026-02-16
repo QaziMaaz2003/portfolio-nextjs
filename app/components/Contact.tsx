@@ -80,10 +80,9 @@ export default function Contact() {
         >
           {/* Header Section */}
           <div className="text-center mb-16">
-            <h2 className="text-4xl sm:text-5xl font-bold mb-4 text-gray-900">
-              Let&apos;s <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Connect</span>
+            <h2 className="text-4xl sm:text-5xl font-bold mb-4">
+              <span className="gradient-text">Let&apos;s Connect</span>
             </h2>
-            <div className="w-20 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto rounded-full" />
             <p className="mt-4 text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
               Have a project in mind? Let&apos;s turn your vision into reality. I&apos;m here to help bring your ideas to life!
             </p>

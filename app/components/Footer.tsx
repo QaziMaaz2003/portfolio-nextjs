@@ -22,7 +22,7 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="bg-[#010a14] text-gray-200 py-12 px-4 sm:px-6 lg:px-8">
+    <footer className="bg-[#010a14] text-gray-200 py-12 px-4 sm:px-6 lg:px-8 [&_*]:!cursor-[inherit]" style={{ cursor: 'url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2232%22 height=%2232%22 viewBox=%220 0 32 32%22%3E%3Ccircle cx=%2216%22 cy=%2216%22 r=%223%22 fill=%22white%22 stroke=%22white%22 stroke-width=%222%22/%3E%3Ccircle cx=%2216%22 cy=%2216%22 r=%2212%22 fill=%22none%22 stroke=%22white%22 stroke-width=%222%22 opacity=%221%22/%3E%3C/svg%3E") 16 16, auto' }}>
       <div className="max-w-6xl mx-auto">
         <div className="grid md:grid-cols-3 gap-8 mb-8">
           {/* Brand */}

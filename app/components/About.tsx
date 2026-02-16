@@ -61,10 +61,9 @@ export default function About() {
         >
           {/* Section Title */}
           <motion.div variants={itemVariants} className="text-center">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4 text-gray-900">
-              About <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Me</span>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4">
+              <span className="gradient-text">About Me</span>
             </h2>
-            <div className="w-16 sm:w-20 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto rounded-full" />
           </motion.div>
 
           <div className="grid md:grid-cols-2 gap-8 sm:gap-10 md:gap-12 items-center">

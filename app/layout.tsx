@@ -13,8 +13,15 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Qazi Maaz Ahmed | Full Stack Developer",
+  title: "Qazi Maaz Ahmed",
   description: "Full Stack Developer specializing in React, Next.js, Node.js, and Performance Optimization. Building fast, modern web applications.",
+  icons: {
+    icon: [
+      { url: '/LOGOO.png', sizes: '32x32', type: 'image/png' },
+      { url: '/LOGOO.png', sizes: '64x64', type: 'image/png' },
+    ],
+    apple: { url: '/LOGOO.png', sizes: '180x180', type: 'image/png' },
+  },
 };
 
 export default function RootLayout({
