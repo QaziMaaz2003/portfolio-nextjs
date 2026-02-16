@@ -98,14 +98,16 @@ export default function Projects() {
               <motion.div
                 key={project.title}
                 variants={itemVariants}
-                className="flex flex-col md:grid md:grid-cols-2 gap-8 items-start md:items-center"
+                className={`flex flex-col gap-8 ${
+                  expandedProject === index ? 'md:grid md:grid-cols-2 items-start' : 'items-center'
+                }`}
               >
                 {/* Project Image */}
                 <motion.div
                   onClick={() => setExpandedProject(expandedProject === index ? null : index)}
                   whileHover={{ scale: 1.02 }}
                   className={`${
-                    expandedProject === index ? 'w-full cursor-pointer' : 'w-full max-w-xl mx-auto md:mx-0 cursor-pointer'
+                    expandedProject === index ? 'w-full cursor-pointer' : 'w-full max-w-xl cursor-pointer mx-auto'
                   } relative group`}
                 >
                   <div className="min-h-[300px] rounded-2xl shadow-xl overflow-hidden relative border-2 border-gray-700">
@@ -178,23 +180,6 @@ export default function Projects() {
               </motion.div>
             ))}
           </div>
-
-          {/* More Projects CTA */}
-          <motion.div variants={itemVariants} className="text-center mt-16">
-            <p className="text-gray-600 dark:text-gray-400 mb-4">
-              Want to see more of my work?
-            </p>
-            <motion.a
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              href="https://github.com/QaziMaaz2003"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-full font-semibold hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors"
-            >
-              View All Projects on GitHub
-            </motion.a>
-          </motion.div>
         </motion.div>
       </div>
     </section>
