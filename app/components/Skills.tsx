@@ -103,10 +103,9 @@ export default function Skills() {
             transition={{ duration: 0.6 }}
             className="text-center mb-8 sm:mb-12 md:mb-16"
           >
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4 text-white">
-              Technical <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Skills</span>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4">
+              <span className="gradient-text">Technical Skills</span>
             </h2>
-            <div className="w-16 sm:w-20 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto rounded-full mb-3 sm:mb-4" />
             <p className="text-sm sm:text-base text-gray-400 px-4">
               Tools I use to build scalable apps
             </p>

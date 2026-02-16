@@ -70,10 +70,9 @@ export default function Projects() {
         >
           {/* Section Title */}
           <motion.div variants={itemVariants} className="text-center mb-16">
-            <h2 className="text-4xl sm:text-5xl font-bold mb-4 text-gray-900">
-              Featured <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Projects</span>
+            <h2 className="text-4xl sm:text-5xl font-bold mb-4">
+              <span className="gradient-text">Featured Projects</span>
             </h2>
-            <div className="w-20 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto rounded-full" />
             <p className="mt-4 text-gray-600 max-w-2xl mx-auto">
               Here are some of my recent projects that showcase my skills and experience
             </p>

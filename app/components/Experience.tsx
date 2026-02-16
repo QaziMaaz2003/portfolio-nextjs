@@ -70,10 +70,9 @@ export default function Experience() {
         >
           {/* Section Title */}
           <motion.div variants={itemVariants} className="text-center mb-16">
-            <h2 className="text-4xl sm:text-5xl font-bold mb-4 text-white">
-              Professional <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Experience</span>
+            <h2 className="text-4xl sm:text-5xl font-bold mb-4">
+              <span className="gradient-text">Professional Experience</span>
             </h2>
-            <div className="w-20 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto rounded-full" />
           </motion.div>
 
           {/* Work Experience */}
