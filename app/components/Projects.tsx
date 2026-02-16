@@ -2,7 +2,7 @@
 
 import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'framer-motion';
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { HiExternalLink, HiCode } from 'react-icons/hi';
 import { SiReact, SiNodedotjs, SiExpress, SiMysql, SiJavascript, SiHtml5, SiCss3 } from 'react-icons/si';
 import Image from 'next/image';
@@ -11,6 +11,18 @@ export default function Projects() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: false, margin: "-100px" });
   const [expandedProject, setExpandedProject] = useState<number | null>(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const projects = [
     {
@@ -86,20 +98,14 @@ export default function Projects() {
               <motion.div
                 key={project.title}
                 variants={itemVariants}
-                layout
-                className={`${
-                  expandedProject === index
-                    ? 'grid md:grid-cols-2 gap-8 items-start'
-                    : 'flex justify-center'
-                }`}
+                className="flex flex-col md:grid md:grid-cols-2 gap-8 items-start md:items-center"
               >
                 {/* Project Image */}
                 <motion.div
-                  layout
                   onClick={() => setExpandedProject(expandedProject === index ? null : index)}
                   whileHover={{ scale: 1.02 }}
                   className={`${
-                    expandedProject === index ? 'md:w-full cursor-pointer' : 'w-full max-w-xl cursor-pointer'
+                    expandedProject === index ? 'w-full cursor-pointer' : 'w-full max-w-xl mx-auto md:mx-0 cursor-pointer'
                   } relative group`}
                 >
                   <div className="min-h-[300px] rounded-2xl shadow-xl overflow-hidden relative border-2 border-gray-700">
@@ -117,11 +123,26 @@ export default function Projects() {
                 <AnimatePresence>
                   {expandedProject === index && (
                     <motion.div
-                      initial={{ opacity: 0, x: 50 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      exit={{ opacity: 0, x: 50 }}
-                      transition={{ duration: 0.5 }}
-                      className="space-y-4"
+                      initial={{ 
+                        opacity: 0, 
+                        y: isMobile ? 30 : 0, 
+                        x: isMobile ? 0 : 50 
+                      }}
+                      animate={{ 
+                        opacity: 1, 
+                        y: 0, 
+                        x: 0 
+                      }}
+                      exit={{ 
+                        opacity: 0, 
+                        y: isMobile ? 30 : 0, 
+                        x: isMobile ? 0 : 50 
+                      }}
+                      transition={{ 
+                        duration: 0.6, 
+                        ease: [0.22, 1, 0.36, 1]
+                      }}
+                      className="space-y-4 w-full"
                     >
                       <h3 className="text-2xl sm:text-3xl font-bold text-gray-900">
                         {project.title}
