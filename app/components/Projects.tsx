@@ -1,14 +1,16 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'framer-motion';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { HiExternalLink, HiCode } from 'react-icons/hi';
 import { SiReact, SiNodedotjs, SiExpress, SiMysql, SiJavascript, SiHtml5, SiCss3 } from 'react-icons/si';
+import Image from 'next/image';
 
 export default function Projects() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: false, margin: "-100px" });
+  const [expandedProject, setExpandedProject] = useState<number | null>(null);
 
   const projects = [
     {
@@ -20,7 +22,7 @@ export default function Projects() {
         { name: 'Express', icon: SiExpress, color: 'text-gray-700' },
         { name: 'MySQL', icon: SiMysql, color: 'text-blue-700' },
       ],
-      image: '/projects/ecommerce.jpg',
+      image: '/e-commerce.png',
       liveLink: '#',
       githubLink: '#',
       gradient: 'from-blue-500 to-cyan-500',
@@ -33,7 +35,7 @@ export default function Projects() {
         { name: 'CSS3', icon: SiCss3, color: 'text-blue-600' },
         { name: 'JavaScript', icon: SiJavascript, color: 'text-yellow-500' },
       ],
-      image: '/projects/gym.jpg',
+      image: '/gymweb.png',
       liveLink: '#',
       githubLink: '#',
       gradient: 'from-purple-500 to-pink-500',
@@ -84,81 +86,100 @@ export default function Projects() {
               <motion.div
                 key={project.title}
                 variants={itemVariants}
-                className={`grid md:grid-cols-2 gap-8 items-center ${
-                  index % 2 === 1 ? 'md:flex-row-reverse' : ''
+                layout
+                className={`${
+                  expandedProject === index
+                    ? 'grid md:grid-cols-2 gap-8 items-start'
+                    : 'flex justify-center'
                 }`}
               >
                 {/* Project Image */}
                 <motion.div
-                  whileHover={{ scale: 1.05 }}
-                  className={`${index % 2 === 1 ? 'md:order-2' : ''} relative group`}
+                  layout
+                  onClick={() => setExpandedProject(expandedProject === index ? null : index)}
+                  whileHover={{ scale: 1.02 }}
+                  className={`${
+                    expandedProject === index ? 'md:w-full cursor-pointer' : 'w-full max-w-xl cursor-pointer'
+                  } relative group`}
                 >
-                  <div className={`absolute inset-0 bg-gradient-to-r ${project.gradient} opacity-20 rounded-2xl group-hover:opacity-30 transition-opacity`} />
-                  <div className="aspect-video bg-gradient-to-br from-gray-200 to-gray-300 dark:from-gray-700 dark:to-gray-800 rounded-2xl shadow-xl flex items-center justify-center overflow-hidden">
-                    <div className={`w-full h-full bg-gradient-to-br ${project.gradient} opacity-10`} />
-                    <div className="absolute text-gray-400 dark:text-gray-600">
-                      <HiCode size={80} />
-                    </div>
+                  <div className="min-h-[300px] rounded-2xl shadow-xl overflow-hidden relative">
+                    <Image 
+                      src={project.image} 
+                      alt={project.title}
+                      fill
+                      className="object-contain"
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                    />
                   </div>
                 </motion.div>
 
-                {/* Project Details */}
-                <motion.div className={`${index % 2 === 1 ? 'md:order-1' : ''} space-y-4`}>
-                  <h3 className="text-2xl sm:text-3xl font-bold text-gray-900">
-                    {project.title}
-                  </h3>
-                  
-                  <p className="text-gray-600 leading-relaxed">
-                    {project.description}
-                  </p>
+                {/* Project Details - Only show when expanded */}
+                <AnimatePresence>
+                  {expandedProject === index && (
+                    <motion.div
+                      initial={{ opacity: 0, x: 50 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: 50 }}
+                      transition={{ duration: 0.5 }}
+                      className="space-y-4"
+                    >
+                      <h3 className="text-2xl sm:text-3xl font-bold text-gray-900">
+                        {project.title}
+                      </h3>
+                      
+                      <p className="text-gray-600 leading-relaxed">
+                        {project.description}
+                      </p>
 
-                  {/* Tech Stack */}
-                  <div>
-                    <h4 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">
-                      Technologies Used:
-                    </h4>
-                    <div className="flex flex-wrap gap-3">
-                      {project.tech.map((tech) => (
-                        <motion.div
-                          key={tech.name}
-                          whileHover={{ scale: 1.1 }}
-                          className="flex items-center gap-2 px-4 py-2 bg-gray-100 dark:bg-gray-800 rounded-full"
+                      {/* Tech Stack */}
+                      <div>
+                        <h4 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">
+                          Technologies Used:
+                        </h4>
+                        <div className="flex flex-wrap gap-3">
+                          {project.tech.map((tech) => (
+                            <motion.div
+                              key={tech.name}
+                              whileHover={{ scale: 1.1 }}
+                              className="flex items-center gap-2 px-4 py-2 bg-gray-100 dark:bg-gray-800 rounded-full"
+                            >
+                              <tech.icon className={`${tech.color} text-xl`} />
+                              <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                                {tech.name}
+                              </span>
+                            </motion.div>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Action Buttons */}
+                      <div className="flex gap-4 pt-4">
+                        <motion.a
+                          whileHover={{ scale: 1.05 }}
+                          whileTap={{ scale: 0.95 }}
+                          href={project.liveLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className={`flex items-center gap-2 px-6 py-3 bg-gradient-to-r ${project.gradient} text-white rounded-lg font-medium shadow-md hover:shadow-lg transition-shadow`}
                         >
-                          <tech.icon className={`${tech.color} text-xl`} />
-                          <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                            {tech.name}
-                          </span>
-                        </motion.div>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Action Buttons */}
-                  <div className="flex gap-4 pt-4">
-                    <motion.a
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                      href={project.liveLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={`flex items-center gap-2 px-6 py-3 bg-gradient-to-r ${project.gradient} text-white rounded-lg font-medium shadow-md hover:shadow-lg transition-shadow`}
-                    >
-                      <HiExternalLink size={20} />
-                      Live Demo
-                    </motion.a>
-                    <motion.a
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                      href={project.githubLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-2 px-6 py-3 bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-lg font-medium hover:bg-gray-300 dark:hover:bg-gray-700 transition-colors"
-                    >
-                      <HiCode size={20} />
-                      View Code
-                    </motion.a>
-                  </div>
-                </motion.div>
+                          <HiExternalLink size={20} />
+                          Live Demo
+                        </motion.a>
+                        <motion.a
+                          whileHover={{ scale: 1.05 }}
+                          whileTap={{ scale: 0.95 }}
+                          href={project.githubLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-2 px-6 py-3 bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-lg font-medium hover:bg-gray-300 dark:hover:bg-gray-700 transition-colors"
+                        >
+                          <HiCode size={20} />
+                          View Code
+                        </motion.a>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </motion.div>
             ))}
           </div>
