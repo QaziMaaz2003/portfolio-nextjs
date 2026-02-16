@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import gsap from 'gsap';
+import Image from 'next/image';
 
 export default function Navbar() {
   const [activeSection, setActiveSection] = useState('home');
@@ -328,10 +329,17 @@ export default function Navbar() {
           {/* Logo */}
           <motion.div
             whileHover={{ scale: 1.05 }}
-            className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent cursor-pointer"
+            className="cursor-pointer relative w-12 h-12 flex items-center justify-center"
             onClick={() => scrollToSection('hero')}
           >
-            QM
+            <Image
+              src="/LOGOO.png"
+              alt="MA Logo"
+              width={48}
+              height={48}
+              className="object-contain"
+              style={{ filter: 'invert(70%) sepia(50%) saturate(500%) hue-rotate(170deg) brightness(1.1)' }}
+            />
           </motion.div>
 
           {/* Hamburger Button */}
