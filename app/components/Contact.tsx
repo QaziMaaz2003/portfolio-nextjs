@@ -83,7 +83,7 @@ export default function Contact() {
             <h2 className="text-4xl sm:text-5xl font-bold mb-4">
               <span className="gradient-text">Let&apos;s Connect</span>
             </h2>
-            <p className="mt-4 text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+            <p className="mt-4 text-gray-600 max-w-2xl mx-auto">
               Have a project in mind? Let&apos;s turn your vision into reality. I&apos;m here to help bring your ideas to life!
             </p>
           </div>
@@ -103,7 +103,7 @@ export default function Contact() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {/* Full Name */}
                   <div>
-                    <label htmlFor="name" className="block text-sm font-bold text-black sm:text-gray-700 dark:text-gray-900 sm:dark:text-gray-300 mb-2">
+                    <label htmlFor="name" className="block text-sm font-bold text-gray-700 mb-2">
                       Full Name *
                     </label>
                     <input
@@ -113,14 +113,14 @@ export default function Contact() {
                       value={formData.name}
                       onChange={handleChange}
                       required
-                      className="w-full px-5 py-4 rounded-xl border-2 border-gray-300 dark:border-gray-300 sm:dark:border-gray-600 bg-white dark:bg-white sm:dark:bg-gray-800 text-gray-900 dark:text-gray-900 sm:dark:text-white placeholder-gray-400 dark:placeholder-gray-600 sm:dark:placeholder-gray-500 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
+                      className="w-full px-5 py-4 rounded-xl border-2 border-gray-300 bg-white text-gray-900 placeholder-gray-500 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
                       placeholder="John Doe"
                     />
                   </div>
 
                   {/* Email Address */}
                   <div>
-                    <label htmlFor="email" className="block text-sm font-bold text-black sm:text-gray-700 dark:text-gray-900 sm:dark:text-gray-300 mb-2">
+                    <label htmlFor="email" className="block text-sm font-bold text-gray-700 mb-2">
                       Email Address *
                     </label>
                     <input
@@ -130,7 +130,7 @@ export default function Contact() {
                       value={formData.email}
                       onChange={handleChange}
                       required
-                      className="w-full px-5 py-4 rounded-xl border-2 border-gray-300 dark:border-gray-300 sm:dark:border-gray-600 bg-white dark:bg-white sm:dark:bg-gray-800 text-gray-900 dark:text-gray-900 sm:dark:text-white placeholder-gray-400 dark:placeholder-gray-600 sm:dark:placeholder-gray-500 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
+                      className="w-full px-5 py-4 rounded-xl border-2 border-gray-300 bg-white text-gray-900 placeholder-gray-500 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
                       placeholder="john@example.com"
                     />
                   </div>
@@ -138,7 +138,7 @@ export default function Contact() {
 
                 {/* Phone Number */}
                 <div>
-                  <label htmlFor="phone" className="block text-sm font-bold text-black sm:text-gray-700 dark:text-gray-900 sm:dark:text-gray-300 mb-2">
+                  <label htmlFor="phone" className="block text-sm font-bold text-gray-700 mb-2">
                     Phone Number (Optional)
                   </label>
                   <input
@@ -147,14 +147,14 @@ export default function Contact() {
                     name="phone"
                     value={formData.phone}
                     onChange={handleChange}
-                    className="w-full px-5 py-4 rounded-xl border-2 border-gray-300 dark:border-gray-300 sm:dark:border-gray-600 bg-white dark:bg-white sm:dark:bg-gray-800 text-gray-900 dark:text-gray-900 sm:dark:text-white placeholder-gray-400 dark:placeholder-gray-600 sm:dark:placeholder-gray-500 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
+                    className="w-full px-5 py-4 rounded-xl border-2 border-gray-300 bg-white text-gray-900 placeholder-gray-500 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
                     placeholder="(555) 123-4567"
                   />
                 </div>
 
                 {/* Message */}
                 <div>
-                  <label htmlFor="message" className="block text-sm font-bold text-black sm:text-gray-700 dark:text-gray-900 sm:dark:text-gray-300 mb-2">
+                  <label htmlFor="message" className="block text-sm font-bold text-gray-700 mb-2">
                     Your Message *
                   </label>
                   <textarea
@@ -164,7 +164,7 @@ export default function Contact() {
                     onChange={handleChange}
                     required
                     rows={6}
-                    className="w-full px-5 py-4 rounded-xl border-2 border-gray-300 dark:border-gray-300 sm:dark:border-gray-600 bg-white dark:bg-white sm:dark:bg-gray-800 text-gray-900 dark:text-gray-900 sm:dark:text-white placeholder-gray-400 dark:placeholder-gray-600 sm:dark:placeholder-gray-500 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all resize-none"
+                    className="w-full px-5 py-4 rounded-xl border-2 border-gray-300 bg-white text-gray-900 placeholder-gray-500 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all resize-none"
                     placeholder="Tell me about your project..."
                   />
                 </div>
@@ -187,7 +187,7 @@ export default function Contact() {
                   <motion.div
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
-                    className="p-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 text-green-700 dark:text-green-400 rounded-lg text-center font-medium"
+                    className="p-4 bg-green-50 border border-green-200 text-green-700 rounded-lg text-center font-medium"
                   >
                     ✓ Message sent successfully! I&apos;ll get back to you soon.
                   </motion.div>
@@ -198,7 +198,7 @@ export default function Contact() {
                   <motion.div
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
-                    className="p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 text-red-700 dark:text-red-400 rounded-lg text-center font-medium"
+                    className="p-4 bg-red-50 border border-red-200 text-red-700 rounded-lg text-center font-medium"
                   >
                     ✕ {errorMessage}
                   </motion.div>
@@ -208,9 +208,9 @@ export default function Contact() {
 
             {/* Vertical Divider with Text */}
             <div className="hidden lg:flex flex-col items-center justify-center relative h-full self-stretch">
-              <div className="w-px h-full bg-gradient-to-b from-transparent via-gray-300 dark:via-gray-600 to-transparent absolute"></div>
+              <div className="w-px h-full bg-gradient-to-b from-transparent via-gray-300 to-transparent absolute"></div>
               <div className="bg-gray-100 px-4 py-2 rounded-full z-10 relative">
-                <span className="text-sm font-semibold text-gray-600 dark:text-gray-400 whitespace-nowrap text-center" style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}>Or Direct Contact</span>
+                <span className="text-sm font-semibold text-gray-600 whitespace-nowrap text-center" style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}>Or Direct Contact</span>
               </div>
             </div>
 
@@ -224,9 +224,9 @@ export default function Contact() {
               
               {/* Mobile Divider - Only visible on mobile */}
               <div className="lg:hidden w-full flex items-center gap-4">
-                <div className="flex-1 h-px bg-gradient-to-r from-transparent via-gray-300 dark:via-gray-600 to-gray-300 dark:to-gray-600"></div>
-                <span className="text-sm font-semibold text-gray-600 dark:text-gray-400 whitespace-nowrap">Or Direct Contact</span>
-                <div className="flex-1 h-px bg-gradient-to-l from-transparent via-gray-300 dark:via-gray-600 to-gray-300 dark:to-gray-600"></div>
+                <div className="flex-1 h-px bg-gradient-to-r from-transparent via-gray-300 to-gray-300"></div>
+                <span className="text-sm font-semibold text-gray-600 whitespace-nowrap">Or Direct Contact</span>
+                <div className="flex-1 h-px bg-gradient-to-l from-transparent via-gray-300 to-gray-300"></div>
               </div>
 
               {/* Direct Contact Section */}
@@ -239,12 +239,12 @@ export default function Contact() {
                     whileHover={{ x: 5 }}
                     className="flex items-center gap-4 group"
                   >
-                    <div className="p-3 bg-white dark:bg-white sm:dark:bg-gray-800 rounded-lg border border-gray-400 dark:border-gray-300 sm:dark:border-gray-600 group-hover:bg-white dark:group-hover:bg-white sm:dark:group-hover:bg-gray-800 transition-colors">
+                    <div className="p-3 bg-white rounded-lg border border-gray-300 group-hover:bg-white transition-colors">
                       <HiMail className="text-2xl text-blue-600" />
                     </div>
                     <div>
-                      <p className="text-sm text-gray-500 dark:text-gray-700 sm:dark:text-gray-400">Email</p>
-                      <p className="font-semibold text-black sm:text-gray-900 dark:text-gray-900 sm:dark:text-white">qazimaaz404@gmail.com</p>
+                      <p className="text-sm text-gray-500">Email</p>
+                      <p className="font-semibold text-gray-900">qazimaaz404@gmail.com</p>
                     </div>
                   </motion.a>
 
@@ -256,12 +256,12 @@ export default function Contact() {
                     whileHover={{ x: 5 }}
                     className="flex items-center gap-4 group"
                   >
-                    <div className="p-3 bg-white dark:bg-white sm:dark:bg-gray-800 rounded-lg border border-gray-400 dark:border-gray-300 sm:dark:border-gray-600 group-hover:bg-white dark:group-hover:bg-white sm:dark:group-hover:bg-gray-800 transition-colors">
+                    <div className="p-3 bg-white rounded-lg border border-gray-300 group-hover:bg-white transition-colors">
                       <SiWhatsapp className="text-2xl text-green-600" />
                     </div>
                     <div>
-                      <p className="text-sm text-gray-500 dark:text-gray-700 sm:dark:text-gray-400">WhatsApp</p>
-                      <p className="font-semibold text-black sm:text-gray-900 dark:text-gray-900 sm:dark:text-white">Message on WhatsApp</p>
+                      <p className="text-sm text-gray-500">WhatsApp</p>
+                      <p className="font-semibold text-gray-900">Message on WhatsApp</p>
                     </div>
                   </motion.a>
 
@@ -273,12 +273,12 @@ export default function Contact() {
                     whileHover={{ x: 5 }}
                     className="flex items-center gap-4 group"
                   >
-                    <div className="p-3 bg-white dark:bg-white sm:dark:bg-gray-800 rounded-lg border border-gray-400 dark:border-gray-300 sm:dark:border-gray-600 group-hover:bg-white dark:group-hover:bg-white sm:dark:group-hover:bg-gray-800 transition-colors">
+                    <div className="p-3 bg-white rounded-lg border border-gray-300 group-hover:bg-white transition-colors">
                       <SiLinkedin className="text-2xl text-blue-600" />
                     </div>
                     <div>
-                      <p className="text-sm text-gray-500 dark:text-gray-700 sm:dark:text-gray-400">LinkedIn</p>
-                      <p className="font-semibold text-black sm:text-gray-900 dark:text-gray-900 sm:dark:text-white">Connect on LinkedIn</p>
+                      <p className="text-sm text-gray-500">LinkedIn</p>
+                      <p className="font-semibold text-gray-900">Connect on LinkedIn</p>
                     </div>
                   </motion.a>
 
@@ -290,12 +290,12 @@ export default function Contact() {
                     whileHover={{ x: 5 }}
                     className="flex items-center gap-4 group"
                   >
-                    <div className="p-3 bg-white dark:bg-white sm:dark:bg-gray-800 rounded-lg border border-gray-400 dark:border-gray-300 sm:dark:border-gray-600 group-hover:bg-white dark:group-hover:bg-white sm:dark:group-hover:bg-gray-800 transition-colors">
-                      <SiGithub className="text-2xl text-gray-900 dark:text-gray-900 sm:dark:text-white" />
+                    <div className="p-3 bg-white rounded-lg border border-gray-300 group-hover:bg-white transition-colors">
+                      <SiGithub className="text-2xl text-gray-900" />
                     </div>
                     <div>
-                      <p className="text-sm text-gray-500 dark:text-gray-700 sm:dark:text-gray-400">GitHub</p>
-                      <p className="font-semibold text-black sm:text-gray-900 dark:text-gray-900 sm:dark:text-white">View My Projects</p>
+                      <p className="text-sm text-gray-500">GitHub</p>
+                      <p className="font-semibold text-gray-900">View My Projects</p>
                     </div>
                   </motion.a>
 

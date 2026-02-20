@@ -74,19 +74,19 @@ export default function About() {
             >
               {/* Introduction */}
               <div className="space-y-3 sm:space-y-4">
-                <h3 className="text-xl sm:text-2xl font-bold text-black sm:text-gray-900 dark:text-black sm:dark:text-white">
+                <h3 className="text-xl sm:text-2xl font-bold text-gray-900">
                   Passionate Full Stack Developer
                 </h3>
-                <p className="text-sm sm:text-base text-gray-600 dark:text-black sm:dark:text-gray-300 leading-relaxed">
-                  I&apos;m a <span className="font-semibold text-blue-600 dark:text-blue-400">Computer Science student</span> at FAST National University with deep expertise in <span className="font-semibold dark:font-bold sm:dark:font-semibold text-gray-900 dark:text-black sm:dark:text-white">Full Stack Development</span>, Data Science, and Performance Optimization. I transform complex problems into elegant, scalable solutions.
+                <p className="text-sm sm:text-base text-gray-700 leading-relaxed">
+                  I&apos;m a <span className="font-semibold text-blue-600">Computer Science student</span> at FAST National University with deep expertise in <span className="font-semibold text-gray-900">Full Stack Development</span>, Data Science, and Performance Optimization. I transform complex problems into elegant, scalable solutions.
                 </p>
               </div>
 
               {/* Experience */}
               <div className="space-y-3 sm:space-y-4">
-                <h3 className="text-sm sm:text-base font-semibold dark:font-bold sm:dark:font-semibold text-black sm:text-gray-900 dark:text-black sm:dark:text-white uppercase tracking-wide sm:tracking-widest">Professional Experience</h3>
-                <p className="text-sm sm:text-base text-gray-600 dark:text-black sm:dark:text-gray-300 leading-relaxed">
-                  With hands-on experience from <span className="font-semibold text-blue-600 dark:text-blue-400">BytesPak</span> and <span className="font-semibold text-blue-600 dark:text-blue-400">Meezan Bank</span>, I specialize in architecting and developing fast, scalable web applications using modern technologies like <span className="font-medium">React, Next.js, Node.js, Express, and MySQL</span>.
+                <h3 className="text-sm sm:text-base font-semibold text-gray-900 uppercase tracking-wide sm:tracking-widest">Professional Experience</h3>
+                <p className="text-sm sm:text-base text-gray-700 leading-relaxed">
+                  With hands-on experience from <span className="font-semibold text-blue-600">BytesPak</span> and <span className="font-semibold text-blue-600">Meezan Bank</span>, I specialize in architecting and developing fast, scalable web applications using modern technologies like <span className="font-medium text-gray-900">React, Next.js, Node.js, Express, and MySQL</span>.
                 </p>
               </div>
 
@@ -95,43 +95,43 @@ export default function About() {
                 <motion.div
                   variants={itemVariants}
                   whileHover={{ y: -5, boxShadow: "0 10px 25px rgba(0,0,0,0.1)" }}
-                  className="p-4 sm:p-5 bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/30 dark:to-blue-900/10 rounded-lg sm:rounded-xl border border-blue-200 dark:border-blue-800/30 transition-all"
+                  className="p-4 sm:p-5 bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg sm:rounded-xl border border-blue-200 transition-all"
                 >
                   <div className="flex items-center gap-2 sm:gap-3 mb-2">
                     <div className="p-1.5 sm:p-2 bg-blue-600 rounded-lg">
                       <HiAcademicCap className="text-white text-base sm:text-lg" />
                     </div>
-                    <h4 className="font-bold text-gray-900 dark:text-black sm:dark:text-white text-xs sm:text-sm uppercase tracking-wide">Education</h4>
+                    <h4 className="font-bold text-gray-900 text-xs sm:text-sm uppercase tracking-wide">Education</h4>
                   </div>
-                  <p className="text-xs sm:text-sm text-gray-600 sm:text-gray-700 dark:text-black sm:dark:text-gray-300">BS Computer Science<br/><span className="text-xs text-gray-600 sm:text-gray-700 dark:text-black sm:dark:text-gray-400">FAST University (8th Semester)</span></p>
+                  <p className="text-xs sm:text-sm text-gray-700">BS Computer Science<br/><span className="text-xs text-gray-600">FAST University (8th Semester)</span></p>
                 </motion.div>
 
                 <motion.div
                   variants={itemVariants}
                   whileHover={{ y: -5, boxShadow: "0 10px 25px rgba(0,0,0,0.1)" }}
-                  className="p-4 sm:p-5 bg-gradient-to-br from-purple-50 to-purple-100 dark:from-purple-900/30 dark:to-purple-900/10 rounded-lg sm:rounded-xl border border-purple-200 dark:border-purple-800/30 transition-all"
+                  className="p-4 sm:p-5 bg-gradient-to-br from-purple-50 to-purple-100 rounded-lg sm:rounded-xl border border-purple-200 transition-all"
                 >
                   <div className="flex items-center gap-2 sm:gap-3 mb-2">
                     <div className="p-1.5 sm:p-2 bg-purple-600 rounded-lg">
                       <HiTrendingUp className="text-white text-base sm:text-lg" />
                     </div>
-                    <h4 className="font-bold text-gray-900 dark:text-black sm:dark:text-white text-xs sm:text-sm uppercase tracking-wide">Specialty</h4>
+                    <h4 className="font-bold text-gray-900 text-xs sm:text-sm uppercase tracking-wide">Specialty</h4>
                   </div>
-                  <p className="text-xs sm:text-sm text-gray-600 sm:text-gray-700 dark:text-black sm:dark:text-gray-300">Full Stack & Backend<br/><span className="text-xs text-gray-600 sm:text-gray-700 dark:text-black sm:dark:text-gray-400">Scalable Solutions</span></p>
+                  <p className="text-xs sm:text-sm text-gray-700">Full Stack & Backend<br/><span className="text-xs text-gray-600">Scalable Solutions</span></p>
                 </motion.div>
 
                 <motion.div
                   variants={itemVariants}
                   whileHover={{ y: -5, boxShadow: "0 10px 25px rgba(0,0,0,0.1)" }}
-                  className="p-4 sm:p-5 bg-gradient-to-br from-pink-50 to-pink-100 dark:from-pink-900/30 dark:to-pink-900/10 rounded-lg sm:rounded-xl border border-pink-200 dark:border-pink-800/30 transition-all"
+                  className="p-4 sm:p-5 bg-gradient-to-br from-pink-50 to-pink-100 rounded-lg sm:rounded-xl border border-pink-200 transition-all"
                 >
                   <div className="flex items-center gap-2 sm:gap-3 mb-2">
                     <div className="p-1.5 sm:p-2 bg-pink-600 rounded-lg">
                       <HiLocationMarker className="text-white text-base sm:text-lg" />
                     </div>
-                    <h4 className="font-bold text-gray-900 dark:text-black sm:dark:text-white text-xs sm:text-sm uppercase tracking-wide">Location</h4>
+                    <h4 className="font-bold text-gray-900 text-xs sm:text-sm uppercase tracking-wide">Location</h4>
                   </div>
-                  <p className="text-xs sm:text-sm text-gray-600 sm:text-gray-700 dark:text-black sm:dark:text-gray-300">Karachi, Pakistan<br/><span className="text-xs text-gray-600 sm:text-gray-700 dark:text-black sm:dark:text-gray-400">Available Worldwide</span></p>
+                  <p className="text-xs sm:text-sm text-gray-700">Karachi, Pakistan<br/><span className="text-xs text-gray-600">Available Worldwide</span></p>
                 </motion.div>
               </div>
             </motion.div>

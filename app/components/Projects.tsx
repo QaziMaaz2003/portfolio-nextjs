@@ -87,7 +87,7 @@ export default function Projects() {
             <h2 className="text-4xl sm:text-5xl font-bold mb-4">
               <span className="gradient-text">Featured Projects</span>
             </h2>
-            <p className="mt-4 text-gray-600 max-w-2xl mx-auto">
+            <p className="mt-4 text-gray-700 max-w-2xl mx-auto">
               Here are some of my recent projects that showcase my skills and experience
             </p>
           </motion.div>
@@ -148,13 +148,13 @@ export default function Projects() {
                       }}
                       className="space-y-4 w-full"
                     >
-                      <p className="text-gray-600 leading-relaxed">
+                      <p className="text-gray-700 leading-relaxed">
                         {project.description}
                       </p>
 
                       {/* Tech Stack */}
                       <div>
-                        <h4 className="text-sm font-semibold text-gray-700 dark:text-black sm:dark:text-gray-300 mb-3">
+                        <h4 className="text-sm font-semibold text-gray-800 mb-3">
                           Technologies Used:
                         </h4>
                         <div className="flex flex-wrap gap-3">
@@ -162,10 +162,10 @@ export default function Projects() {
                             <motion.div
                               key={tech.name}
                               whileHover={{ scale: 1.1 }}
-                              className="flex items-center gap-2 px-4 py-2 bg-gray-100 dark:bg-gray-800 rounded-full"
+                              className="flex items-center gap-2 px-4 py-2 bg-gray-100 rounded-full"
                             >
                               <tech.icon className={`${tech.color} text-xl`} />
-                              <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                              <span className="text-sm font-medium text-gray-800">
                                 {tech.name}
                               </span>
                             </motion.div>

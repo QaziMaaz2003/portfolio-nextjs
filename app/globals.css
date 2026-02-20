@@ -5,6 +5,12 @@
   --foreground: #171717;
 }
 
+/* Force light theme for consistent appearance across Chrome, Opera, Edge */
+html.light-theme,
+html {
+  color-scheme: light;
+}
+
 /* Gradient text animation */
 .gradient-text {
   background: linear-gradient(45deg, #00d4ff, #5b73ff, #ff6b6b);
@@ -97,10 +103,11 @@
   --font-mono: var(--font-geist-mono);
 }
 
+/* Force light theme for consistent appearance across Chrome, Opera, Edge */
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #ffffff;
+    --foreground: #171717;
   }
 }
 
